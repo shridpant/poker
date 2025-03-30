@@ -6,7 +6,7 @@ import csv
 import sys
 from datetime import datetime
 
-import pyspiel
+# import pyspiel
 
 from utilities import (
     log_to_console_and_store, 
@@ -125,40 +125,45 @@ class KuhnPokerEngine:
         
         # Conduct betting rounds
         print("\n" + "-" * 40 + " BETTING ROUND 1 " + "-" * 40)
-        first_round_actions = self.betting_round(1)
+        first_round_actions, last_acted_player = self.betting_round(1)
         
         if all(a == "check" for a in first_round_actions):
             self.log("All players checked. Going to showdown.")
             self.showdown(chips_before_round)
             return
-        
+
         if self.num_players == 2 and any(a in ["bet", "call", "raise"] for a in first_round_actions):
-            active_players = [i for i in range(self.num_players) if not self.folded[i]]
-            if len(active_players) > 1:
-                self.showdown(chips_before_round)
-            else:
-                self.showdown(chips_before_round)
+            self.showdown(chips_before_round)
             return
-        
+
         # If not everyone folded, do the second betting round
         active_players = [i for i in range(self.num_players) if not self.folded[i]]
         if len(active_players) > 1:
             print("\n" + "-" * 40 + " BETTING ROUND 2 " + "-" * 40)
-            second_round_actions = self.betting_round(2)
-            
-        # Showdown among remaining players
+            # Start with the next player after the last one who acted in round 1
+            next_player = (last_acted_player + 1) % self.num_players
+            # Skip any folded players for the starting position
+            while self.folded[next_player]:
+                next_player = (next_player + 1) % self.num_players
+            self.log(f"Second round starts with Player {next_player} (continuing clockwise)")
+            second_round_actions, _ = self.betting_round(2, starting_player=next_player)
+
+        # Now do final showdown
         self.showdown(chips_before_round)
         
-    def betting_round(self, round_num):
+    def betting_round(self, round_num, starting_player=0):
         """Conduct a betting round."""
         self.log(f"Starting {'First' if round_num == 1 else 'Second'} Betting Round.")
         
         actions = []
-        current_player = 0
+        current_player = starting_player
         highest_bet = 0
         players_acted = 0
         all_players_acted = False
-        last_bettor = None # Keep track of the last player who bet or raised
+        last_bettor = None  # Keep track of the last player who bet or raised
+        last_acted_player = starting_player  # Track who acted last for next round
+        active_players_count = len([i for i in range(self.num_players) if not self.folded[i]])
+        starting_active_players = active_players_count  # Remember how many players we started with
 
         while not all_players_acted:
             # Skip folded players
@@ -168,24 +173,31 @@ class KuhnPokerEngine:
                 
             # Determine available actions
             available_actions = {}
-            
+            bet_diff = max(0, highest_bet - self.current_bets[current_player])
+
+            # Build list of possible actions, filtering out those not feasible
+            if bet_diff == 0:
+                # Can check if you have >=0 chips
+                if self.chips[current_player] > 0:
+                    available_actions[0] = "check - No bet on the table. You may check or bet."
+                    # Bet is 1 if they have at least 1 chip
+                    if self.chips[current_player] >= 1:
+                        available_actions[1] = "bet - You may bet 1 unit."
+                else:
+                    # No chips => must effectively skip (check if no bet or fold if needed)
+                    available_actions[0] = "check - No chips left."
+            else:
+                # There's a call to pay
+                if self.chips[current_player] >= bet_diff:
+                    available_actions[2] = f"call - Call the bet of {bet_diff} unit(s)."
+                # Fold is always possible
+                available_actions[3] = "fold - Fold your hand."
+                # Raise check
+                if highest_bet > 0 and self.chips[current_player] > bet_diff:
+                    available_actions[4] = "raise - Raise by betting an additional amount."
+
             # Display player turn indicator before determining actions
             print(f"\n[PLAYER {current_player}'S TURN]")
-            
-            # Calculate bet difference to determine appropriate actions
-            bet_diff = max(0, highest_bet - self.current_bets[current_player])
-            
-            # If no bet difference (either no bet or already called), show check/bet options
-            if bet_diff == 0:
-                available_actions[0] = "check - No bet on the table. You may check or bet."
-                available_actions[1] = "bet - You may bet 1 unit."
-            else:
-                # If there's a bet difference, show fold/call options
-                available_actions[3] = f"fold - Fold your hand."
-                available_actions[2] = f"call - Call the bet of {bet_diff} unit(s)."
-                # Add raise option if there's been a previous bet and raising is allowed
-                if highest_bet > 0:
-                    available_actions[4] = f"raise - Raise by betting an additional unit."
             
             # Display available actions for the current player
             self.log(f"Available actions for Player {current_player} :")
@@ -219,32 +231,51 @@ class KuhnPokerEngine:
                         self.log(f"Player {current_player} bets. Pot is now {self.pot}.")
                         actions.append("bet")
                         last_bettor = current_player
+                        players_acted = 1  # Reset action count when there's a new bet
             else:  # There is a bet to call/fold/raise
                 if action_idx == 3:  # Fold
                     self.log(f"Player {current_player} folds.")
                     self.folded[current_player] = True
                     actions.append("fold")
+                    active_players_count -= 1
+                    if active_players_count <= 1:
+                        all_players_acted = True
                 elif action_idx == 2:  # Call
                     call_amount = min(bet_diff, self.chips[current_player])
                     if call_amount <= 0:
                         self.log(f"Player {current_player} doesn't have enough chips to call - forced to fold.")
                         self.folded[current_player] = True
                         actions.append("fold")
+                        active_players_count -= 1
                     else:
                         self.chips[current_player] -= call_amount
                         self.current_bets[current_player] += call_amount
                         self.pot += call_amount
                         self.log(f"Player {current_player} calls. Pot is now {self.pot}.")
                         actions.append("call")
+                        
+                        # Check if all active players have had a chance to act after the last bet/raise
+                        # and have equal bets
+                        active_players = [i for i in range(self.num_players) if not self.folded[i]]
+                        all_bets_equal = all(self.current_bets[p] == highest_bet for p in active_players)
+                        
+                        # If all players have acted since the last bet and bets are equal, round is complete
+                        if all_bets_equal and (players_acted >= starting_active_players):
+                            all_players_acted = True
+                            
                 elif action_idx == 4:  # Raise
-                    # First call the current bet
-                    self.chips[current_player] -= bet_diff
-                    self.current_bets[current_player] += bet_diff
-                    self.pot += bet_diff
-                    
-                    # Then raise by raise_amount
-                    actual_raise = min(raise_amount, self.chips[current_player])
-                    if actual_raise <= 0:
+                    # First pay call
+                    call_needed = bet_diff
+                    call_used = min(call_needed, self.chips[current_player])
+                    self.chips[current_player] -= call_used
+                    self.current_bets[current_player] += call_used
+                    self.pot += call_used
+
+                    # Now add the raise
+                    min_extra = 1
+                    max_extra = self.chips[current_player]
+                    raise_used = min(max_extra, max(min_extra, raise_amount or 1))
+                    if raise_used <= 0:
                         self.log(f"Player {current_player} can't raise further - forced to call or fold.")
                         if self.chips[current_player] > 0:
                             self.chips[current_player] -= self.chips[current_player]
@@ -255,19 +286,17 @@ class KuhnPokerEngine:
                         else:
                             self.folded[current_player] = True
                             actions.append("fold")
+                            active_players_count -= 1
                     else:
-                        self.chips[current_player] -= actual_raise
-                        self.current_bets[current_player] += actual_raise
-                        self.pot += actual_raise
+                        self.chips[current_player] -= raise_used
+                        self.current_bets[current_player] += raise_used
+                        self.pot += raise_used
                         highest_bet = self.current_bets[current_player]
-                        
-                        self.log(f"Player {current_player} raises by {actual_raise} unit(s). Pot is now {self.pot}.")
+                        self.log(f"Player {current_player} raises by {raise_used} unit(s). Pot is now {self.pot}.")
                         actions.append("raise")
                         last_bettor = current_player
-                    
-                    # When someone raises, we need to give others a chance to respond
-                    # Reset the all_players_acted flag and make sure we go around again
-                    all_players_acted = False
+                        # Reset players_acted counter when there's a new bet
+                        players_acted = 1
             
             # After processing the chosen action, only record local transitions if agent is FRL
             if isinstance(self.players[current_player], FederatedPlayer):
@@ -283,30 +312,34 @@ class KuhnPokerEngine:
             players_acted += 1
             current_player = (current_player + 1) % self.num_players
             
-            # Round is complete when all active players have acted and either:
-            # 1. Everyone has folded, or
-            # 2. All active players have had a chance to act after the last bet/raise, and the bets are equalized
+            # Check if everyone has folded 
             active_players = [i for i in range(self.num_players) if not self.folded[i]]
             if len(active_players) <= 1:
                 all_players_acted = True
-            elif players_acted >= self.num_players:
-                # Check if all active players have equal bets
-                equal_bets = True
-                first_bet = -1
-                for player in active_players:
-                    if first_bet == -1:
-                        first_bet = self.current_bets[player]
-                    elif self.current_bets[player] != first_bet:
-                        equal_bets = False
-                        break
-                if equal_bets:
+                continue
+            
+            # Check for round completion under different conditions:
+            
+            # 1. When everyone has checked (no bets made)
+            if highest_bet == 0 and players_acted >= starting_active_players:
+                all_players_acted = True
+                continue
+                
+            # 2. After a bet/raise: everyone after the bettor needs to act and bets are equal
+            equal_bets = all(self.current_bets[player] == highest_bet for player in active_players)
+            if last_bettor is not None:
+                # We made at least one complete rotation after the last bet
+                if players_acted > active_players_count and equal_bets:
                     all_players_acted = True
             
-
-            time.sleep(self.delay)  # Keep delay after processing action
+            time.sleep(self.delay)
             sys.stdout.flush()
         
-        return actions
+        # At the end, after processing all actions, update last_acted_player
+        last_acted_player = (current_player - 1) % self.num_players
+        
+        # Add last_acted_player to the return value
+        return actions, last_acted_player
         
     def showdown(self, chips_before_round):
         """
