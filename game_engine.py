@@ -308,6 +308,42 @@ class KuhnPokerEngine:
                 }
                 self.players[current_player].record_local_transition(transition_data)
             
+            # Record transition for RL training (for ALL players)
+            session_id = datetime.now().strftime("%Y%m%d%H%M%S")
+            transition_data = {
+                "session_id": session_id,
+                "round": self.current_hand,
+                "decision_index": players_acted,
+                "stage": "first" if round_num == 1 else "second",
+                "current_player": current_player,
+                "state": {
+                    "round": self.current_hand,
+                    "stage": "first" if round_num == 1 else "second",
+                    "current_player": current_player,
+                    "player0_card": self.cards[0] if 0 < len(self.cards) else -1,
+                    "player1_card": self.cards[1] if 1 < len(self.cards) else -1,
+                    "player2_card": self.cards[2] if 2 < len(self.cards) and self.num_players > 2 else -1,
+                    "pot": self.pot,
+                    "chips": ";".join([str(c) for c in self.chips[:2]]),  # Only storing first two players' chips for simplicity
+                    "betting_history": "".join(str(a) for a in actions),
+                },
+                "legal_actions": list(available_actions.keys()),
+                "chosen_action": action_idx,
+                "reward": 0,  # Reward will be updated at showdown
+                "done": False
+            }
+            self.transitions.append(transition_data)
+            
+            # FederatedPlayer specific code
+            if isinstance(self.players[current_player], FederatedPlayer):
+                local_transition = {
+                    "local_state": "example_state",
+                    "local_action": action_idx,
+                    "local_reward": 0,
+                    "local_done": False
+                }
+                self.players[current_player].record_local_transition(local_transition)
+            
             # Move to next player and track if everyone has acted
             players_acted += 1
             current_player = (current_player + 1) % self.num_players
@@ -382,6 +418,40 @@ class KuhnPokerEngine:
         # Award pot to winner
         self.chips[winner] += self.pot
         
+        # Calculate rewards (chip differences) for each player
+        rewards = {}
+        for i in range(self.num_players):
+            rewards[i] = self.chips[i] - chips_before_round[i]
+        
+        # Update the transitions with proper rewards and done status
+        # Group transitions by player and round
+        player_round_transitions = {}
+        for transition in self.transitions:
+            if transition["round"] == self.current_hand:
+                player_id = transition["current_player"]
+                round_key = f"{player_id}_{transition['round']}_{transition['stage']}"
+                if round_key not in player_round_transitions:
+                    player_round_transitions[round_key] = []
+                player_round_transitions[round_key].append(transition)
+        
+        # For each player, mark only their last action in this round as terminal
+        for round_key, transitions in player_round_transitions.items():
+            # Sort by decision index to find the last action
+            sorted_transitions = sorted(transitions, key=lambda t: t["decision_index"])
+            if sorted_transitions:
+                # Set rewards for all transitions
+                player_id = sorted_transitions[0]["current_player"]
+                reward = rewards.get(player_id, 0)
+                
+                # Set all transitions to have the reward but only the last one is terminal
+                for t in sorted_transitions[:-1]:
+                    t["reward"] = reward
+                    t["done"] = False
+                    
+                # Mark the last transition as terminal
+                sorted_transitions[-1]["reward"] = reward
+                sorted_transitions[-1]["done"] = True
+        
         # Show per-round diff
         for i in range(self.num_players):
             diff = self.chips[i] - chips_before_round[i]
@@ -397,15 +467,96 @@ class KuhnPokerEngine:
         self.log(f"Chip counts after Hand {self.current_hand}: {chip_status}")
         
     def write_transitions(self):
-        """Write collected RL data to a CSV file."""
+        """Write collected RL data to CSV files."""
         if self.transitions:
-            with open('logs/game_data/rl_data.csv', 'w', newline='') as file:
-                writer = csv.writer(file)
-                writer.writerow(['state', 'action', 'next_state', 'reward'])
-                writer.writerows(self.transitions)
-            self.log("Transitions written to logs/game_data/rl_data.csv.")
+            from utilities import write_transitions_to_csv
+            write_transitions_to_csv(self.transitions, self.log)
+            # Also export training data
+            self.export_training_data()
         
         # Flush local transitions for any FederatedPlayer
         for i, p in enumerate(self.players):
-            if isinstance(p, FederatedPlayer):
+            if hasattr(p, 'flush_local_transitions'):
                 p.flush_local_transitions()
+
+    def export_training_data(self, filename="logs/game_data/training_data.csv"):
+        """
+        Export transitions in a format more suitable for model training.
+        """
+        if not self.transitions:
+            self.log("No transitions to export.")
+            return
+            
+        import os
+        import ast
+        
+        os.makedirs(os.path.dirname(filename), exist_ok=True)
+        
+        # Card mapping to numeric values
+        card_map = {"J": 1, "Q": 2, "K": 3, "A": 4}
+        
+        # Prepare structured data
+        training_data = []
+        
+        for t in self.transitions:
+            try:
+                # Parse the state string into a dictionary
+                if isinstance(t["state"], str):
+                    state = ast.literal_eval(t["state"])
+                else:
+                    state = t["state"]
+                    
+                # Feature vector
+                features = {
+                    # Convert cards to numeric values
+                    "player_card": card_map.get(state.get(f"player{t['current_player']}_card", ""), 0),
+                    "pot_ratio": state.get("pot", 0) / 10.0,  # Normalize pot size
+                    "chips_ratio": float(state.get("chips", "0;0").split(";")[min(t["current_player"], len(state.get("chips", "0;0").split(";"))-1)]) / 10.0 if state.get("chips") else 0.0,
+                    "round": state.get("round", 1) / 5.0,  # Normalize round number
+                    "is_first_round": 1.0 if state.get("stage") == "first" else 0.0,
+                    # One-hot encode betting position
+                    "position_p0": 1.0 if t["current_player"] == 0 else 0.0,
+                    "position_p1": 1.0 if t["current_player"] == 1 else 0.0,
+                    "position_p2": 1.0 if t["current_player"] == 2 else 0.0,
+                    # Add betting history features
+                    "history_bet_count": state.get("betting_history", "").count("bet") / 5.0,
+                    "history_raise_count": state.get("betting_history", "").count("raise") / 5.0,
+                    "history_fold_count": state.get("betting_history", "").count("fold") / 5.0,
+                }
+                
+                # One-hot encode action
+                action_vec = [0] * 5  # 5 possible actions
+                action_idx = int(t.get("chosen_action", 0))
+                if 0 <= action_idx < 5:
+                    action_vec[action_idx] = 1
+                    
+                # Row with features, action, reward, done
+                row = {
+                    "player_id": t["current_player"],
+                    "episode": f"{t['session_id']}_{t['round']}",
+                    "step": t["decision_index"],
+                    **features,
+                    "action_check": action_vec[0],
+                    "action_bet": action_vec[1], 
+                    "action_call": action_vec[2],
+                    "action_fold": action_vec[3],
+                    "action_raise": action_vec[4],
+                    "reward": t["reward"],
+                    "done": 1 if t["done"] else 0
+                }
+                
+                training_data.append(row)
+            except Exception as e:
+                self.log(f"Error processing transition: {e}")
+        
+        # Write
+        if training_data:
+            import csv
+            with open(filename, 'w', newline='') as csvfile:
+                fieldnames = list(training_data[0].keys())
+                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                writer.writeheader()
+                writer.writerows(training_data)
+                self.log(f"Training data exported to {filename}")
+        else:
+            self.log("No valid training data to export.")
