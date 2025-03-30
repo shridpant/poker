@@ -1,0 +1,294 @@
+=== New Game ===
+[16:13:54] === Welcome to Kuhn Poker ===
+[16:13:54] Rules:
+[16:13:54] • You and your opponent are each dealt one card (J, Q, or K).
+[16:13:54] • You can choose to 'pass' or 'bet' on your turn.
+[16:13:54] • The higher card wins.
+[16:13:54] • Bluffing is possible!
+[16:13:54] Chance node: Dealt card J to Player 0.
+[16:13:55] Chance node: Dealt card Q to Player 1.
+[16:13:55] Your card: J
+[16:13:55] Betting History: None
+[16:14:02] You chose: PASS
+[16:14:03] Betting History: pass
+[16:14:03] Opponent chooses: BET
+[16:14:03] Your card: J
+[16:14:03] Betting History: pass -> bet
+[16:14:07] You chose: PASS
+[16:14:08] === Game Over ===
+[16:14:08] Final Betting History: pass -> bet -> pass
+[16:14:08] Result: You LOSE 😞 | Game returns: [-1.0, 1.0]
+[16:14:08] Your card: J | Opponent's card: Q
+
+=== New Game ===
+[16:14:19] === Welcome to Kuhn Poker ===
+[16:14:19] Rules:
+[16:14:19] • You and your opponent are each dealt one card (J, Q, or K).
+[16:14:19] • You can choose to 'pass' or 'bet' on your turn.
+[16:14:19] • The higher card wins.
+[16:14:19] • Bluffing is possible!
+[16:14:19] Chance node: Dealt card J to Player 0.
+[16:14:20] Chance node: Dealt card K to Player 1.
+[16:14:20] Your card: J
+[16:14:20] Betting History: None
+[16:14:23] You chose: PASS
+[16:14:24] Betting History: pass
+[16:14:24] Opponent chooses: BET
+[16:14:24] Your card: J
+[16:14:24] Betting History: pass -> bet
+[16:14:26] You chose: PASS
+[16:14:27] === Game Over ===
+[16:14:27] Final Betting History: pass -> bet -> pass
+[16:14:27] Result: You LOSE 😞 | Game returns: [-1.0, 1.0]
+[16:14:27] Your card: J | Opponent's card: K
+
+=== New Game ===
+[16:14:31] === Welcome to Kuhn Poker ===
+[16:14:31] Rules:
+[16:14:31] • You and your opponent are each dealt one card (J, Q, or K).
+[16:14:31] • You can choose to 'pass' or 'bet' on your turn.
+[16:14:31] • The higher card wins.
+[16:14:31] • Bluffing is possible!
+[16:14:32] Chance node: Dealt card Q to Player 0.
+[16:14:32] Chance node: Dealt card J to Player 1.
+[16:14:33] Your card: Q
+[16:14:33] Betting History: None
+[16:14:34] You chose: PASS
+[16:14:35] Betting History: pass
+[16:14:35] Opponent chooses: BET
+[16:14:35] Your card: Q
+[16:14:35] Betting History: pass -> bet
+[16:14:44] You chose: BET
+[16:14:44] === Game Over ===
+[16:14:44] Final Betting History: pass -> bet -> bet
+[16:14:44] Result: You WIN 🥳 | Game returns: [2.0, -2.0]
+[16:14:44] Your card: Q | Opponent's card: J
+
+=== New Game ===
+[16:53:26] === Starting Round 1 ===
+[16:53:26] Both players ante 1 unit. Pot is now 2.
+[16:53:26] Chance node: Dealt card K to Player 0.
+[16:53:26] Chance node: Dealt card J to Player 1.
+[16:53:27] Visual Stage: First Betting: No actions yet.
+[16:53:44] You bet 1 unit. Pot increases to 3.
+[16:53:44] Visual Stage: First Betting: One action taken.
+[16:53:44] Opponent chooses to PASS.
+[16:53:45] === Round Over ===
+[16:53:45] Final Betting History: bet -> pass
+[16:53:45] Your card: K | Opponent's card: J
+[16:53:45] You win the round and collect 3 units.
+[16:53:45] Chip counts after Round 1: You: 11, Opponent: 9
+[16:54:01] === Starting Round 2 ===
+[16:54:01] Both players ante 1 unit. Pot is now 2.
+[16:54:01] Chance node: Dealt card J to Player 0.
+[16:54:01] Chance node: Dealt card Q to Player 1.
+[16:54:02] Visual Stage: First Betting: No actions yet.
+[16:56:59] You choose to PASS.
+[16:57:00] Visual Stage: First Betting: One action taken.
+[16:57:00] Opponent bets 1 unit. Pot increases to 3.
+[16:57:00] Visual Stage: Second Betting: Awaiting response.
+[16:57:07] You choose to PASS.
+[16:57:08] === Round Over ===
+[16:57:08] Final Betting History: pass -> bet -> pass
+[16:57:08] Your card: J | Opponent's card: Q
+[16:57:08] Opponent wins the round and collects 3 units.
+[16:57:08] Chip counts after Round 2: You: 10, Opponent: 10
+[16:57:10] Game session ended.
+
+=== New Game Session ===
+[17:33:12] === Starting Round 1 ===
+[17:33:12] All players ante 1 unit. Pot is now 2.
+[17:33:12] Chance node: Dealt card Q to Player 0.
+[17:33:12] Chance node: Dealt card K to Player 1.
+[17:33:13] Starting First Betting Round.
+[17:33:51] Player 0 checks.
+[17:33:51] Player 1 available actions: {0: 'No bet has been made. You may check or bet.', 1: 'You may bet 1 unit.'}
+[17:33:51] Player 1 checks.
+[17:33:52] Starting Second Betting Round.
+[17:34:17] Player 0 checks.
+[17:34:18] Player 1 available actions: {0: 'No bet has been made. You may check or bet.', 1: 'You may bet 1 unit.'}
+[17:34:18] Player 1 checks.
+[17:34:18] === Showdown ===
+[17:34:18] Cards revealed: Player 0: Q, Player 1: K
+[17:34:18] Chip counts after Round 1: Player 0: 9, Player 1: 9
+[17:34:25] Game session ended.
+
+=== New Game Session ===
+[17:35:20] === Starting Round 1 ===
+[17:35:20] All players ante 1 unit. Pot is now 2.
+[17:35:20] Chance node: Dealt card K to Player 0.
+[17:35:20] Chance node: Dealt card Q to Player 1.
+[17:35:21] Starting First Betting Round.
+[17:35:29] Player 0 bets. Pot is now 3.
+[17:35:29] Player 1 available actions: {2: 'A bet exists. You may call to match the bet.', 3: 'You may fold and forfeit the pot.', 4: 'You may raise by betting an extra unit.'}
+[17:35:29] Player 1 raises. Pot is now 4.
+[17:35:30] Starting Second Betting Round.
+[17:36:53] Player 0 bets. Pot is now 5.
+[17:36:53] Player 1 available actions: {2: 'A bet exists. You may call to match the bet.', 3: 'You may fold and forfeit the pot.'}
+[17:36:53] Player 1 calls. Pot is now 6.
+[17:36:54] === Showdown ===
+[17:36:54] Cards revealed: Player 0: K, Player 1: Q
+[17:36:54] Chip counts after Round 1: Player 0: 7, Player 1: 7
+[17:37:12] Game session ended.
+
+=== New Game Session ===
+[17:52:01] === Starting Round 1 ===
+[17:52:01] All players ante 1 unit. Pot is now 2.
+[17:52:01] Chance node: Dealt card J to Player 0.
+[17:52:01] Chance node: Dealt card Q to Player 1.
+[17:52:02] Starting First Betting Round.
+[17:52:05] Player 0 checks.
+[17:52:05] Player 1 available actions: {0: 'No bet has been made. You may check or bet.', 1: 'You may bet 1 unit.'}
+[17:52:05] Player 1 checks.
+[17:52:06] Starting Second Betting Round.
+[17:52:10] Player 0 checks.
+[17:52:10] Player 1 available actions: {0: 'No bet has been made. You may check or bet.', 1: 'You may bet 1 unit.'}
+[17:52:10] Player 1 checks.
+[17:52:11] === Showdown ===
+[17:52:11] Cards revealed: Player 0: J, Player 1: Q
+[17:52:11] Chip counts after Round 1: Player 0: 9, Player 1: 9
+[17:52:13] Game session ended.
+
+=== New Game Session ===
+[17:52:27] === Starting Round 1 ===
+[17:52:27] All players ante 1 unit. Pot is now 2.
+[17:52:27] Chance node: Dealt card J to Player 0.
+[17:52:27] Chance node: Dealt card K to Player 1.
+[17:52:28] Starting First Betting Round.
+[17:52:50] Player 0 checks.
+[17:52:51] Player 1 available actions: {0: 'No bet on the table. You may check or bet.', 1: 'You may bet 1 unit.'}
+[17:52:51] Player 1 checks.
+[17:52:51] Starting Second Betting Round.
+[17:53:47] Player 0 checks.
+[17:53:47] Player 1 available actions: {0: 'No bet on the table. You may check or bet.', 1: 'You may bet 1 unit.'}
+[17:53:47] Player 1 checks.
+[17:53:48] === Showdown ===
+[17:53:48] Cards revealed: Player 0: J, Player 1: K
+[17:53:48] Player 1 wins the pot of 2 with K.
+[17:53:48] Chip counts after Round 1: Player 0: 9, Player 1: 11
+[17:54:24] Game session ended.
+
+=== New Game Session ===
+[17:58:54] === Starting Round 1 ===
+[17:58:54] All players ante 1 unit. Pot is now 2.
+[17:58:54] Chance node: Dealt card J to Player 0.
+[17:58:54] Chance node: Dealt card Q to Player 1.
+[17:58:55] Starting First Betting Round.
+[17:59:02] Player 0 checks.
+[17:59:02] Player 1 available actions: {0: 'No bet on the table. You may check or bet.', 1: 'You may bet 1 unit.'}
+[17:59:02] Player 1 bets. Pot is now 3.
+[17:59:03] Starting Second Betting Round.
+[17:59:51] Player 0 checks.
+[17:59:52] Player 1 available actions: {0: 'No bet on the table. You may check or bet.', 1: 'You may bet 1 unit.'}
+[17:59:52] Player 1 checks.
+[17:59:52] === Showdown ===
+[17:59:52] Cards revealed: Player 0: J, Player 1: Q
+[17:59:52] Player 1 wins the pot of 3 with Q.
+[17:59:52] Chip counts after Round 1: Player 0: 9, Player 1: 11
+[18:00:14] Game session ended.
+
+=== New Game Session ===
+[18:08:43] === Starting Round 1 ===
+[18:08:43] All players ante 1 unit. Pot is now 2.
+[18:08:43] Chance node: Dealt card Q to Player 0.
+[18:08:44] Chance node: Dealt card K to Player 1.
+[18:08:44] Starting First Betting Round.
+[18:08:49] Player 0 checks.
+[18:08:49] Player 1 available actions: {0: 'No bet on the table. You may check or bet.', 1: 'You may bet 1 unit.'}
+[18:08:49] Player 1 bets. Pot is now 3.
+[18:08:50] Starting Second Betting Round.
+[18:09:23] Player 0 checks.
+[18:09:24] Player 1 available actions: {0: 'No bet on the table. You may check or bet.', 1: 'You may bet 1 unit.'}
+[18:09:24] Player 1 bets. Pot is now 4.
+[18:09:24] === Showdown ===
+[18:09:24] Cards revealed: Player 0: Q, Player 1: K
+[18:09:24] Player 1 wins the pot of 4 with K.
+[18:09:24] Chip counts after Round 1: Player 0: 9, Player 1: 11
+[18:09:42] === Starting Round 2 ===
+[18:09:42] All players ante 1 unit. Pot is now 2.
+[18:09:42] Chance node: Dealt card J to Player 0.
+[18:09:43] Chance node: Dealt card Q to Player 1.
+[18:09:43] Starting First Betting Round.
+[18:10:27] Player 0 checks.
+[18:10:27] Player 1 available actions: {0: 'No bet on the table. You may check or bet.', 1: 'You may bet 1 unit.'}
+[18:10:27] Player 1 checks.
+[18:10:28] Starting Second Betting Round.
+[18:11:38] Player 0 checks.
+[18:11:39] Player 1 available actions: {0: 'No bet on the table. You may check or bet.', 1: 'You may bet 1 unit.'}
+[18:11:39] Player 1 bets. Pot is now 3.
+[18:11:39] === Showdown ===
+[18:11:39] Cards revealed: Player 0: J, Player 1: Q
+[18:11:39] Player 1 wins the pot of 3 with Q.
+[18:11:39] Chip counts after Round 2: Player 0: 8, Player 1: 12
+[18:11:46] Game session ended.
+
+=== New Game Session ===
+[18:18:05] === Starting Round 1 ===
+[18:18:05] All players ante 1 unit. Pot is now 2.
+[18:18:05] Chance node: Dealt card K to Player 0.
+[18:18:06] Chance node: Dealt card J to Player 1.
+[18:18:06] Starting First Betting Round.
+[18:18:16] Player 0 checks.
+[18:18:17] Player 1 available actions: {0: 'No bet on the table. You may check or bet.', 1: 'You may bet 1 unit.'}
+[18:18:17] Player 1 bets. Pot is now 3.
+[18:18:17] Starting Second Betting Round.
+[18:18:36] Player 0 bets. Pot is now 4.
+[18:18:37] Player 1 available actions: {2: 'A bet is on the table. You may call.', 3: 'You may fold.'}
+[18:18:37] Player 1 calls. Pot is now 5.
+[18:18:37] === Showdown ===
+[18:18:37] Cards revealed: Player 0: K, Player 1: J
+[18:18:37] Player 0 wins the pot of 5 with K.
+[18:18:37] Chip counts after Round 1: Player 0: 13, Player 1: 7
+[18:18:54] === Starting Round 2 ===
+[18:18:54] All players ante 1 unit. Pot is now 2.
+[18:18:54] Chance node: Dealt card J to Player 0.
+[18:18:54] Chance node: Dealt card Q to Player 1.
+[18:18:55] Starting First Betting Round.
+[18:19:26] Player 0 checks.
+[18:19:26] Player 1 available actions: {0: 'No bet on the table. You may check or bet.', 1: 'You may bet 1 unit.'}
+[18:19:26] Player 1 checks.
+[18:19:27] Starting Second Betting Round.
+[18:19:35] Player 0 checks.
+[18:19:36] Player 1 available actions: {0: 'No bet on the table. You may check or bet.', 1: 'You may bet 1 unit.'}
+[18:19:36] Player 1 checks.
+[18:19:36] === Showdown ===
+[18:19:36] Cards revealed: Player 0: J, Player 1: Q
+[18:19:36] Player 1 wins the pot of 2 with Q.
+[18:19:36] Chip counts after Round 2: Player 0: 12, Player 1: 8
+[18:19:45] Game session ended.
+
+=== New Game Session ===
+[18:24:30] === Starting Round 1 ===
+[18:24:30] All players ante 1 unit. Pot is now 2.
+[18:24:30] Chance node: Dealt card Q to Player 0.
+[18:24:31] Chance node: Dealt card K to Player 1.
+[18:24:31] Starting First Betting Round.
+[18:24:57] Player 0 checks.
+[18:24:57] Player 1 available actions: {0: 'No bet on the table. You may check or bet.', 1: 'You may bet 1 unit.'}
+[18:24:57] Player 1 checks.
+[18:24:58] Starting Second Betting Round.
+[18:25:33] Player 0 checks.
+[18:25:33] Player 1 available actions: {0: 'No bet on the table. You may check or bet.', 1: 'You may bet 1 unit.'}
+[18:25:33] Player 1 checks.
+[18:25:34] === Showdown ===
+[18:25:34] Cards revealed: Player 0: Q, Player 1: K
+[18:25:34] Player 1 wins the pot of 2 with K.
+[18:25:34] Chip counts after Round 1: Player 0: 9, Player 1: 11
+[18:25:39] === Starting Round 2 ===
+[18:25:39] All players ante 1 unit. Pot is now 2.
+[18:25:39] Chance node: Dealt card Q to Player 0.
+[18:25:40] Chance node: Dealt card K to Player 1.
+[18:25:40] Starting First Betting Round.
+[18:26:03] Player 0 checks.
+[18:26:03] Player 1 available actions: {0: 'No bet on the table. You may check or bet.', 1: 'You may bet 1 unit.'}
+[18:26:03] Player 1 checks.
+[18:26:04] Starting Second Betting Round.
+[18:26:18] Player 0 checks.
+[18:26:18] Player 1 available actions: {0: 'No bet on the table. You may check or bet.', 1: 'You may bet 1 unit.'}
+[18:26:18] Player 1 checks.
+[18:26:19] === Showdown ===
+[18:26:19] Cards revealed: Player 0: Q, Player 1: K
+[18:26:19] Player 1 wins the pot of 2 with K.
+[18:26:19] Chip counts after Round 2: Player 0: 8, Player 1: 12
+[18:26:22] Game session ended.
+
