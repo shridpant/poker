@@ -265,6 +265,22 @@ class KuhnPokerEngine:
         last_acted_player = starting_player  # Track who acted last for next round
         active_players_count = len([i for i in range(self.num_players) if not self.folded[i]])
         starting_active_players = active_players_count  # Remember how many players we started with
+        last_raise_amount = 1  # Default minimum raise
+
+        # public_state for more comprehensive information
+        public_state = {
+            "pot_size": self.pot,
+            "current_bets": self.current_bets.copy(),
+            "chip_counts": self.chips.copy(),
+            "betting_history": [],  # Will be a list of action strings like ["check", "bet", "call"]
+            "folded_players": self.folded.copy(),
+            "num_players": self.num_players,
+            "highest_bet": highest_bet,
+            "last_bettor": last_bettor,
+            "current_player": current_player,
+            "round_num": round_num,
+            "min_raise": last_raise_amount
+        }
 
         while not all_players_acted:
             # Skip folded players
@@ -305,12 +321,26 @@ class KuhnPokerEngine:
             for idx, desc in available_actions.items():
                 self.log(f"{idx}: {desc}")
             
+            # Update public_state with the latest information before calling get_action
+            public_state["pot_size"] = self.pot
+            public_state["current_bets"] = self.current_bets.copy()
+            public_state["chip_counts"] = self.chips.copy()
+            public_state["betting_history"] = actions.copy()
+            public_state["folded_players"] = self.folded.copy()
+            public_state["highest_bet"] = highest_bet
+            public_state["last_bettor"] = last_bettor
+            public_state["current_player"] = current_player
+            public_state["player_id"] = current_player  # Explicitly tell the player which player they are
+            
             # Get player action; now returns (action_idx, raise_amount)
-            action_idx, raise_amount = self.players[current_player].get_action(
-                self.cards[current_player],
-                available_actions,
-                round_num,
-                self.chips[current_player]
+            action_idx, raise_amount = (
+                self.players[current_player].get_action(
+                    self.cards[current_player],
+                    available_actions,
+                    round_num,
+                    self.chips[current_player],
+                    public_state
+                )
             ) if hasattr(self.players[current_player], 'get_action') else (0, None)
             
             # Process the chosen action
@@ -425,8 +455,10 @@ class KuhnPokerEngine:
                     "player1_card": self.cards[1] if 1 < len(self.cards) else -1,
                     "player2_card": self.cards[2] if 2 < len(self.cards) and self.num_players > 2 else -1,
                     "pot": self.pot,
-                    "chips": ";".join([str(c) for c in self.chips[:2]]),  # Only storing first two players' chips for simplicity
-                    "betting_history": "".join(str(a) for a in actions),
+                    "chips": ";".join([str(c) for c in self.chips]),  # Include all players' chips
+                    "betting_history": ",".join(actions),  # More readable format with commas
+                    "highest_bet": highest_bet,
+                    "last_bettor": last_bettor if last_bettor is not None else -1
                 },
                 "legal_actions": list(available_actions.keys()),
                 "chosen_action": action_idx,

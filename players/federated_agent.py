@@ -7,7 +7,7 @@ class FederatedPlayer(Player):
         self.player_id = player_id
         self.local_transitions = []
 
-    def get_action(self, card, available_actions, round_num, chips_remaining):
+    def get_action(self, card, available_actions, round_num, chips_remaining, public_state):
         # Pick a random action from the available options
         action_idx = random.choice(list(available_actions.keys()))
         if action_idx == 4:  # raise
