@@ -42,7 +42,7 @@ class OllamaPlayer(Player):
             "temperature": self.temperature,
             "stream": False
         }
-        
+       
         try:
             response = requests.post(self.ollama_api_url, json=payload)
             response.raise_for_status()  # Raise exception for HTTP errors
@@ -52,7 +52,7 @@ class OllamaPlayer(Player):
             # Fallback to a random action if API call fails
             return "random"
     
-    def format_prompt(self, card, available_actions, round_num, chips_remaining):
+    def format_prompt(self, card, available_actions, round_num, chips_remaining, public_state=None):
         """
         Format the game state into a prompt for the LLM.
         """
@@ -62,13 +62,47 @@ class OllamaPlayer(Player):
         
         action_descriptions = "\n".join([f"{idx}: {desc}" for idx, desc in available_actions.items()])
         
-        # Keep context brief but informative
+        # Enhanced context with public state information
         context = f"""
 You are an AI poker player in a game of Kuhn Poker. Your goal is to maximize winnings.
+You are Player {public_state['player_id'] if public_state else 'Unknown'}.
+
 Here is the current situation:
 - Your card: {card_name}
 - Current betting round: {round_num}
 - Your remaining chips: {chips_remaining}
+- Current pot size: {public_state['pot_size'] if public_state else 'Unknown'}
+"""
+
+        # Add minimum raise information if available
+        min_raise = 1
+        if public_state and 'min_raise' in public_state:
+            min_raise = public_state['min_raise']
+            context += f"- Minimum raise amount: {min_raise}\n"
+
+        # Add info about all players' chips and bets
+        if public_state:
+            context += "- Players status:\n"
+            for i in range(public_state['num_players']):
+                player_info = f"  Player {i}: {public_state['chip_counts'][i]} chips"
+                player_info += f" (bet: {public_state['current_bets'][i]})"
+                if public_state['folded_players'][i]:
+                    player_info += " [FOLDED]"
+                if i == public_state['current_player']:
+                    player_info += " <- Your turn"
+                context += f"{player_info}\n"
+        
+        # Add betting history if available
+        if public_state and public_state['betting_history']:
+            context += f"- Previous actions: {', '.join(public_state['betting_history'])}\n"
+        
+        # Add information about folded players
+        if public_state:
+            folded = [i for i, has_folded in enumerate(public_state['folded_players']) if has_folded]
+            if folded:
+                context += f"- Players who folded: {', '.join(map(str, folded))}\n"
+        
+        context += f"""
 - Available actions:
 {action_descriptions}
 
@@ -98,7 +132,7 @@ IMPORTANT:
         Extract the numeric action (and optional raise amount) by searching only
         for lines that match the final one-line format, ignoring chain-of-thought.
         """
-        # Only look at each line and find something like "4 2" or "3"
+        # Only look at each line and find something like "4 2" or "0"
         lines = response.strip().splitlines()
         final_line = None
         for line in reversed(lines):
@@ -114,7 +148,7 @@ IMPORTANT:
         action_str, raise_str = final_line.groups()
         return action_str, raise_str
     
-    def get_action(self, card, available_actions, round_num, chips_remaining):
+    def get_action(self, card, available_actions, round_num, chips_remaining, public_state):
         """
         Use Ollama to choose an action based on the current game state.
         
@@ -123,12 +157,13 @@ IMPORTANT:
             available_actions: Dictionary of available actions
             round_num: Current betting round (1 or 2)
             chips_remaining: The number of chips the player has
+            public_state: The public state of the game
             
         Returns:
             tuple: (Index of chosen action, raise amount)
         """
         # Format the prompt with game state information
-        prompt = self.format_prompt(card, available_actions, round_num, chips_remaining)
+        prompt = self.format_prompt(card, available_actions, round_num, chips_remaining, public_state)
         
         # Query the LLM
         response = self.query_ollama(prompt)
@@ -158,9 +193,11 @@ IMPORTANT:
                 if action_idx == 4 and raise_str is not None:
                     try:
                         raise_amount = int(raise_str)
+                        # Ensure we respect the engine's min_raise
+                        min_engine_raise = public_state.get("min_raise", 1)
+                        raise_amount = max(min_engine_raise, raise_amount, 1)
                         # Ensure raise is within limits
                         raise_amount = min(raise_amount, chips_remaining)
-                        raise_amount = max(1, raise_amount)  # Minimum raise is 1
                         print(f"Choosing action {action_idx} with raise amount {raise_amount}")
                         return (action_idx, raise_amount)
                     except ValueError:
@@ -188,7 +225,9 @@ IMPORTANT:
             else:
                 fallback = random.choice(list(available_actions.keys()))
                 if fallback == 4:
-                    return (4, 1)  # minimal raise
+                    # Use the engine-provided min_raise if available
+                    min_raise = public_state.get("min_raise", 1)
+                    return (4, min_raise)
                 return (fallback, 0)
     
     def record_local_transition(self, transition):
