@@ -1,0 +1,362 @@
+[16:46:19] 
+🎲 POKER GAME SESSION STARTED 🎲
+[16:46:19] Current chip counts before session: Player 0: 10, Player 1: 10, Player 2: 10
+[16:46:19] === Starting Hand 1 ===
+[16:46:19] Starting Hand 1 with chip counts: Player 0: 10, Player 1: 10, Player 2: 10
+[16:46:19] All players ante 1 unit. Pot is now 3.
+[16:46:19] Chance node: Dealt card K to Player 0.
+[16:46:19] Chance node: Dealt card J to Player 1.
+[16:46:19] Chance node: Dealt card A to Player 2.
+[16:46:19] One card is face-down (hidden). For debugging: Q
+[16:46:19] Starting First Betting Round.
+[16:46:19] Available actions for Player 0 :
+[16:46:19] 0: check - No bet on the table. You may check or bet.
+[16:46:19] 1: bet - You may bet 1 unit.
+[16:46:19] Player 0 checks.
+[16:46:19] Available actions for Player 1 :
+[16:46:19] 0: check - No bet on the table. You may check or bet.
+[16:46:19] 1: bet - You may bet 1 unit.
+[16:46:19] Player 1 checks.
+[16:46:19] Available actions for Player 2 :
+[16:46:19] 0: check - No bet on the table. You may check or bet.
+[16:46:19] 1: bet - You may bet 1 unit.
+[16:46:19] Player 2 checks.
+[16:46:19] All players checked. Going to showdown.
+[16:46:19] === Showdown ===
+[16:46:19] Cards revealed: Player 0: K, Player 1: J, Player 2: A
+[16:46:19] (** Debug/Reveal **) The unused hidden card was: Q
+[16:46:19] Player 2 wins the pot of 3 with A.
+[16:46:19] Player 0 lost 1 chip(s) this round.
+[16:46:19] Player 1 lost 1 chip(s) this round.
+[16:46:19] Player 2 gained 2 chip(s) this round.
+[16:46:19] Chip counts after Hand 1: Player 0: 9, Player 1: 9, Player 2: 12
+[16:46:19] === Starting Hand 2 ===
+[16:46:19] Starting Hand 2 with chip counts: Player 0: 9, Player 1: 9, Player 2: 12
+[16:46:19] All players ante 1 unit. Pot is now 3.
+[16:46:19] Chance node: Dealt card J to Player 0.
+[16:46:19] Chance node: Dealt card A to Player 1.
+[16:46:19] Chance node: Dealt card K to Player 2.
+[16:46:19] One card is face-down (hidden). For debugging: Q
+[16:46:19] Starting First Betting Round.
+[16:46:19] Available actions for Player 0 :
+[16:46:19] 0: check - No bet on the table. You may check or bet.
+[16:46:19] 1: bet - You may bet 1 unit.
+[16:46:19] Player 0 bets. Pot is now 4.
+[16:46:19] Available actions for Player 1 :
+[16:46:19] 2: call - Call the bet of 1 unit(s).
+[16:46:19] 3: fold - Fold your hand.
+[16:46:19] 4: raise - Raise by betting an additional amount.
+[16:46:19] Player 1 folds.
+[16:46:19] Available actions for Player 2 :
+[16:46:19] 2: call - Call the bet of 1 unit(s).
+[16:46:19] 3: fold - Fold your hand.
+[16:46:19] 4: raise - Raise by betting an additional amount.
+[16:46:19] Player 2 raises by 4 unit(s). Pot is now 9.
+[16:46:19] Available actions for Player 0 :
+[16:46:19] 2: call - Call the bet of 4 unit(s).
+[16:46:19] 3: fold - Fold your hand.
+[16:46:19] 4: raise - Raise by betting an additional amount.
+[16:46:19] Player 0 folds.
+[16:46:19] === Showdown ===
+[16:46:19] Cards revealed: Player 2: K
+[16:46:19] (** Debug/Reveal **) The unused hidden card was: Q
+[16:46:19] Player 2 wins the pot of 9 by default (others folded).
+[16:46:19] Player 0 lost 2 chip(s) this round.
+[16:46:19] Player 1 lost 1 chip(s) this round.
+[16:46:19] Player 2 gained 3 chip(s) this round.
+[16:46:19] Chip counts after Hand 2: Player 0: 7, Player 1: 8, Player 2: 15
+[16:46:19] === Starting Hand 3 ===
+[16:46:19] Starting Hand 3 with chip counts: Player 0: 7, Player 1: 8, Player 2: 15
+[16:46:19] All players ante 1 unit. Pot is now 3.
+[16:46:19] Chance node: Dealt card Q to Player 0.
+[16:46:19] Chance node: Dealt card A to Player 1.
+[16:46:19] Chance node: Dealt card K to Player 2.
+[16:46:19] One card is face-down (hidden). For debugging: J
+[16:46:19] Starting First Betting Round.
+[16:46:19] Available actions for Player 0 :
+[16:46:19] 0: check - No bet on the table. You may check or bet.
+[16:46:19] 1: bet - You may bet 1 unit.
+[16:46:19] Player 0 checks.
+[16:46:19] Available actions for Player 1 :
+[16:46:19] 0: check - No bet on the table. You may check or bet.
+[16:46:19] 1: bet - You may bet 1 unit.
+[16:46:19] Player 1 checks.
+[16:46:19] Available actions for Player 2 :
+[16:46:19] 0: check - No bet on the table. You may check or bet.
+[16:46:19] 1: bet - You may bet 1 unit.
+[16:46:19] Player 2 checks.
+[16:46:19] All players checked. Going to showdown.
+[16:46:19] === Showdown ===
+[16:46:19] Cards revealed: Player 0: Q, Player 1: A, Player 2: K
+[16:46:19] (** Debug/Reveal **) The unused hidden card was: J
+[16:46:19] Player 1 wins the pot of 3 with A.
+[16:46:19] Player 0 lost 1 chip(s) this round.
+[16:46:19] Player 1 gained 2 chip(s) this round.
+[16:46:19] Player 2 lost 1 chip(s) this round.
+[16:46:19] Chip counts after Hand 3: Player 0: 6, Player 1: 10, Player 2: 14
+[16:46:19] === Starting Hand 4 ===
+[16:46:19] Starting Hand 4 with chip counts: Player 0: 6, Player 1: 10, Player 2: 14
+[16:46:19] All players ante 1 unit. Pot is now 3.
+[16:46:19] Chance node: Dealt card A to Player 0.
+[16:46:19] Chance node: Dealt card Q to Player 1.
+[16:46:19] Chance node: Dealt card K to Player 2.
+[16:46:19] One card is face-down (hidden). For debugging: J
+[16:46:19] Starting First Betting Round.
+[16:46:19] Available actions for Player 0 :
+[16:46:19] 0: check - No bet on the table. You may check or bet.
+[16:46:19] 1: bet - You may bet 1 unit.
+[16:46:19] Player 0 bets. Pot is now 4.
+[16:46:19] Available actions for Player 1 :
+[16:46:19] 2: call - Call the bet of 1 unit(s).
+[16:46:19] 3: fold - Fold your hand.
+[16:46:19] 4: raise - Raise by betting an additional amount.
+[16:46:19] Player 1 calls. Pot is now 5.
+[16:46:19] Available actions for Player 2 :
+[16:46:19] 2: call - Call the bet of 1 unit(s).
+[16:46:19] 3: fold - Fold your hand.
+[16:46:19] 4: raise - Raise by betting an additional amount.
+[16:46:19] Player 2 folds.
+[16:46:19] Second round starts with Player 0 (continuing clockwise)
+[16:46:19] Starting Second Betting Round.
+[16:46:19] Available actions for Player 0 :
+[16:46:19] 0: check - No bet on the table. You may check or bet.
+[16:46:19] 1: bet - You may bet 1 unit.
+[16:46:19] Player 0 bets. Pot is now 6.
+[16:46:19] Available actions for Player 1 :
+[16:46:19] 2: call - Call the bet of 1 unit(s).
+[16:46:19] 3: fold - Fold your hand.
+[16:46:19] 4: raise - Raise by betting an additional amount.
+[16:46:19] Player 1 folds.
+[16:46:19] === Showdown ===
+[16:46:19] Cards revealed: Player 0: A
+[16:46:19] (** Debug/Reveal **) The unused hidden card was: J
+[16:46:19] Player 0 wins the pot of 6 by default (others folded).
+[16:46:19] Player 0 gained 3 chip(s) this round.
+[16:46:19] Player 1 lost 2 chip(s) this round.
+[16:46:19] Player 2 lost 1 chip(s) this round.
+[16:46:19] Chip counts after Hand 4: Player 0: 9, Player 1: 8, Player 2: 13
+[16:46:19] === Starting Hand 5 ===
+[16:46:19] Starting Hand 5 with chip counts: Player 0: 9, Player 1: 8, Player 2: 13
+[16:46:19] All players ante 1 unit. Pot is now 3.
+[16:46:19] Chance node: Dealt card J to Player 0.
+[16:46:19] Chance node: Dealt card Q to Player 1.
+[16:46:19] Chance node: Dealt card K to Player 2.
+[16:46:19] One card is face-down (hidden). For debugging: A
+[16:46:19] Starting First Betting Round.
+[16:46:19] Available actions for Player 0 :
+[16:46:19] 0: check - No bet on the table. You may check or bet.
+[16:46:19] 1: bet - You may bet 1 unit.
+[16:46:19] Player 0 checks.
+[16:46:19] Available actions for Player 1 :
+[16:46:19] 0: check - No bet on the table. You may check or bet.
+[16:46:19] 1: bet - You may bet 1 unit.
+[16:46:19] Player 1 bets. Pot is now 4.
+[16:46:19] Available actions for Player 2 :
+[16:46:19] 2: call - Call the bet of 1 unit(s).
+[16:46:19] 3: fold - Fold your hand.
+[16:46:19] 4: raise - Raise by betting an additional amount.
+[16:46:19] Player 2 folds.
+[16:46:19] Available actions for Player 0 :
+[16:46:19] 2: call - Call the bet of 1 unit(s).
+[16:46:19] 3: fold - Fold your hand.
+[16:46:19] 4: raise - Raise by betting an additional amount.
+[16:46:19] Player 0 raises by 6 unit(s). Pot is now 11.
+[16:46:19] Available actions for Player 1 :
+[16:46:19] 2: call - Call the bet of 6 unit(s).
+[16:46:19] 3: fold - Fold your hand.
+[16:46:19] Player 1 folds.
+[16:46:19] === Showdown ===
+[16:46:19] Cards revealed: Player 0: J
+[16:46:19] (** Debug/Reveal **) The unused hidden card was: A
+[16:46:19] Player 0 wins the pot of 11 by default (others folded).
+[16:46:19] Player 0 gained 3 chip(s) this round.
+[16:46:19] Player 1 lost 2 chip(s) this round.
+[16:46:19] Player 2 lost 1 chip(s) this round.
+[16:46:19] Chip counts after Hand 5: Player 0: 12, Player 1: 6, Player 2: 12
+[16:46:19] === Starting Hand 6 ===
+[16:46:19] Starting Hand 6 with chip counts: Player 0: 12, Player 1: 6, Player 2: 12
+[16:46:19] All players ante 1 unit. Pot is now 3.
+[16:46:19] Chance node: Dealt card Q to Player 0.
+[16:46:19] Chance node: Dealt card J to Player 1.
+[16:46:19] Chance node: Dealt card A to Player 2.
+[16:46:19] One card is face-down (hidden). For debugging: K
+[16:46:19] Starting First Betting Round.
+[16:46:19] Available actions for Player 0 :
+[16:46:19] 0: check - No bet on the table. You may check or bet.
+[16:46:19] 1: bet - You may bet 1 unit.
+[16:46:19] Player 0 bets. Pot is now 4.
+[16:46:19] Available actions for Player 1 :
+[16:46:19] 2: call - Call the bet of 1 unit(s).
+[16:46:19] 3: fold - Fold your hand.
+[16:46:19] 4: raise - Raise by betting an additional amount.
+[16:46:19] Player 1 calls. Pot is now 5.
+[16:46:19] Available actions for Player 2 :
+[16:46:19] 2: call - Call the bet of 1 unit(s).
+[16:46:19] 3: fold - Fold your hand.
+[16:46:19] 4: raise - Raise by betting an additional amount.
+[16:46:19] Player 2 calls. Pot is now 6.
+[16:46:19] Second round starts with Player 0 (continuing clockwise)
+[16:46:19] Starting Second Betting Round.
+[16:46:19] Available actions for Player 0 :
+[16:46:19] 0: check - No bet on the table. You may check or bet.
+[16:46:19] 1: bet - You may bet 1 unit.
+[16:46:19] Player 0 checks.
+[16:46:19] Available actions for Player 1 :
+[16:46:19] 0: check - No bet on the table. You may check or bet.
+[16:46:19] 1: bet - You may bet 1 unit.
+[16:46:19] Player 1 checks.
+[16:46:19] Available actions for Player 2 :
+[16:46:19] 0: check - No bet on the table. You may check or bet.
+[16:46:19] 1: bet - You may bet 1 unit.
+[16:46:19] Player 2 checks.
+[16:46:19] === Showdown ===
+[16:46:19] Cards revealed: Player 0: Q, Player 1: J, Player 2: A
+[16:46:19] (** Debug/Reveal **) The unused hidden card was: K
+[16:46:19] Player 2 wins the pot of 6 with A.
+[16:46:19] Player 0 lost 2 chip(s) this round.
+[16:46:19] Player 1 lost 2 chip(s) this round.
+[16:46:19] Player 2 gained 4 chip(s) this round.
+[16:46:19] Chip counts after Hand 6: Player 0: 10, Player 1: 4, Player 2: 16
+[16:46:19] === Starting Hand 7 ===
+[16:46:19] Starting Hand 7 with chip counts: Player 0: 10, Player 1: 4, Player 2: 16
+[16:46:19] All players ante 1 unit. Pot is now 3.
+[16:46:19] Chance node: Dealt card A to Player 0.
+[16:46:19] Chance node: Dealt card Q to Player 1.
+[16:46:19] Chance node: Dealt card J to Player 2.
+[16:46:19] One card is face-down (hidden). For debugging: K
+[16:46:19] Starting First Betting Round.
+[16:46:19] Available actions for Player 0 :
+[16:46:19] 0: check - No bet on the table. You may check or bet.
+[16:46:19] 1: bet - You may bet 1 unit.
+[16:46:19] Player 0 bets. Pot is now 4.
+[16:46:19] Available actions for Player 1 :
+[16:46:19] 2: call - Call the bet of 1 unit(s).
+[16:46:19] 3: fold - Fold your hand.
+[16:46:19] 4: raise - Raise by betting an additional amount.
+[16:46:19] Player 1 raises by 2 unit(s). Pot is now 7.
+[16:46:19] Available actions for Player 2 :
+[16:46:19] 2: call - Call the bet of 3 unit(s).
+[16:46:19] 3: fold - Fold your hand.
+[16:46:19] 4: raise - Raise by betting an additional amount.
+[16:46:19] Player 2 folds.
+[16:46:19] Available actions for Player 0 :
+[16:46:19] 2: call - Call the bet of 2 unit(s).
+[16:46:19] 3: fold - Fold your hand.
+[16:46:19] 4: raise - Raise by betting an additional amount.
+[16:46:19] Player 0 raises by 5 unit(s). Pot is now 14.
+[16:46:19] Available actions for Player 1 :
+[16:46:19] 3: fold - Fold your hand.
+[16:46:19] Player 1 folds.
+[16:46:19] === Showdown ===
+[16:46:19] Cards revealed: Player 0: A
+[16:46:19] (** Debug/Reveal **) The unused hidden card was: K
+[16:46:19] Player 0 wins the pot of 14 by default (others folded).
+[16:46:19] Player 0 gained 5 chip(s) this round.
+[16:46:19] Player 1 lost 4 chip(s) this round.
+[16:46:19] Player 2 lost 1 chip(s) this round.
+[16:46:19] Chip counts after Hand 7: Player 0: 15, Player 1: 0, Player 2: 15
+[16:46:19] === Starting Hand 8 ===
+[16:46:19] Starting Hand 8 with chip counts: Player 0: 15, Player 1: 0, Player 2: 15
+[16:46:19] All players ante 1 unit. Pot is now 3.
+[16:46:19] Chance node: Dealt card A to Player 0.
+[16:46:19] Chance node: Dealt card K to Player 1.
+[16:46:19] Chance node: Dealt card J to Player 2.
+[16:46:19] One card is face-down (hidden). For debugging: Q
+[16:46:19] Starting First Betting Round.
+[16:46:19] Available actions for Player 0 :
+[16:46:19] 0: check - No bet on the table. You may check or bet.
+[16:46:19] 1: bet - You may bet 1 unit.
+[16:46:19] Player 0 checks.
+[16:46:19] Available actions for Player 1 :
+[16:46:19] 0: check - No chips left.
+[16:46:19] Player 1 checks.
+[16:46:19] Available actions for Player 2 :
+[16:46:19] 0: check - No bet on the table. You may check or bet.
+[16:46:19] 1: bet - You may bet 1 unit.
+[16:46:19] Player 2 bets. Pot is now 4.
+[16:46:19] Available actions for Player 0 :
+[16:46:19] 2: call - Call the bet of 1 unit(s).
+[16:46:19] 3: fold - Fold your hand.
+[16:46:19] 4: raise - Raise by betting an additional amount.
+[16:46:19] Player 0 folds.
+[16:46:19] Available actions for Player 1 :
+[16:46:19] 3: fold - Fold your hand.
+[16:46:19] Player 1 folds.
+[16:46:19] === Showdown ===
+[16:46:19] Cards revealed: Player 2: J
+[16:46:19] (** Debug/Reveal **) The unused hidden card was: Q
+[16:46:19] Player 2 wins the pot of 4 by default (others folded).
+[16:46:19] Player 0 lost 1 chip(s) this round.
+[16:46:19] Player 1 lost 1 chip(s) this round.
+[16:46:19] Player 2 gained 2 chip(s) this round.
+[16:46:19] Chip counts after Hand 8: Player 0: 14, Player 1: -1, Player 2: 17
+[16:46:19] === Starting Hand 9 ===
+[16:46:19] Starting Hand 9 with chip counts: Player 0: 14, Player 1: -1, Player 2: 17
+[16:46:19] All players ante 1 unit. Pot is now 3.
+[16:46:19] Chance node: Dealt card K to Player 0.
+[16:46:19] Chance node: Dealt card Q to Player 1.
+[16:46:19] Chance node: Dealt card A to Player 2.
+[16:46:19] One card is face-down (hidden). For debugging: J
+[16:46:19] Starting First Betting Round.
+[16:46:19] Available actions for Player 0 :
+[16:46:19] 0: check - No bet on the table. You may check or bet.
+[16:46:19] 1: bet - You may bet 1 unit.
+[16:46:19] Player 0 bets. Pot is now 4.
+[16:46:19] Available actions for Player 1 :
+[16:46:19] 3: fold - Fold your hand.
+[16:46:19] Player 1 folds.
+[16:46:19] Available actions for Player 2 :
+[16:46:19] 2: call - Call the bet of 1 unit(s).
+[16:46:19] 3: fold - Fold your hand.
+[16:46:19] 4: raise - Raise by betting an additional amount.
+[16:46:19] Player 2 calls. Pot is now 5.
+[16:46:19] Second round starts with Player 0 (continuing clockwise)
+[16:46:19] Starting Second Betting Round.
+[16:46:19] Available actions for Player 0 :
+[16:46:19] 0: check - No bet on the table. You may check or bet.
+[16:46:19] 1: bet - You may bet 1 unit.
+[16:46:19] Player 0 checks.
+[16:46:19] Available actions for Player 2 :
+[16:46:19] 0: check - No bet on the table. You may check or bet.
+[16:46:19] 1: bet - You may bet 1 unit.
+[16:46:19] Player 2 checks.
+[16:46:19] === Showdown ===
+[16:46:19] Cards revealed: Player 0: K, Player 2: A
+[16:46:19] (** Debug/Reveal **) The unused hidden card was: J
+[16:46:19] Player 2 wins the pot of 5 with A.
+[16:46:19] Player 0 lost 2 chip(s) this round.
+[16:46:19] Player 1 lost 1 chip(s) this round.
+[16:46:19] Player 2 gained 3 chip(s) this round.
+[16:46:19] Chip counts after Hand 9: Player 0: 12, Player 1: -2, Player 2: 20
+[16:46:19] === Starting Hand 10 ===
+[16:46:19] Starting Hand 10 with chip counts: Player 0: 12, Player 1: -2, Player 2: 20
+[16:46:19] All players ante 1 unit. Pot is now 3.
+[16:46:19] Chance node: Dealt card A to Player 0.
+[16:46:19] Chance node: Dealt card K to Player 1.
+[16:46:19] Chance node: Dealt card J to Player 2.
+[16:46:19] One card is face-down (hidden). For debugging: Q
+[16:46:19] Starting First Betting Round.
+[16:46:19] Available actions for Player 0 :
+[16:46:19] 0: check - No bet on the table. You may check or bet.
+[16:46:19] 1: bet - You may bet 1 unit.
+[16:46:19] Player 0 bets. Pot is now 4.
+[16:46:19] Available actions for Player 1 :
+[16:46:19] 3: fold - Fold your hand.
+[16:46:19] Player 1 folds.
+[16:46:19] Available actions for Player 2 :
+[16:46:19] 2: call - Call the bet of 1 unit(s).
+[16:46:19] 3: fold - Fold your hand.
+[16:46:19] 4: raise - Raise by betting an additional amount.
+[16:46:19] Player 2 folds.
+[16:46:19] === Showdown ===
+[16:46:19] Cards revealed: Player 0: A
+[16:46:19] (** Debug/Reveal **) The unused hidden card was: Q
+[16:46:19] Player 0 wins the pot of 4 by default (others folded).
+[16:46:19] Player 0 gained 2 chip(s) this round.
+[16:46:19] Player 1 lost 1 chip(s) this round.
+[16:46:19] Player 2 lost 1 chip(s) this round.
+[16:46:19] Chip counts after Hand 10: Player 0: 14, Player 1: -3, Player 2: 19
+[16:46:19] 🏁 GAME SESSION ENDED 🏁
+[16:46:19] Final chip counts: Player 0: 14, Player 1: -3, Player 2: 19
+[16:46:19] Transitions written to /Users/shridpant/Documents/poker/engine/../logs/game_data/rl_data.csv.
+[16:46:19] Training data exported to /Users/shridpant/Documents/poker/engine/../logs/game_data/training_data.csv

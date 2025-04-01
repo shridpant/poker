@@ -71,7 +71,7 @@ There's an ```example.ipynb``` for you. I tried to make it super intuitive, but 
 ### 2-Player Game (Human vs Random)
 
 ```python
-from game_engine import KuhnPokerEngine
+from engine.game_engine import KuhnPokerEngine
 from players.human_agent import HumanPlayer
 from players.random_agent import RandomPlayer
 
@@ -92,7 +92,7 @@ engine.run_game()
 ### 3-Player Game (Human vs Random vs Federated)
 
 ```python
-from game_engine import KuhnPokerEngine
+from engine.game_engine import KuhnPokerEngine
 from players.human_agent import HumanPlayer
 from players.random_agent import RandomPlayer
 from players.federated_agent import FederatedPlayer

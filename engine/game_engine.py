@@ -5,10 +5,10 @@ import random
 import csv
 import sys
 from datetime import datetime
+import os
+import ast
 
-# import pyspiel
-
-from utilities import (
+from engine.utilities import (
     log_to_console_and_store, 
     append_to_log_file, 
     write_transitions_to_csv
@@ -30,6 +30,12 @@ CARD_NAMES = {0: "J", 1: "Q", 2: "K"}
 #   4 -> raise
 ACTION_CODES = {0: "check", 1: "bet", 2: "call", 3: "fold", 4: "raise"}
 
+# Centralized log directory references
+LOG_DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "logs", "game_data")
+GAME_LOG_FILE = os.path.join(LOG_DATA_DIR, "game_log.txt")
+RL_DATA_FILE = os.path.join(LOG_DATA_DIR, "rl_data.csv")
+TRAINING_DATA_FILE = os.path.join(LOG_DATA_DIR, "training_data.csv")
+
 class RLDataLogger:
     """Handles RL transitions and data exporting."""
     def __init__(self):
@@ -39,20 +45,17 @@ class RLDataLogger:
     def record_transition(self, transition):
         self.transitions.append(transition)
 
-    def write_transitions(self, log_callback):
+    def write_transitions(self, log_callback, filename=RL_DATA_FILE):
         if self.transitions:
-            from utilities import write_transitions_to_csv
-            write_transitions_to_csv(self.transitions, log_callback)
+            from engine.utilities import write_transitions_to_csv
+            write_transitions_to_csv(self.transitions, log_callback, filename)
             # Also export training data
             self.export_training_data(log_callback)
         
-    def export_training_data(self, log_callback, filename="logs/game_data/training_data.csv"):
+    def export_training_data(self, log_callback, filename=TRAINING_DATA_FILE):
         if not self.transitions:
             log_callback("No transitions to export.")
             return
-            
-        import os
-        import ast
         
         os.makedirs(os.path.dirname(filename), exist_ok=True)
         
@@ -115,7 +118,6 @@ class RLDataLogger:
         
         # Write
         if training_data:
-            import csv
             with open(filename, 'w', newline='') as csvfile:
                 fieldnames = list(training_data[0].keys())
                 writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
@@ -138,8 +140,8 @@ class KuhnPokerEngine:
         self.current_hand = 0
         self.rlogger = RLDataLogger()
         self.log_file = None
-        
-    def log(self, message, filename="logs/game_data/game_log.csv"):
+       
+    def log(self, message, filename=GAME_LOG_FILE):
         """Log a message with timestamp."""
         timestamp = datetime.now().strftime("%H:%M:%S")
         formatted_msg = f"[{timestamp}] {message}"
@@ -150,7 +152,7 @@ class KuhnPokerEngine:
                 f.write(formatted_msg + "\n")
         except Exception as e:
             print(f"Failed to write log to {filename}: {e}")
-  
+ 
     def run_game(self):
         """Run the entire game session."""
         self.log("\n🎲 POKER GAME SESSION STARTED 🎲")

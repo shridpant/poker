@@ -62,9 +62,6 @@ def write_federated_data(transitions, filename):
         transitions: List of transition dictionaries
         filename: Path to CSV file
     """
-    import os
-    import csv
-    
     # Ensure directory exists
     os.makedirs(os.path.dirname(filename), exist_ok=True)
     

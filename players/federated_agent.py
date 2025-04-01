@@ -1,5 +1,5 @@
 from players.base import Player
-from utilities import write_federated_data
+from engine.utilities import write_federated_data
 import random
 
 class FederatedPlayer(Player):
