@@ -145,9 +145,11 @@ class KuhnPokerEngine:
         formatted_msg = f"[{timestamp}] {message}"
         print(formatted_msg)
         # Append the log message to game_log.txt
-        with open(filename, "a") as f:
-            f.write(formatted_msg + "\n")
-        sys.stdout.flush()
+        try:
+            with open(filename, "a") as f:
+                f.write(formatted_msg + "\n")
+        except Exception as e:
+            print(f"Failed to write log to {filename}: {e}")
   
     def run_game(self):
         """Run the entire game session."""
