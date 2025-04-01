@@ -139,11 +139,16 @@ class KuhnPokerEngine:
         self.rlogger = RLDataLogger()
         self.log_file = None
         
-    def log(self, message):
+    def log(self, message, filename="logs/game_data/game_log.csv"):
         """Log a message with timestamp."""
         timestamp = datetime.now().strftime("%H:%M:%S")
-        print(f"[{timestamp}] {message}")
-        
+        formatted_msg = f"[{timestamp}] {message}"
+        print(formatted_msg)
+        # Append the log message to game_log.txt
+        with open(filename, "a") as f:
+            f.write(formatted_msg + "\n")
+        sys.stdout.flush()
+  
     def run_game(self):
         """Run the entire game session."""
         self.log("\n🎲 POKER GAME SESSION STARTED 🎲")
@@ -409,10 +414,11 @@ class KuhnPokerEngine:
                     if raise_used <= 0:
                         self.log(f"Player {current_player} can't raise further - forced to call or fold.")
                         if self.chips[current_player] > 0:
-                            self.chips[current_player] -= self.chips[current_player]
-                            self.current_bets[current_player] += self.chips[current_player]
-                            self.pot += self.chips[current_player]
-                            self.log(f"Player {current_player} calls with remaining chips. Pot is now {self.pot}.")
+                            remaining_chips = self.chips[current_player]  # Store before setting to zero
+                            self.chips[current_player] = 0
+                            self.current_bets[current_player] += remaining_chips
+                            self.pot += remaining_chips
+                            self.log(f"Player {current_player} calls with remaining {remaining_chips} chip(s). Pot is now {self.pot}.")
                             actions.append("call")
                         else:
                             self.folded[current_player] = True
@@ -500,8 +506,8 @@ class KuhnPokerEngine:
             # 2. After a bet/raise: everyone after the bettor needs to act and bets are equal
             equal_bets = all(self.current_bets[player] == highest_bet for player in active_players)
             if last_bettor is not None:
-                # We made at least one complete rotation after the last bet
-                if players_acted > active_players_count and equal_bets:
+                # Make at least one complete rotation after the last bet
+                if players_acted >= active_players_count and equal_bets:
                     all_players_acted = True
             
             time.sleep(self.delay)
