@@ -403,9 +403,9 @@ class KuhnPokerEngine:
                     self.pot += call_used
 
                     # Now add the raise
-                    min_extra = 1
+                    min_extra = last_raise_amount
                     max_extra = self.chips[current_player]
-                    raise_used = min(max_extra, max(min_extra, raise_amount or 1))
+                    raise_used = min(max_extra, max(min_extra, raise_amount or min_extra))
                     if raise_used <= 0:
                         self.log(f"Player {current_player} can't raise further - forced to call or fold.")
                         if self.chips[current_player] > 0:
@@ -428,6 +428,9 @@ class KuhnPokerEngine:
                         last_bettor = current_player
                         # Reset players_acted counter when there's a new bet
                         players_acted = 1
+                        # Update last_raise_amount so future raises must meet or exceed this
+                        last_raise_amount = raise_used
+                        public_state["min_raise"] = last_raise_amount
             
             # After processing the chosen action, only record local transitions if agent is FRL
             if isinstance(self.players[current_player], FederatedPlayer):
