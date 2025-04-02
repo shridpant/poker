@@ -17,6 +17,7 @@ Mappings for card names & actions
 """
 # This dictionary maps indexes to card names in Kuhn Poker.
 CARD_NAMES = {0: "J", 1: "Q", 2: "K"}
+CHIP_TOTAL = 100 # Total chips each player starts with
 
 # Possible betting actions
 #   0 -> check
@@ -35,7 +36,7 @@ class KuhnPokerEngine:
         self.delay = delay
         self.num_players = num_players
         self.auto_rounds = auto_rounds
-        self.chips = [10] * num_players
+        self.chips = [CHIP_TOTAL] * num_players
         self.current_hand = 0
         self.rlogger = RLDataLogger()
         self.log_file = None
