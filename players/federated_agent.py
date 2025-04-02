@@ -1,11 +1,11 @@
 from players.base import Player
-from engine.utilities import write_federated_data
 import random
 
 class FederatedPlayer(Player):
     def __init__(self, player_id):
         self.player_id = player_id
         self.local_transitions = []
+        self.supports_federated = True
 
     def get_action(self, card, available_actions, round_num, chips_remaining, public_state):
         # Pick a random action from the available options
@@ -38,8 +38,3 @@ class FederatedPlayer(Player):
         
         # Append to local transitions list
         self.local_transitions.append(formatted_transition)
-
-    def flush_local_transitions(self):
-        filename = f"logs/game_data/federated_player_{self.player_id}_data.csv"
-        write_federated_data(self.local_transitions, filename)
-        self.local_transitions.clear()

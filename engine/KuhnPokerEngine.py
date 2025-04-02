@@ -1,20 +1,16 @@
-# game_engine.py
+# KuhnPokerEngine.py
 
 import time
 import random
-import csv
 import sys
 from datetime import datetime
-import os
-import ast
 
 from engine.utilities import (
-    log_to_console_and_store, 
-    append_to_log_file, 
-    write_transitions_to_csv
+    flush_federated_transitions,
+    RLDataLogger,
+    log_message,
+    record_local_transition_if_applicable
 )
-from players.human_agent import HumanPlayer
-from players.federated_agent import FederatedPlayer
 
 """
 Mappings for card names & actions
@@ -30,103 +26,6 @@ CARD_NAMES = {0: "J", 1: "Q", 2: "K"}
 #   4 -> raise
 ACTION_CODES = {0: "check", 1: "bet", 2: "call", 3: "fold", 4: "raise"}
 
-# Centralized log directory references
-LOG_DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "logs", "game_data")
-GAME_LOG_FILE = os.path.join(LOG_DATA_DIR, "game_log.txt")
-RL_DATA_FILE = os.path.join(LOG_DATA_DIR, "rl_data.csv")
-TRAINING_DATA_FILE = os.path.join(LOG_DATA_DIR, "training_data.csv")
-
-class RLDataLogger:
-    """Handles RL transitions and data exporting."""
-    def __init__(self):
-        # Store transitions here instead of the engine
-        self.transitions = []
-
-    def record_transition(self, transition):
-        self.transitions.append(transition)
-
-    def write_transitions(self, log_callback, filename=RL_DATA_FILE):
-        if self.transitions:
-            from engine.utilities import write_transitions_to_csv
-            write_transitions_to_csv(self.transitions, log_callback, filename)
-            # Also export training data
-            self.export_training_data(log_callback)
-        
-    def export_training_data(self, log_callback, filename=TRAINING_DATA_FILE):
-        if not self.transitions:
-            log_callback("No transitions to export.")
-            return
-        
-        os.makedirs(os.path.dirname(filename), exist_ok=True)
-        
-        # Card mapping to numeric values
-        card_map = {"J": 1, "Q": 2, "K": 3, "A": 4}
-        
-        # Prepare structured data
-        training_data = []
-        
-        for t in self.transitions:
-            try:
-                # Parse the state string into a dictionary
-                if isinstance(t["state"], str):
-                    state = ast.literal_eval(t["state"])
-                else:
-                    state = t["state"]
-                    
-                # Feature vector
-                features = {
-                    # Convert cards to numeric values
-                    "player_card": card_map.get(state.get(f"player{t['current_player']}_card", ""), 0),
-                    "pot_ratio": state.get("pot", 0) / 10.0,  # Normalize pot size
-                    "chips_ratio": float(state.get("chips", "0;0").split(";")[min(t["current_player"], len(state.get("chips", "0;0").split(";"))-1)]) / 10.0 if state.get("chips") else 0.0,
-                    "round": state.get("round", 1) / 5.0,  # Normalize round number
-                    "is_first_round": 1.0 if state.get("stage") == "first" else 0.0,
-                    # One-hot encode betting position
-                    "position_p0": 1.0 if t["current_player"] == 0 else 0.0,
-                    "position_p1": 1.0 if t["current_player"] == 1 else 0.0,
-                    "position_p2": 1.0 if t["current_player"] == 2 else 0.0,
-                    # Add betting history features
-                    "history_bet_count": state.get("betting_history", "").count("bet") / 5.0,
-                    "history_raise_count": state.get("betting_history", "").count("raise") / 5.0,
-                    "history_fold_count": state.get("betting_history", "").count("fold") / 5.0,
-                }
-                
-                # One-hot encode action
-                action_vec = [0] * 5  # 5 possible actions
-                action_idx = int(t.get("chosen_action", 0))
-                if 0 <= action_idx < 5:
-                    action_vec[action_idx] = 1
-                    
-                # Row with features, action, reward, done
-                row = {
-                    "player_id": t["current_player"],
-                    "episode": f"{t['session_id']}_{t['round']}",
-                    "step": t["decision_index"],
-                    **features,
-                    "action_check": action_vec[0],
-                    "action_bet": action_vec[1], 
-                    "action_call": action_vec[2],
-                    "action_fold": action_vec[3],
-                    "action_raise": action_vec[4],
-                    "reward": t["reward"],
-                    "done": 1 if t["done"] else 0
-                }
-                
-                training_data.append(row)
-            except Exception as e:
-                log_callback(f"Error processing transition: {e}")
-        
-        # Write
-        if training_data:
-            with open(filename, 'w', newline='') as csvfile:
-                fieldnames = list(training_data[0].keys())
-                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-                writer.writeheader()
-                writer.writerows(training_data)
-                log_callback(f"Training data exported to {filename}")
-        else:
-            log_callback("No valid training data to export.")
-
 class KuhnPokerEngine:
     """Manages the flow of a Kuhn Poker game, from dealing to resolution."""
     def __init__(self, player0, player1, player2=None, delay=0.5, num_players=2, auto_rounds=None):
@@ -140,19 +39,11 @@ class KuhnPokerEngine:
         self.current_hand = 0
         self.rlogger = RLDataLogger()
         self.log_file = None
-       
-    def log(self, message, filename=GAME_LOG_FILE):
-        """Log a message with timestamp."""
-        timestamp = datetime.now().strftime("%H:%M:%S")
-        formatted_msg = f"[{timestamp}] {message}"
-        print(formatted_msg)
-        # Append the log message to game_log.txt
-        try:
-            with open(filename, "a") as f:
-                f.write(formatted_msg + "\n")
-        except Exception as e:
-            print(f"Failed to write log to {filename}: {e}")
- 
+
+    def log(self, message):
+        """Wrapper around the utility logging function."""
+        log_message(message)
+
     def run_game(self):
         """Run the entire game session."""
         self.log("\n🎲 POKER GAME SESSION STARTED 🎲")
@@ -443,14 +334,7 @@ class KuhnPokerEngine:
                         public_state["min_raise"] = last_raise_amount
             
             # After processing the chosen action, only record local transitions if agent is FRL
-            if isinstance(self.players[current_player], FederatedPlayer):
-                transition_data = {
-                    "local_state": "example_state",
-                    "local_action": action_idx,
-                    "local_reward": 0,
-                    "local_done": False
-                }
-                self.players[current_player].record_local_transition(transition_data)
+            record_local_transition_if_applicable(self.players[current_player], action_idx)
             
             # Record transition for RL training (for ALL players)
             session_id = datetime.now().strftime("%Y%m%d%H%M%S")
@@ -479,16 +363,6 @@ class KuhnPokerEngine:
                 "done": False
             }
             self.rlogger.record_transition(transition_data)
-            
-            # FederatedPlayer specific code
-            if isinstance(self.players[current_player], FederatedPlayer):
-                local_transition = {
-                    "local_state": "example_state",
-                    "local_action": action_idx,
-                    "local_reward": 0,
-                    "local_done": False
-                }
-                self.players[current_player].record_local_transition(local_transition)
             
             # Move to next player and track if everyone has acted
             players_acted += 1
@@ -611,12 +485,12 @@ class KuhnPokerEngine:
         # Display chip counts
         chip_status = ", ".join([f"Player {i}: {self.chips[i]}" for i in range(self.num_players)])
         self.log(f"Chip counts after Hand {self.current_hand}: {chip_status}")
-        
+
     def write_transitions(self):
         """Write collected RL data to CSV files."""
         self.rlogger.write_transitions(self.log)
         
         # Flush local transitions for any FederatedPlayer
         for i, p in enumerate(self.players):
-            if hasattr(p, 'flush_local_transitions'):
-                p.flush_local_transitions()
+            if hasattr(p, 'local_transitions'):
+                flush_federated_transitions(p)
