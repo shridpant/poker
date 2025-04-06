@@ -87,15 +87,35 @@ class KuhnPokerEngine:
         self.pot = 0
         self.current_bets = [0] * self.num_players
         self.folded = [False] * self.num_players
+        self.all_in = [False] * self.num_players  # Track which players are all-in
         self.cards = []
         chips_before_round = self.chips[:]  # Track starting chips for diff
         
         # Ante
         ante = 1
         for i in range(self.num_players):
-            self.chips[i] -= ante
-            self.pot += ante
-        self.log(f"All players ante {ante} unit. Pot is now {self.pot}.")
+            if self.chips[i] >= ante:
+                self.chips[i] -= ante
+                self.pot += ante
+            else:
+                self.log(f"Player {i} doesn't have enough chips for ante - forced to fold.")
+                self.folded[i] = True
+        
+        # Check if we have enough active players to continue
+        active_players = [i for i in range(self.num_players) if not self.folded[i]]
+        if len(active_players) <= 1:
+            if active_players:
+                winner = active_players[0]
+                self.log(f"Only Player {winner} has enough chips to play. Player {winner} wins the pot of {self.pot} by default.")
+                self.chips[winner] += self.pot
+            else:
+                self.log("No players have enough chips to play this hand.")
+            
+            # Use showdown to handle rewards and transition updates
+            self.showdown(chips_before_round)
+            return
+
+        self.log(f"All active players ante {ante} unit. Pot is now {self.pot}.")
 
         # Deal cards
         if self.num_players == 3:
@@ -283,15 +303,24 @@ class KuhnPokerEngine:
                         self.chips[current_player] -= call_amount
                         self.current_bets[current_player] += call_amount
                         self.pot += call_amount
-                        self.log(f"Player {current_player} calls. Pot is now {self.pot}.")
+                        
+                        # Mark player as all-in if they can't fully match the bet
+                        if call_amount < bet_diff:
+                            self.all_in[current_player] = True
+                            self.log(f"Player {current_player} calls all-in with {call_amount} chip(s). Pot is now {self.pot}.")
+                        else:
+                            self.log(f"Player {current_player} calls. Pot is now {self.pot}.")
+                        
                         actions.append("call")
                         
                         # Check if all active players have had a chance to act after the last bet/raise
-                        # and have equal bets
+                        # and have equal bets or are all-in
                         active_players = [i for i in range(self.num_players) if not self.folded[i]]
-                        all_bets_equal = all(self.current_bets[p] == highest_bet for p in active_players)
                         
-                        # If all players have acted since the last bet and bets are equal, round is complete
+                        # Consider a player's bet "equal" if they're all-in with whatever they could contribute
+                        all_bets_equal = all(self.current_bets[p] == highest_bet or self.all_in[p] for p in active_players)
+                        
+                        # If all players have acted since the last bet and bets are equal or players are all-in, round is complete
                         if all_bets_equal and (players_acted >= starting_active_players):
                             all_players_acted = True
                             
@@ -314,8 +343,9 @@ class KuhnPokerEngine:
                             self.chips[current_player] = 0
                             self.current_bets[current_player] += remaining_chips
                             self.pot += remaining_chips
-                            self.log(f"Player {current_player} calls with remaining {remaining_chips} chip(s). Pot is now {self.pot}.")
+                            self.log(f"Player {current_player} calls all-in with remaining {remaining_chips} chip(s). Pot is now {self.pot}.")
                             actions.append("call")
+                            self.all_in[current_player] = True  # Mark as all-in
                         else:
                             self.folded[current_player] = True
                             actions.append("fold")
@@ -325,7 +355,14 @@ class KuhnPokerEngine:
                         self.current_bets[current_player] += raise_used
                         self.pot += raise_used
                         highest_bet = self.current_bets[current_player]
-                        self.log(f"Player {current_player} raises by {raise_used} unit(s). Pot is now {self.pot}.")
+                        
+                        # Check if player is all-in after the raise
+                        if self.chips[current_player] == 0:
+                            self.all_in[current_player] = True
+                            self.log(f"Player {current_player} raises all-in by {raise_used} unit(s). Pot is now {self.pot}.")
+                        else:
+                            self.log(f"Player {current_player} raises by {raise_used} unit(s). Pot is now {self.pot}.")
+                            
                         actions.append("raise")
                         last_bettor = current_player
                         # Reset players_acted counter when there's a new bet
@@ -383,7 +420,10 @@ class KuhnPokerEngine:
                 continue
                 
             # 2. After a bet/raise: everyone after the bettor needs to act and bets are equal
-            equal_bets = all(self.current_bets[player] == highest_bet for player in active_players)
+            # Consider a player's bet "equal" if they're all-in with whatever they could contribute
+            active_players = [i for i in range(self.num_players) if not self.folded[i]]
+            equal_bets = all(self.current_bets[player] == highest_bet or self.all_in[player] for player in active_players)
+            
             if last_bettor is not None:
                 # Make at least one complete rotation after the last bet
                 if players_acted >= active_players_count and equal_bets:
@@ -400,78 +440,88 @@ class KuhnPokerEngine:
         
     def showdown(self, chips_before_round):
         """
-        Determine the winner and distribute the pot.
+        Determine the winner and distribute the pot with side pot support.
         """
         print("\n" + "-" * 40 + " SHOWDOWN " + "-" * 40)
         self.log("=== Showdown ===")
         
-        # Show cards of non-folded players
-        reveal_message = "Cards revealed: "
         active_players = []
-        for i in range(self.num_players):
-            if not self.folded[i]:
-                reveal_message += f"Player {i}: {self.cards[i]}, "
-                active_players.append(i)
-        self.log(reveal_message.rstrip(", "))
-        
-        # If there's a hidden card in 3-player mode, log it at the showdown
-        if self.num_players == 3 and hasattr(self, 'hidden_card'):
-            self.log(f"(** Debug/Reveal **) The unused hidden card was: {self.hidden_card}")
-        
-        # Determine winner
-        if len(active_players) == 1:
-            winner = active_players[0]
-            self.log(f"Player {winner} wins the pot of {self.pot} by default (others folded).")
-        else:
-            # Compare cards (in Kuhn poker, higher card wins)
-            card_ranks = {"J": 1, "Q": 2, "K": 3, "A": 4}
-            best_card = -1
-            winner = -1
+        # Show cards of non-folded players, but only if cards have been dealt
+        if self.cards:
+            reveal_message = "Cards revealed: "
+            for i in range(self.num_players):
+                if not self.folded[i]:
+                    reveal_message += f"Player {i}: {self.cards[i]}, "
+                    active_players.append(i)
+            self.log(reveal_message.rstrip(", "))
             
-            for player in active_players:
-                card_rank = card_ranks.get(self.cards[player], 0)
-                if card_rank > best_card:
-                    best_card = card_rank
-                    winner = player
-                    
-            self.log(f"Player {winner} wins the pot of {self.pot} with {self.cards[winner]}.")
+            # If there's a hidden card in 3-player mode, log it at the showdown
+            if self.num_players == 3 and hasattr(self, 'hidden_card'):
+                self.log(f"(** Debug/Reveal **) The unused hidden card was: {self.hidden_card}")
+        else:
+            # If no cards were dealt, just collect active players
+            for i in range(self.num_players):
+                if not self.folded[i]:
+                    active_players.append(i)
         
-        # Award pot to winner
-        self.chips[winner] += self.pot
-        
-        # Calculate rewards (chip differences) for each player
-        rewards = {}
-        for i in range(self.num_players):
-            rewards[i] = self.chips[i] - chips_before_round[i]
-        
-        # Update the transitions with proper rewards and done status
-        # Group transitions by player and round
-        player_round_transitions = {}
-        for transition in self.rlogger.transitions:
-            if transition["round"] == self.current_hand:
-                player_id = transition["current_player"]
-                round_key = f"{player_id}_{transition['round']}_{transition['stage']}"
-                if round_key not in player_round_transitions:
-                    player_round_transitions[round_key] = []
-                player_round_transitions[round_key].append(transition)
-        
-        # For each player, mark only their last action in this round as terminal
-        for round_key, transitions in player_round_transitions.items():
-            # Sort by decision index to find the last action
-            sorted_transitions = sorted(transitions, key=lambda t: t["decision_index"])
-            if sorted_transitions:
-                # Set rewards for all transitions
-                player_id = sorted_transitions[0]["current_player"]
-                reward = rewards.get(player_id, 0)
+        # Only handle side pots in 3-player mode when multiple players remain
+        if self.num_players == 3 and any(self.all_in) and len(active_players) > 1:
+            self.distribute_with_side_pots(active_players, chips_before_round)
+        else:
+            # Original showdown logic for standard cases
+            if len(active_players) == 1:
+                winner = active_players[0]
+                self.log(f"Player {winner} wins the pot of {self.pot} by default (others folded).")
+            else:
+                # Compare cards (in Kuhn poker, higher card wins)
+                card_ranks = {"J": 1, "Q": 2, "K": 3, "A": 4}
+                best_card = -1
+                winner = -1
                 
-                # Set all transitions to have the reward but only the last one is terminal
-                for t in sorted_transitions[:-1]:
-                    t["reward"] = reward
-                    t["done"] = False
+                for player in active_players:
+                    card_rank = card_ranks.get(self.cards[player], 0)
+                    if card_rank > best_card:
+                        best_card = card_rank
+                        winner = player
+                        
+                self.log(f"Player {winner} wins the pot of {self.pot} with {self.cards[winner]}.")
+            
+            # Award pot to winner
+            self.chips[winner] += self.pot
+            
+            # Calculate rewards (chip differences) for each player
+            rewards = {}
+            for i in range(self.num_players):
+                rewards[i] = self.chips[i] - chips_before_round[i]
+            
+            # Update the transitions with proper rewards and done status
+            # Group transitions by player and round
+            player_round_transitions = {}
+            for transition in self.rlogger.transitions:
+                if transition["round"] == self.current_hand:
+                    player_id = transition["current_player"]
+                    round_key = f"{player_id}_{transition['round']}_{transition['stage']}"
+                    if round_key not in player_round_transitions:
+                        player_round_transitions[round_key] = []
+                    player_round_transitions[round_key].append(transition)
+            
+            # For each player, mark only their last action in this round as terminal
+            for round_key, transitions in player_round_transitions.items():
+                # Sort by decision index to find the last action
+                sorted_transitions = sorted(transitions, key=lambda t: t["decision_index"])
+                if sorted_transitions:
+                    # Set rewards for all transitions
+                    player_id = sorted_transitions[0]["current_player"]
+                    reward = rewards.get(player_id, 0)
                     
-                # Mark the last transition as terminal
-                sorted_transitions[-1]["reward"] = reward
-                sorted_transitions[-1]["done"] = True
+                    # Set all transitions to have the reward but only the last one is terminal
+                    for t in sorted_transitions[:-1]:
+                        t["reward"] = reward
+                        t["done"] = False
+                        
+                    # Mark the last transition as terminal
+                    sorted_transitions[-1]["reward"] = reward
+                    sorted_transitions[-1]["done"] = True
         
         # Show per-round diff
         for i in range(self.num_players):
@@ -487,6 +537,113 @@ class KuhnPokerEngine:
         chip_status = ", ".join([f"Player {i}: {self.chips[i]}" for i in range(self.num_players)])
         self.log(f"Chip counts after Hand {self.current_hand}: {chip_status}")
 
+    def distribute_with_side_pots(self, active_players, chips_before_round):
+        """
+        Distribute the pot considering side pots for all-in players.
+        """
+        # Sort active players by their bet amounts (all-in amounts)
+        active_players_by_bet = sorted(active_players, key=lambda p: self.current_bets[p])
+        
+        # Card ranks for determining winners
+        card_ranks = {"J": 1, "Q": 2, "K": 3, "A": 4}
+        
+        remaining_pot = self.pot
+        processed_amount = 0
+        eligible_players = active_players.copy()
+        
+        # Process each potential side pot
+        for i, current_all_in_player in enumerate(active_players_by_bet):
+            # Skip if player isn't all-in (will be part of the main pot)
+            if not self.all_in[current_all_in_player]:
+                continue
+                
+            current_bet = self.current_bets[current_all_in_player]
+            
+            # Calculate this side pot amount
+            side_pot_amount = 0
+            for player in range(self.num_players):
+                # How much of this player's bet goes into this side pot
+                if not self.folded[player]:
+                    contribution = min(self.current_bets[player], current_bet) - processed_amount
+                    if contribution > 0:
+                        side_pot_amount += contribution
+            
+            if side_pot_amount <= 0:
+                continue  # Skip if no money in this side pot
+                
+            # For this side pot, find the winner among eligible players
+            if len(eligible_players) == 1:
+                # Only one player eligible for this side pot
+                winner = eligible_players[0]
+            else:
+                # Find highest card among eligible players
+                best_card = -1
+                winner = -1
+                for player in eligible_players:
+                    card_rank = card_ranks.get(self.cards[player], 0)
+                    if card_rank > best_card:
+                        best_card = card_rank
+                        winner = player
+            
+            # Award this side pot to the winner
+            self.chips[winner] += side_pot_amount
+            remaining_pot -= side_pot_amount
+            
+            self.log(f"Player {winner} wins side pot of {side_pot_amount} with {self.cards[winner]}.")
+            
+            # Remove current all-in player from eligible players for next side pots
+            if current_all_in_player in eligible_players:
+                eligible_players.remove(current_all_in_player)
+                
+            # Update processed amount for next side pot
+            processed_amount = current_bet
+        
+        # Handle the main pot (if anything remains)
+        if remaining_pot > 0 and eligible_players:
+            if len(eligible_players) == 1:
+                winner = eligible_players[0]
+            else:
+                # Find highest card among remaining eligible players
+                best_card = -1
+                winner = -1
+                for player in eligible_players:
+                    card_rank = card_ranks.get(self.cards[player], 0)
+                    if card_rank > best_card:
+                        best_card = card_rank
+                        winner = player
+                        
+            self.chips[winner] += remaining_pot
+            self.log(f"Player {winner} wins main pot of {remaining_pot} with {self.cards[winner]}.")
+        
+        # Calculate rewards for RL updates
+        rewards = {}
+        for i in range(self.num_players):
+            rewards[i] = self.chips[i] - chips_before_round[i]
+        
+        # Update transitions with rewards - copied from original showdown method
+        player_round_transitions = {}
+        for transition in self.rlogger.transitions:
+            if transition["round"] == self.current_hand:
+                player_id = transition["current_player"]
+                round_key = f"{player_id}_{transition['round']}_{transition['stage']}"
+                if round_key not in player_round_transitions:
+                    player_round_transitions[round_key] = []
+                player_round_transitions[round_key].append(transition)
+        
+        # For each player, mark only their last action in this round as terminal
+        for round_key, transitions in player_round_transitions.items():
+            sorted_transitions = sorted(transitions, key=lambda t: t["decision_index"])
+            if sorted_transitions:
+                player_id = sorted_transitions[0]["current_player"]
+                reward = rewards.get(player_id, 0)
+                
+                for t in sorted_transitions[:-1]:
+                    t["reward"] = reward
+                    t["done"] = False
+                    
+                sorted_transitions[-1]["reward"] = reward
+                sorted_transitions[-1]["done"] = True
+    
     def write_transitions(self):
         """Write collected RL data to CSV files."""
         self.rlogger.write_transitions(self.log)
