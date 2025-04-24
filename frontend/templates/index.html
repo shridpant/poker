@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ML-Poker</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+</head>
+<body>
+  <button id="toggleTheme" class="theme-btn">🌓</button>
+  <div class="centered">
+    <h1>ML-Based Poker Agents</h1>
+    <form id="modeForm">
+      <label><input type="radio" name="mode" value="2" checked> 2-Player Kuhn</label>
+      <label><input type="radio" name="mode" value="3"> 3-Player Kuhn</label>
+      <button class="btn">Next</button>
+    </form>
+  </div>
+  <script src="{{ url_for('static',filename='js/index.js') }}"></script>
+</body>
+</html>

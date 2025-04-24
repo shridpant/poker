@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Table</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+</head>
+<body>
+  <button id="toggleTheme" class="theme-btn">🌓</button>
+  <div class="table-container">
+    <div class="poker-table">
+      <div class="seat seat-top"><div class="name">P1</div><div class="cards"></div></div>
+      <div class="seat seat-left"><div class="name">P2</div><div class="cards"></div></div>
+      <div class="seat seat-right"><div class="name">P3</div><div class="cards"></div></div>
+      <div class="pot">Pot: <span id="pot">0</span></div>
+    </div>
+
+    <div class="controls">
+      <label>Speed: <input type="range" id="speedControl" min="200" max="2000" value="1000"></label>
+      <button id="startSim" class="btn">▶︎</button>
+      <button id="stopSim" class="btn" style="display:none">❚❚</button>
+    </div>
+
+    <div class="win-counter">
+      <div>P1 Wins: <span id="w1">0</span></div>
+      <div>P2 Wins: <span id="w2">0</span></div>
+      <div>P3 Wins: <span id="w3">0</span></div>
+    </div>
+
+    <div class="game-log">
+      <h3>Game Log</h3>
+      <div id="gameLog"></div>
+    </div>
+  </div>
+  <script src="{{ url_for('static',filename='js/game.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Select Agents</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+</head>
+<body>
+  <button id="toggleTheme" class="theme-btn">🌓</button>
+  <div class="centered">
+    <h1>Select Your Models</h1>
+    <form id="modelsForm">
+      {% for i in range(mode) %}
+      <div class="form-group">
+        <label>Player {{i+1}}</label>
+        <select name="player{{i}}" required>
+          <option value="">— choose —</option>
+          {% for m in player_modules %}
+          <option value="{{m}}">{{m}}</option>
+          {% endfor %}
+        </select>
+      </div>
+      {% endfor %}
+      <button class="btn">Start Game</button>
+    </form>
+  </div>
+  <script src="{{ url_for('static',filename='js/select_models.js') }}"></script>
+</body>
+</html>

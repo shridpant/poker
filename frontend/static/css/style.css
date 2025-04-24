@@ -1,0 +1,62 @@
+:root {
+  --bg: #fafafa; --fg: #222; --accent: #d91e48; --card-bg: #fff;
+}
+[data-theme="dark"] {
+  --bg: #121212; --fg: #eee; --accent: #f23a66; --card-bg: #333;
+}
+body {
+  margin:0; font-family:sans-serif;
+  background:var(--bg); color:var(--fg);
+  transition: background .3s, color .3s;
+}
+.theme-btn {
+  position:fixed; top:10px; right:10px;
+  background:none; border:none; font-size:1.2rem; cursor:pointer;
+}
+.centered { max-width:400px; margin:100px auto; text-align:center; }
+.btn { background:var(--accent); color:var(--card-bg);
+  border:none; padding:10px 20px; margin-top:1rem; cursor:pointer;
+  border-radius:4px; font-size:1rem;
+}
+.form-group { margin:1rem 0; text-align:left; }
+input,select { width:100%; padding:8px; font-size:1rem;
+  border-radius:4px; border:1px solid #999;
+  background:var(--card-bg); color:var(--fg);
+}
+
+.table-container { position:relative; width:100vw; height:100vh; overflow:hidden; }
+.poker-table {
+  position:absolute; top:50%; left:50%;
+  width:600px; height:350px;
+  margin:-175px 0 0 -300px;
+  background:#2f4f4f; border-radius:50%/30%;
+}
+.seat {
+  position:absolute; width:120px; height:80px;
+  background:var(--card-bg); border-radius:8px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  box-shadow:0 4px 8px rgba(0,0,0,0.2);
+}
+.seat-top { top:20px; left:50%; transform:translateX(-50%); }
+.seat-left { top:50%; left:20px; transform:translateY(-50%); }
+.seat-right { top:50%; right:20px; transform:translateY(-50%); }
+
+.pot { position:absolute; bottom:20px; left:50%; transform:translateX(-50%);
+  font-weight:bold; font-size:1.2rem;
+}
+.controls { position:absolute; bottom:20px; left:20px; }
+.win-counter { position:absolute; bottom:20px; right:20px; text-align:right; }
+.game-log {
+  position:absolute; top:20px; left:20px;
+  width:250px; max-height:80vh; overflow-y:auto;
+  background:var(--card-bg); padding:10px; border-radius:6px;
+  box-shadow:0 2px 5px rgba(0,0,0,0.2);
+}
+.game-log h3 { margin-top:0; }
+.cards { display:flex; gap:5px; margin-top:5px; }
+.card {
+  width:30px; height:40px; background:var(--card-bg); color:var(--fg);
+  border-radius:4px; border:1px solid #999;
+  display:flex; align-items:center; justify-content:center;
+  font-weight:bold;
+}
