@@ -16,7 +16,7 @@ from engine.utilities import (
 Mappings for card names & actions
 """
 # This dictionary maps indexes to card names in Kuhn Poker.
-CARD_NAMES = {0: "J", 1: "Q", 2: "K"}
+CARD_NAMES = {0: "J", 1: "Q", 2: "K", 3: "A"}
 CHIP_TOTAL = 100 # Total chips each player starts with
 
 # Possible betting actions
@@ -93,13 +93,26 @@ class KuhnPokerEngine:
         
         # Ante
         ante = 1
+        players_with_chips = 0
         for i in range(self.num_players):
             if self.chips[i] >= ante:
-                self.chips[i] -= ante
-                self.pot += ante
-            else:
-                self.log(f"Player {i} doesn't have enough chips for ante - forced to fold.")
-                self.folded[i] = True
+                players_with_chips += 1
+        
+        # Only collect ante if there are at least 2 players with chips (to avoid forced folds)
+        if players_with_chips >= 2:
+            for i in range(self.num_players):
+                if self.chips[i] >= ante:
+                    self.chips[i] -= ante
+                    self.pot += ante
+                else:
+                    self.log(f"Player {i} doesn't have enough chips for ante - forced to fold.")
+                    self.folded[i] = True
+        else:
+            # If only one or no players have chips, don't collect ante
+            for i in range(self.num_players):
+                if self.chips[i] < ante:
+                    self.log(f"Player {i} doesn't have enough chips for ante - forced to fold.")
+                    self.folded[i] = True
         
         # Check if we have enough active players to continue
         active_players = [i for i in range(self.num_players) if not self.folded[i]]
@@ -333,7 +346,7 @@ class KuhnPokerEngine:
                     self.pot += call_used
 
                     # Now add the raise
-                    min_extra = last_raise_amount
+                    min_extra = 1  # Always set minimum raise to 1 instead of last_raise_amount
                     max_extra = self.chips[current_player]
                     raise_used = min(max_extra, max(min_extra, raise_amount or min_extra))
                     if raise_used <= 0:
@@ -368,7 +381,7 @@ class KuhnPokerEngine:
                         # Reset players_acted counter when there's a new bet
                         players_acted = 1
                         # Update last_raise_amount so future raises must meet or exceed this
-                        last_raise_amount = raise_used
+                        last_raise_amount = 1  # Always keep minimum raise as 1
                         public_state["min_raise"] = last_raise_amount
             
             # After processing the chosen action, only record local transitions if agent is FRL
