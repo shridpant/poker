@@ -1952,3 +1952,1002 @@
 [20:22:05] Player 1 lost 1 chip(s) this round.
 [20:22:05] Player 2 gained 5 chip(s) this round.
 [20:22:05] Chip counts after Hand 0: Player 0: 95, Player 1: 98, Player 2: 107
+[10:05:57] 
+🎲 POKER GAME SESSION STARTED 🎲
+[10:05:57] Current chip counts before session: Player 0: 100, Player 1: 100
+[10:05:57] === Starting Hand 1 ===
+[10:05:57] Starting Hand 1 with chip counts: Player 0: 100, Player 1: 100
+[10:05:57] All active players ante 1 unit. Pot is now 2.
+[10:05:57] Chance node: Dealt card Q to Player 0.
+[10:05:57] Chance node: Dealt card K to Player 1.
+[10:05:57] Starting First Betting Round.
+[10:05:57] Available actions for Player 0 :
+[10:05:57] 0: check - No bet on the table. You may check or bet.
+[10:05:57] 1: bet - You may bet 1 unit.
+[10:05:57] Player 0 bets. Pot is now 3.
+[10:05:58] Available actions for Player 1 :
+[10:05:58] 2: call - Call the bet of 1 unit(s).
+[10:05:58] 3: fold - Fold your hand.
+[10:05:58] 4: raise - Raise by betting an additional amount.
+[10:05:58] Player 1 calls. Pot is now 4.
+[10:05:58] === Showdown ===
+[10:05:58] Cards revealed: Player 0: Q, Player 1: K
+[10:05:58] Player 1 wins the pot of 4 with K.
+[10:05:58] Player 0 lost 2 chip(s) this round.
+[10:05:58] Player 1 gained 2 chip(s) this round.
+[10:05:58] Chip counts after Hand 1: Player 0: 98, Player 1: 102
+[10:05:58] === Starting Hand 2 ===
+[10:05:58] Starting Hand 2 with chip counts: Player 0: 98, Player 1: 102
+[10:05:58] All active players ante 1 unit. Pot is now 2.
+[10:05:58] Chance node: Dealt card J to Player 0.
+[10:05:58] Chance node: Dealt card Q to Player 1.
+[10:05:59] Starting First Betting Round.
+[10:05:59] Available actions for Player 0 :
+[10:05:59] 0: check - No bet on the table. You may check or bet.
+[10:05:59] 1: bet - You may bet 1 unit.
+[10:05:59] Player 0 checks.
+[10:05:59] Available actions for Player 1 :
+[10:05:59] 0: check - No bet on the table. You may check or bet.
+[10:05:59] 1: bet - You may bet 1 unit.
+[10:05:59] Player 1 checks.
+[10:05:59] All players checked. Going to showdown.
+[10:05:59] === Showdown ===
+[10:05:59] Cards revealed: Player 0: J, Player 1: Q
+[10:05:59] Player 1 wins the pot of 2 with Q.
+[10:05:59] Player 0 lost 1 chip(s) this round.
+[10:05:59] Player 1 gained 1 chip(s) this round.
+[10:05:59] Chip counts after Hand 2: Player 0: 97, Player 1: 103
+[10:05:59] === Starting Hand 3 ===
+[10:05:59] Starting Hand 3 with chip counts: Player 0: 97, Player 1: 103
+[10:05:59] All active players ante 1 unit. Pot is now 2.
+[10:05:59] Chance node: Dealt card K to Player 0.
+[10:05:59] Chance node: Dealt card Q to Player 1.
+[10:06:00] Starting First Betting Round.
+[10:06:00] Available actions for Player 0 :
+[10:06:00] 0: check - No bet on the table. You may check or bet.
+[10:06:00] 1: bet - You may bet 1 unit.
+[10:06:00] Player 0 bets. Pot is now 3.
+[10:06:00] Available actions for Player 1 :
+[10:06:00] 2: call - Call the bet of 1 unit(s).
+[10:06:00] 3: fold - Fold your hand.
+[10:06:00] 4: raise - Raise by betting an additional amount.
+[10:06:00] Player 1 calls. Pot is now 4.
+[10:06:01] === Showdown ===
+[10:06:01] Cards revealed: Player 0: K, Player 1: Q
+[10:06:01] Player 0 wins the pot of 4 with K.
+[10:06:01] Player 0 gained 2 chip(s) this round.
+[10:06:01] Player 1 lost 2 chip(s) this round.
+[10:06:01] Chip counts after Hand 3: Player 0: 99, Player 1: 101
+[10:06:01] === Starting Hand 4 ===
+[10:06:01] Starting Hand 4 with chip counts: Player 0: 99, Player 1: 101
+[10:06:01] All active players ante 1 unit. Pot is now 2.
+[10:06:01] Chance node: Dealt card J to Player 0.
+[10:06:01] Chance node: Dealt card K to Player 1.
+[10:06:01] Starting First Betting Round.
+[10:06:01] Available actions for Player 0 :
+[10:06:01] 0: check - No bet on the table. You may check or bet.
+[10:06:01] 1: bet - You may bet 1 unit.
+[10:06:01] Player 0 bets. Pot is now 3.
+[10:06:02] Available actions for Player 1 :
+[10:06:02] 2: call - Call the bet of 1 unit(s).
+[10:06:02] 3: fold - Fold your hand.
+[10:06:02] 4: raise - Raise by betting an additional amount.
+[10:06:02] Player 1 calls. Pot is now 4.
+[10:06:02] === Showdown ===
+[10:06:02] Cards revealed: Player 0: J, Player 1: K
+[10:06:02] Player 1 wins the pot of 4 with K.
+[10:06:02] Player 0 lost 2 chip(s) this round.
+[10:06:02] Player 1 gained 2 chip(s) this round.
+[10:06:02] Chip counts after Hand 4: Player 0: 97, Player 1: 103
+[10:06:02] === Starting Hand 5 ===
+[10:06:02] Starting Hand 5 with chip counts: Player 0: 97, Player 1: 103
+[10:06:02] All active players ante 1 unit. Pot is now 2.
+[10:06:02] Chance node: Dealt card Q to Player 0.
+[10:06:02] Chance node: Dealt card K to Player 1.
+[10:06:03] Starting First Betting Round.
+[10:06:03] Available actions for Player 0 :
+[10:06:03] 0: check - No bet on the table. You may check or bet.
+[10:06:03] 1: bet - You may bet 1 unit.
+[10:06:03] Player 0 bets. Pot is now 3.
+[10:06:03] Available actions for Player 1 :
+[10:06:03] 2: call - Call the bet of 1 unit(s).
+[10:06:03] 3: fold - Fold your hand.
+[10:06:03] 4: raise - Raise by betting an additional amount.
+[10:06:03] Player 1 calls. Pot is now 4.
+[10:06:04] === Showdown ===
+[10:06:04] Cards revealed: Player 0: Q, Player 1: K
+[10:06:04] Player 1 wins the pot of 4 with K.
+[10:06:04] Player 0 lost 2 chip(s) this round.
+[10:06:04] Player 1 gained 2 chip(s) this round.
+[10:06:04] Chip counts after Hand 5: Player 0: 95, Player 1: 105
+[10:06:04] === Starting Hand 6 ===
+[10:06:04] Starting Hand 6 with chip counts: Player 0: 95, Player 1: 105
+[10:06:04] All active players ante 1 unit. Pot is now 2.
+[10:06:04] Chance node: Dealt card Q to Player 0.
+[10:06:04] Chance node: Dealt card K to Player 1.
+[10:06:05] Starting First Betting Round.
+[10:06:05] Available actions for Player 0 :
+[10:06:05] 0: check - No bet on the table. You may check or bet.
+[10:06:05] 1: bet - You may bet 1 unit.
+[10:06:05] Player 0 bets. Pot is now 3.
+[10:06:05] Available actions for Player 1 :
+[10:06:05] 2: call - Call the bet of 1 unit(s).
+[10:06:05] 3: fold - Fold your hand.
+[10:06:05] 4: raise - Raise by betting an additional amount.
+[10:06:05] Player 1 calls. Pot is now 4.
+[10:06:06] === Showdown ===
+[10:06:06] Cards revealed: Player 0: Q, Player 1: K
+[10:06:06] Player 1 wins the pot of 4 with K.
+[10:06:06] Player 0 lost 2 chip(s) this round.
+[10:06:06] Player 1 gained 2 chip(s) this round.
+[10:06:06] Chip counts after Hand 6: Player 0: 93, Player 1: 107
+[10:06:06] === Starting Hand 7 ===
+[10:06:06] Starting Hand 7 with chip counts: Player 0: 93, Player 1: 107
+[10:06:06] All active players ante 1 unit. Pot is now 2.
+[10:06:06] Chance node: Dealt card K to Player 0.
+[10:06:06] Chance node: Dealt card J to Player 1.
+[10:06:06] Starting First Betting Round.
+[10:06:06] Available actions for Player 0 :
+[10:06:06] 0: check - No bet on the table. You may check or bet.
+[10:06:06] 1: bet - You may bet 1 unit.
+[10:06:06] Player 0 bets. Pot is now 3.
+[10:06:07] Available actions for Player 1 :
+[10:06:07] 2: call - Call the bet of 1 unit(s).
+[10:06:07] 3: fold - Fold your hand.
+[10:06:07] 4: raise - Raise by betting an additional amount.
+[10:06:07] Player 1 calls. Pot is now 4.
+[10:06:07] === Showdown ===
+[10:06:07] Cards revealed: Player 0: K, Player 1: J
+[10:06:07] Player 0 wins the pot of 4 with K.
+[10:06:07] Player 0 gained 2 chip(s) this round.
+[10:06:07] Player 1 lost 2 chip(s) this round.
+[10:06:07] Chip counts after Hand 7: Player 0: 95, Player 1: 105
+[10:06:07] === Starting Hand 8 ===
+[10:06:07] Starting Hand 8 with chip counts: Player 0: 95, Player 1: 105
+[10:06:07] All active players ante 1 unit. Pot is now 2.
+[10:06:07] Chance node: Dealt card J to Player 0.
+[10:06:07] Chance node: Dealt card K to Player 1.
+[10:06:08] Starting First Betting Round.
+[10:06:08] Available actions for Player 0 :
+[10:06:08] 0: check - No bet on the table. You may check or bet.
+[10:06:08] 1: bet - You may bet 1 unit.
+[10:06:08] Player 0 bets. Pot is now 3.
+[10:06:08] Available actions for Player 1 :
+[10:06:08] 2: call - Call the bet of 1 unit(s).
+[10:06:08] 3: fold - Fold your hand.
+[10:06:08] 4: raise - Raise by betting an additional amount.
+[10:06:08] Player 1 calls. Pot is now 4.
+[10:06:09] === Showdown ===
+[10:06:09] Cards revealed: Player 0: J, Player 1: K
+[10:06:09] Player 1 wins the pot of 4 with K.
+[10:06:09] Player 0 lost 2 chip(s) this round.
+[10:06:09] Player 1 gained 2 chip(s) this round.
+[10:06:09] Chip counts after Hand 8: Player 0: 93, Player 1: 107
+[10:06:09] === Starting Hand 9 ===
+[10:06:09] Starting Hand 9 with chip counts: Player 0: 93, Player 1: 107
+[10:06:09] All active players ante 1 unit. Pot is now 2.
+[10:06:09] Chance node: Dealt card Q to Player 0.
+[10:06:09] Chance node: Dealt card K to Player 1.
+[10:06:09] Starting First Betting Round.
+[10:06:09] Available actions for Player 0 :
+[10:06:09] 0: check - No bet on the table. You may check or bet.
+[10:06:09] 1: bet - You may bet 1 unit.
+[10:06:09] Player 0 bets. Pot is now 3.
+[10:06:10] Available actions for Player 1 :
+[10:06:10] 2: call - Call the bet of 1 unit(s).
+[10:06:10] 3: fold - Fold your hand.
+[10:06:10] 4: raise - Raise by betting an additional amount.
+[10:06:10] Player 1 calls. Pot is now 4.
+[10:06:10] === Showdown ===
+[10:06:10] Cards revealed: Player 0: Q, Player 1: K
+[10:06:10] Player 1 wins the pot of 4 with K.
+[10:06:10] Player 0 lost 2 chip(s) this round.
+[10:06:10] Player 1 gained 2 chip(s) this round.
+[10:06:10] Chip counts after Hand 9: Player 0: 91, Player 1: 109
+[10:06:10] === Starting Hand 10 ===
+[10:06:10] Starting Hand 10 with chip counts: Player 0: 91, Player 1: 109
+[10:06:10] All active players ante 1 unit. Pot is now 2.
+[10:06:10] Chance node: Dealt card K to Player 0.
+[10:06:10] Chance node: Dealt card Q to Player 1.
+[10:06:11] Starting First Betting Round.
+[10:06:11] Available actions for Player 0 :
+[10:06:11] 0: check - No bet on the table. You may check or bet.
+[10:06:11] 1: bet - You may bet 1 unit.
+[10:06:11] Player 0 bets. Pot is now 3.
+[10:06:11] Available actions for Player 1 :
+[10:06:11] 2: call - Call the bet of 1 unit(s).
+[10:06:11] 3: fold - Fold your hand.
+[10:06:11] 4: raise - Raise by betting an additional amount.
+[10:06:11] Player 1 calls. Pot is now 4.
+[10:06:12] === Showdown ===
+[10:06:12] Cards revealed: Player 0: K, Player 1: Q
+[10:06:12] Player 0 wins the pot of 4 with K.
+[10:06:12] Player 0 gained 2 chip(s) this round.
+[10:06:12] Player 1 lost 2 chip(s) this round.
+[10:06:12] Chip counts after Hand 10: Player 0: 93, Player 1: 107
+[10:06:12] === Starting Hand 11 ===
+[10:06:12] Starting Hand 11 with chip counts: Player 0: 93, Player 1: 107
+[10:06:12] All active players ante 1 unit. Pot is now 2.
+[10:06:12] Chance node: Dealt card J to Player 0.
+[10:06:12] Chance node: Dealt card K to Player 1.
+[10:06:12] Starting First Betting Round.
+[10:06:12] Available actions for Player 0 :
+[10:06:12] 0: check - No bet on the table. You may check or bet.
+[10:06:12] 1: bet - You may bet 1 unit.
+[10:06:12] Player 0 checks.
+[10:06:13] Available actions for Player 1 :
+[10:06:13] 0: check - No bet on the table. You may check or bet.
+[10:06:13] 1: bet - You may bet 1 unit.
+[10:06:13] Player 1 checks.
+[10:06:13] All players checked. Going to showdown.
+[10:06:13] === Showdown ===
+[10:06:13] Cards revealed: Player 0: J, Player 1: K
+[10:06:13] Player 1 wins the pot of 2 with K.
+[10:06:13] Player 0 lost 1 chip(s) this round.
+[10:06:13] Player 1 gained 1 chip(s) this round.
+[10:06:13] Chip counts after Hand 11: Player 0: 92, Player 1: 108
+[10:06:13] === Starting Hand 12 ===
+[10:06:13] Starting Hand 12 with chip counts: Player 0: 92, Player 1: 108
+[10:06:13] All active players ante 1 unit. Pot is now 2.
+[10:06:13] Chance node: Dealt card K to Player 0.
+[10:06:13] Chance node: Dealt card J to Player 1.
+[10:06:13] Starting First Betting Round.
+[10:06:13] Available actions for Player 0 :
+[10:06:13] 0: check - No bet on the table. You may check or bet.
+[10:06:13] 1: bet - You may bet 1 unit.
+[10:06:13] Player 0 bets. Pot is now 3.
+[10:06:14] Available actions for Player 1 :
+[10:06:14] 2: call - Call the bet of 1 unit(s).
+[10:06:14] 3: fold - Fold your hand.
+[10:06:14] 4: raise - Raise by betting an additional amount.
+[10:06:14] Player 1 calls. Pot is now 4.
+[10:06:14] === Showdown ===
+[10:06:14] Cards revealed: Player 0: K, Player 1: J
+[10:06:14] Player 0 wins the pot of 4 with K.
+[10:06:14] Player 0 gained 2 chip(s) this round.
+[10:06:14] Player 1 lost 2 chip(s) this round.
+[10:06:14] Chip counts after Hand 12: Player 0: 94, Player 1: 106
+[10:06:14] === Starting Hand 13 ===
+[10:06:14] Starting Hand 13 with chip counts: Player 0: 94, Player 1: 106
+[10:06:14] All active players ante 1 unit. Pot is now 2.
+[10:06:14] Chance node: Dealt card J to Player 0.
+[10:06:14] Chance node: Dealt card K to Player 1.
+[10:06:15] Starting First Betting Round.
+[10:06:15] Available actions for Player 0 :
+[10:06:15] 0: check - No bet on the table. You may check or bet.
+[10:06:15] 1: bet - You may bet 1 unit.
+[10:06:15] Player 0 checks.
+[10:06:15] Available actions for Player 1 :
+[10:06:15] 0: check - No bet on the table. You may check or bet.
+[10:06:15] 1: bet - You may bet 1 unit.
+[10:06:15] Player 1 checks.
+[10:06:15] All players checked. Going to showdown.
+[10:06:15] === Showdown ===
+[10:06:15] Cards revealed: Player 0: J, Player 1: K
+[10:06:15] Player 1 wins the pot of 2 with K.
+[10:06:15] Player 0 lost 1 chip(s) this round.
+[10:06:15] Player 1 gained 1 chip(s) this round.
+[10:06:15] Chip counts after Hand 13: Player 0: 93, Player 1: 107
+[10:06:15] === Starting Hand 14 ===
+[10:06:15] Starting Hand 14 with chip counts: Player 0: 93, Player 1: 107
+[10:06:15] All active players ante 1 unit. Pot is now 2.
+[10:06:15] Chance node: Dealt card J to Player 0.
+[10:06:15] Chance node: Dealt card K to Player 1.
+[10:06:16] Starting First Betting Round.
+[10:06:16] Available actions for Player 0 :
+[10:06:16] 0: check - No bet on the table. You may check or bet.
+[10:06:16] 1: bet - You may bet 1 unit.
+[10:06:16] Player 0 bets. Pot is now 3.
+[10:06:16] Available actions for Player 1 :
+[10:06:16] 2: call - Call the bet of 1 unit(s).
+[10:06:16] 3: fold - Fold your hand.
+[10:06:16] 4: raise - Raise by betting an additional amount.
+[10:06:16] Player 1 calls. Pot is now 4.
+[10:06:17] === Showdown ===
+[10:06:17] Cards revealed: Player 0: J, Player 1: K
+[10:06:17] Player 1 wins the pot of 4 with K.
+[10:06:17] Player 0 lost 2 chip(s) this round.
+[10:06:17] Player 1 gained 2 chip(s) this round.
+[10:06:17] Chip counts after Hand 14: Player 0: 91, Player 1: 109
+[10:06:17] === Starting Hand 15 ===
+[10:06:17] Starting Hand 15 with chip counts: Player 0: 91, Player 1: 109
+[10:06:17] All active players ante 1 unit. Pot is now 2.
+[10:06:17] Chance node: Dealt card K to Player 0.
+[10:06:17] Chance node: Dealt card Q to Player 1.
+[10:06:17] Starting First Betting Round.
+[10:06:17] Available actions for Player 0 :
+[10:06:17] 0: check - No bet on the table. You may check or bet.
+[10:06:17] 1: bet - You may bet 1 unit.
+[10:06:17] Player 0 bets. Pot is now 3.
+[10:06:18] Available actions for Player 1 :
+[10:06:18] 2: call - Call the bet of 1 unit(s).
+[10:06:18] 3: fold - Fold your hand.
+[10:06:18] 4: raise - Raise by betting an additional amount.
+[10:06:18] Player 1 calls. Pot is now 4.
+[10:06:18] === Showdown ===
+[10:06:18] Cards revealed: Player 0: K, Player 1: Q
+[10:06:18] Player 0 wins the pot of 4 with K.
+[10:06:18] Player 0 gained 2 chip(s) this round.
+[10:06:18] Player 1 lost 2 chip(s) this round.
+[10:06:18] Chip counts after Hand 15: Player 0: 93, Player 1: 107
+[10:06:18] === Starting Hand 16 ===
+[10:06:18] Starting Hand 16 with chip counts: Player 0: 93, Player 1: 107
+[10:06:18] All active players ante 1 unit. Pot is now 2.
+[10:06:18] Chance node: Dealt card J to Player 0.
+[10:06:18] Chance node: Dealt card K to Player 1.
+[10:06:19] Starting First Betting Round.
+[10:06:19] Available actions for Player 0 :
+[10:06:19] 0: check - No bet on the table. You may check or bet.
+[10:06:19] 1: bet - You may bet 1 unit.
+[10:06:19] Player 0 checks.
+[10:06:19] Available actions for Player 1 :
+[10:06:19] 0: check - No bet on the table. You may check or bet.
+[10:06:19] 1: bet - You may bet 1 unit.
+[10:06:19] Player 1 checks.
+[10:06:19] All players checked. Going to showdown.
+[10:06:19] === Showdown ===
+[10:06:19] Cards revealed: Player 0: J, Player 1: K
+[10:06:19] Player 1 wins the pot of 2 with K.
+[10:06:19] Player 0 lost 1 chip(s) this round.
+[10:06:19] Player 1 gained 1 chip(s) this round.
+[10:06:19] Chip counts after Hand 16: Player 0: 92, Player 1: 108
+[10:06:19] === Starting Hand 17 ===
+[10:06:19] Starting Hand 17 with chip counts: Player 0: 92, Player 1: 108
+[10:06:19] All active players ante 1 unit. Pot is now 2.
+[10:06:19] Chance node: Dealt card J to Player 0.
+[10:06:19] Chance node: Dealt card K to Player 1.
+[10:06:20] Starting First Betting Round.
+[10:06:20] Available actions for Player 0 :
+[10:06:20] 0: check - No bet on the table. You may check or bet.
+[10:06:20] 1: bet - You may bet 1 unit.
+[10:06:20] Player 0 checks.
+[10:06:20] Available actions for Player 1 :
+[10:06:20] 0: check - No bet on the table. You may check or bet.
+[10:06:20] 1: bet - You may bet 1 unit.
+[10:06:20] Player 1 checks.
+[10:06:20] All players checked. Going to showdown.
+[10:06:20] === Showdown ===
+[10:06:20] Cards revealed: Player 0: J, Player 1: K
+[10:06:20] Player 1 wins the pot of 2 with K.
+[10:06:20] Player 0 lost 1 chip(s) this round.
+[10:06:20] Player 1 gained 1 chip(s) this round.
+[10:06:20] Chip counts after Hand 17: Player 0: 91, Player 1: 109
+[10:06:20] === Starting Hand 18 ===
+[10:06:20] Starting Hand 18 with chip counts: Player 0: 91, Player 1: 109
+[10:06:20] All active players ante 1 unit. Pot is now 2.
+[10:06:20] Chance node: Dealt card J to Player 0.
+[10:06:20] Chance node: Dealt card Q to Player 1.
+[10:06:21] Starting First Betting Round.
+[10:06:21] Available actions for Player 0 :
+[10:06:21] 0: check - No bet on the table. You may check or bet.
+[10:06:21] 1: bet - You may bet 1 unit.
+[10:06:21] Player 0 checks.
+[10:06:21] Available actions for Player 1 :
+[10:06:21] 0: check - No bet on the table. You may check or bet.
+[10:06:21] 1: bet - You may bet 1 unit.
+[10:06:21] Player 1 checks.
+[10:06:21] All players checked. Going to showdown.
+[10:06:21] === Showdown ===
+[10:06:21] Cards revealed: Player 0: J, Player 1: Q
+[10:06:21] Player 1 wins the pot of 2 with Q.
+[10:06:21] Player 0 lost 1 chip(s) this round.
+[10:06:21] Player 1 gained 1 chip(s) this round.
+[10:06:21] Chip counts after Hand 18: Player 0: 90, Player 1: 110
+[10:06:21] === Starting Hand 19 ===
+[10:06:21] Starting Hand 19 with chip counts: Player 0: 90, Player 1: 110
+[10:06:21] All active players ante 1 unit. Pot is now 2.
+[10:06:21] Chance node: Dealt card J to Player 0.
+[10:06:21] Chance node: Dealt card Q to Player 1.
+[10:06:22] Starting First Betting Round.
+[10:06:22] Available actions for Player 0 :
+[10:06:22] 0: check - No bet on the table. You may check or bet.
+[10:06:22] 1: bet - You may bet 1 unit.
+[10:06:22] Player 0 bets. Pot is now 3.
+[10:06:22] Available actions for Player 1 :
+[10:06:22] 2: call - Call the bet of 1 unit(s).
+[10:06:22] 3: fold - Fold your hand.
+[10:06:22] 4: raise - Raise by betting an additional amount.
+[10:06:22] Player 1 calls. Pot is now 4.
+[10:06:23] === Showdown ===
+[10:06:23] Cards revealed: Player 0: J, Player 1: Q
+[10:06:23] Player 1 wins the pot of 4 with Q.
+[10:06:23] Player 0 lost 2 chip(s) this round.
+[10:06:23] Player 1 gained 2 chip(s) this round.
+[10:06:23] Chip counts after Hand 19: Player 0: 88, Player 1: 112
+[10:06:23] === Starting Hand 20 ===
+[10:06:23] Starting Hand 20 with chip counts: Player 0: 88, Player 1: 112
+[10:06:23] All active players ante 1 unit. Pot is now 2.
+[10:06:23] Chance node: Dealt card K to Player 0.
+[10:06:23] Chance node: Dealt card J to Player 1.
+[10:06:23] Starting First Betting Round.
+[10:06:23] Available actions for Player 0 :
+[10:06:23] 0: check - No bet on the table. You may check or bet.
+[10:06:23] 1: bet - You may bet 1 unit.
+[10:06:23] Player 0 bets. Pot is now 3.
+[10:06:24] Available actions for Player 1 :
+[10:06:24] 2: call - Call the bet of 1 unit(s).
+[10:06:24] 3: fold - Fold your hand.
+[10:06:24] 4: raise - Raise by betting an additional amount.
+[10:06:24] Player 1 calls. Pot is now 4.
+[10:06:24] === Showdown ===
+[10:06:24] Cards revealed: Player 0: K, Player 1: J
+[10:06:24] Player 0 wins the pot of 4 with K.
+[10:06:24] Player 0 gained 2 chip(s) this round.
+[10:06:24] Player 1 lost 2 chip(s) this round.
+[10:06:24] Chip counts after Hand 20: Player 0: 90, Player 1: 110
+[10:06:24] === Starting Hand 21 ===
+[10:06:24] Starting Hand 21 with chip counts: Player 0: 90, Player 1: 110
+[10:06:24] All active players ante 1 unit. Pot is now 2.
+[10:06:24] Chance node: Dealt card Q to Player 0.
+[10:06:24] Chance node: Dealt card J to Player 1.
+[10:06:25] Starting First Betting Round.
+[10:06:25] Available actions for Player 0 :
+[10:06:25] 0: check - No bet on the table. You may check or bet.
+[10:06:25] 1: bet - You may bet 1 unit.
+[10:06:25] Player 0 bets. Pot is now 3.
+[10:06:25] Available actions for Player 1 :
+[10:06:25] 2: call - Call the bet of 1 unit(s).
+[10:06:25] 3: fold - Fold your hand.
+[10:06:25] 4: raise - Raise by betting an additional amount.
+[10:06:25] Player 1 calls. Pot is now 4.
+[10:06:26] === Showdown ===
+[10:06:26] Cards revealed: Player 0: Q, Player 1: J
+[10:06:26] Player 0 wins the pot of 4 with Q.
+[10:06:26] Player 0 gained 2 chip(s) this round.
+[10:06:26] Player 1 lost 2 chip(s) this round.
+[10:06:26] Chip counts after Hand 21: Player 0: 92, Player 1: 108
+[10:06:26] === Starting Hand 22 ===
+[10:06:26] Starting Hand 22 with chip counts: Player 0: 92, Player 1: 108
+[10:06:26] All active players ante 1 unit. Pot is now 2.
+[10:06:26] Chance node: Dealt card J to Player 0.
+[10:06:26] Chance node: Dealt card Q to Player 1.
+[10:06:26] Starting First Betting Round.
+[10:06:26] Available actions for Player 0 :
+[10:06:26] 0: check - No bet on the table. You may check or bet.
+[10:06:26] 1: bet - You may bet 1 unit.
+[10:06:26] Player 0 checks.
+[10:06:27] Available actions for Player 1 :
+[10:06:27] 0: check - No bet on the table. You may check or bet.
+[10:06:27] 1: bet - You may bet 1 unit.
+[10:06:27] Player 1 checks.
+[10:06:27] All players checked. Going to showdown.
+[10:06:27] === Showdown ===
+[10:06:27] Cards revealed: Player 0: J, Player 1: Q
+[10:06:27] Player 1 wins the pot of 2 with Q.
+[10:06:27] Player 0 lost 1 chip(s) this round.
+[10:06:27] Player 1 gained 1 chip(s) this round.
+[10:06:27] Chip counts after Hand 22: Player 0: 91, Player 1: 109
+[10:06:27] === Starting Hand 23 ===
+[10:06:27] Starting Hand 23 with chip counts: Player 0: 91, Player 1: 109
+[10:06:27] All active players ante 1 unit. Pot is now 2.
+[10:06:27] Chance node: Dealt card Q to Player 0.
+[10:06:27] Chance node: Dealt card J to Player 1.
+[10:06:27] Starting First Betting Round.
+[10:06:27] Available actions for Player 0 :
+[10:06:27] 0: check - No bet on the table. You may check or bet.
+[10:06:27] 1: bet - You may bet 1 unit.
+[10:06:27] Player 0 bets. Pot is now 3.
+[10:06:28] Available actions for Player 1 :
+[10:06:28] 2: call - Call the bet of 1 unit(s).
+[10:06:28] 3: fold - Fold your hand.
+[10:06:28] 4: raise - Raise by betting an additional amount.
+[10:06:28] Player 1 calls. Pot is now 4.
+[10:06:28] === Showdown ===
+[10:06:28] Cards revealed: Player 0: Q, Player 1: J
+[10:06:28] Player 0 wins the pot of 4 with Q.
+[10:06:28] Player 0 gained 2 chip(s) this round.
+[10:06:28] Player 1 lost 2 chip(s) this round.
+[10:06:28] Chip counts after Hand 23: Player 0: 93, Player 1: 107
+[10:06:28] === Starting Hand 24 ===
+[10:06:28] Starting Hand 24 with chip counts: Player 0: 93, Player 1: 107
+[10:06:28] All active players ante 1 unit. Pot is now 2.
+[10:06:28] Chance node: Dealt card K to Player 0.
+[10:06:28] Chance node: Dealt card Q to Player 1.
+[10:06:29] Starting First Betting Round.
+[10:06:29] Available actions for Player 0 :
+[10:06:29] 0: check - No bet on the table. You may check or bet.
+[10:06:29] 1: bet - You may bet 1 unit.
+[10:06:29] Player 0 bets. Pot is now 3.
+[10:06:29] Available actions for Player 1 :
+[10:06:29] 2: call - Call the bet of 1 unit(s).
+[10:06:29] 3: fold - Fold your hand.
+[10:06:29] 4: raise - Raise by betting an additional amount.
+[10:06:29] Player 1 calls. Pot is now 4.
+[10:06:30] === Showdown ===
+[10:06:30] Cards revealed: Player 0: K, Player 1: Q
+[10:06:30] Player 0 wins the pot of 4 with K.
+[10:06:30] Player 0 gained 2 chip(s) this round.
+[10:06:30] Player 1 lost 2 chip(s) this round.
+[10:06:30] Chip counts after Hand 24: Player 0: 95, Player 1: 105
+[10:06:30] === Starting Hand 25 ===
+[10:06:30] Starting Hand 25 with chip counts: Player 0: 95, Player 1: 105
+[10:06:30] All active players ante 1 unit. Pot is now 2.
+[10:06:30] Chance node: Dealt card K to Player 0.
+[10:06:30] Chance node: Dealt card J to Player 1.
+[10:06:30] Starting First Betting Round.
+[10:06:30] Available actions for Player 0 :
+[10:06:30] 0: check - No bet on the table. You may check or bet.
+[10:06:30] 1: bet - You may bet 1 unit.
+[10:06:30] Player 0 bets. Pot is now 3.
+[10:06:31] Available actions for Player 1 :
+[10:06:31] 2: call - Call the bet of 1 unit(s).
+[10:06:31] 3: fold - Fold your hand.
+[10:06:31] 4: raise - Raise by betting an additional amount.
+[10:06:31] Player 1 calls. Pot is now 4.
+[10:06:31] === Showdown ===
+[10:06:31] Cards revealed: Player 0: K, Player 1: J
+[10:06:31] Player 0 wins the pot of 4 with K.
+[10:06:31] Player 0 gained 2 chip(s) this round.
+[10:06:31] Player 1 lost 2 chip(s) this round.
+[10:06:31] Chip counts after Hand 25: Player 0: 97, Player 1: 103
+[10:06:31] === Starting Hand 26 ===
+[10:06:31] Starting Hand 26 with chip counts: Player 0: 97, Player 1: 103
+[10:06:31] All active players ante 1 unit. Pot is now 2.
+[10:06:31] Chance node: Dealt card Q to Player 0.
+[10:06:31] Chance node: Dealt card K to Player 1.
+[10:06:32] Starting First Betting Round.
+[10:06:32] Available actions for Player 0 :
+[10:06:32] 0: check - No bet on the table. You may check or bet.
+[10:06:32] 1: bet - You may bet 1 unit.
+[10:06:32] Player 0 bets. Pot is now 3.
+[10:06:32] Available actions for Player 1 :
+[10:06:32] 2: call - Call the bet of 1 unit(s).
+[10:06:32] 3: fold - Fold your hand.
+[10:06:32] 4: raise - Raise by betting an additional amount.
+[10:06:32] Player 1 calls. Pot is now 4.
+[10:06:33] === Showdown ===
+[10:06:33] Cards revealed: Player 0: Q, Player 1: K
+[10:06:33] Player 1 wins the pot of 4 with K.
+[10:06:33] Player 0 lost 2 chip(s) this round.
+[10:06:33] Player 1 gained 2 chip(s) this round.
+[10:06:33] Chip counts after Hand 26: Player 0: 95, Player 1: 105
+[10:06:33] === Starting Hand 27 ===
+[10:06:33] Starting Hand 27 with chip counts: Player 0: 95, Player 1: 105
+[10:06:33] All active players ante 1 unit. Pot is now 2.
+[10:06:33] Chance node: Dealt card K to Player 0.
+[10:06:33] Chance node: Dealt card Q to Player 1.
+[10:06:33] Starting First Betting Round.
+[10:06:33] Available actions for Player 0 :
+[10:06:33] 0: check - No bet on the table. You may check or bet.
+[10:06:33] 1: bet - You may bet 1 unit.
+[10:06:33] Player 0 bets. Pot is now 3.
+[10:06:34] Available actions for Player 1 :
+[10:06:34] 2: call - Call the bet of 1 unit(s).
+[10:06:34] 3: fold - Fold your hand.
+[10:06:34] 4: raise - Raise by betting an additional amount.
+[10:06:34] Player 1 calls. Pot is now 4.
+[10:06:34] === Showdown ===
+[10:06:34] Cards revealed: Player 0: K, Player 1: Q
+[10:06:34] Player 0 wins the pot of 4 with K.
+[10:06:34] Player 0 gained 2 chip(s) this round.
+[10:06:34] Player 1 lost 2 chip(s) this round.
+[10:06:34] Chip counts after Hand 27: Player 0: 97, Player 1: 103
+[10:06:34] === Starting Hand 28 ===
+[10:06:34] Starting Hand 28 with chip counts: Player 0: 97, Player 1: 103
+[10:06:34] All active players ante 1 unit. Pot is now 2.
+[10:06:34] Chance node: Dealt card Q to Player 0.
+[10:06:34] Chance node: Dealt card K to Player 1.
+[10:06:35] Starting First Betting Round.
+[10:06:35] Available actions for Player 0 :
+[10:06:35] 0: check - No bet on the table. You may check or bet.
+[10:06:35] 1: bet - You may bet 1 unit.
+[10:06:35] Player 0 bets. Pot is now 3.
+[10:06:35] Available actions for Player 1 :
+[10:06:35] 2: call - Call the bet of 1 unit(s).
+[10:06:35] 3: fold - Fold your hand.
+[10:06:35] 4: raise - Raise by betting an additional amount.
+[10:06:35] Player 1 calls. Pot is now 4.
+[10:06:36] === Showdown ===
+[10:06:36] Cards revealed: Player 0: Q, Player 1: K
+[10:06:36] Player 1 wins the pot of 4 with K.
+[10:06:36] Player 0 lost 2 chip(s) this round.
+[10:06:36] Player 1 gained 2 chip(s) this round.
+[10:06:36] Chip counts after Hand 28: Player 0: 95, Player 1: 105
+[10:06:36] === Starting Hand 29 ===
+[10:06:36] Starting Hand 29 with chip counts: Player 0: 95, Player 1: 105
+[10:06:36] All active players ante 1 unit. Pot is now 2.
+[10:06:36] Chance node: Dealt card J to Player 0.
+[10:06:36] Chance node: Dealt card Q to Player 1.
+[10:06:36] Starting First Betting Round.
+[10:06:36] Available actions for Player 0 :
+[10:06:36] 0: check - No bet on the table. You may check or bet.
+[10:06:36] 1: bet - You may bet 1 unit.
+[10:06:36] Player 0 checks.
+[10:06:37] Available actions for Player 1 :
+[10:06:37] 0: check - No bet on the table. You may check or bet.
+[10:06:37] 1: bet - You may bet 1 unit.
+[10:06:37] Player 1 checks.
+[10:06:37] All players checked. Going to showdown.
+[10:06:37] === Showdown ===
+[10:06:37] Cards revealed: Player 0: J, Player 1: Q
+[10:06:37] Player 1 wins the pot of 2 with Q.
+[10:06:37] Player 0 lost 1 chip(s) this round.
+[10:06:37] Player 1 gained 1 chip(s) this round.
+[10:06:37] Chip counts after Hand 29: Player 0: 94, Player 1: 106
+[10:06:37] === Starting Hand 30 ===
+[10:06:37] Starting Hand 30 with chip counts: Player 0: 94, Player 1: 106
+[10:06:37] All active players ante 1 unit. Pot is now 2.
+[10:06:37] Chance node: Dealt card K to Player 0.
+[10:06:37] Chance node: Dealt card J to Player 1.
+[10:06:37] Starting First Betting Round.
+[10:06:37] Available actions for Player 0 :
+[10:06:37] 0: check - No bet on the table. You may check or bet.
+[10:06:37] 1: bet - You may bet 1 unit.
+[10:06:37] Player 0 bets. Pot is now 3.
+[10:06:38] Available actions for Player 1 :
+[10:06:38] 2: call - Call the bet of 1 unit(s).
+[10:06:38] 3: fold - Fold your hand.
+[10:06:38] 4: raise - Raise by betting an additional amount.
+[10:06:38] Player 1 calls. Pot is now 4.
+[10:06:38] === Showdown ===
+[10:06:38] Cards revealed: Player 0: K, Player 1: J
+[10:06:38] Player 0 wins the pot of 4 with K.
+[10:06:38] Player 0 gained 2 chip(s) this round.
+[10:06:38] Player 1 lost 2 chip(s) this round.
+[10:06:38] Chip counts after Hand 30: Player 0: 96, Player 1: 104
+[10:06:38] === Starting Hand 31 ===
+[10:06:38] Starting Hand 31 with chip counts: Player 0: 96, Player 1: 104
+[10:06:38] All active players ante 1 unit. Pot is now 2.
+[10:06:38] Chance node: Dealt card K to Player 0.
+[10:06:38] Chance node: Dealt card Q to Player 1.
+[10:06:39] Starting First Betting Round.
+[10:06:39] Available actions for Player 0 :
+[10:06:39] 0: check - No bet on the table. You may check or bet.
+[10:06:39] 1: bet - You may bet 1 unit.
+[10:06:39] Player 0 bets. Pot is now 3.
+[10:06:39] Available actions for Player 1 :
+[10:06:39] 2: call - Call the bet of 1 unit(s).
+[10:06:39] 3: fold - Fold your hand.
+[10:06:39] 4: raise - Raise by betting an additional amount.
+[10:06:39] Player 1 calls. Pot is now 4.
+[10:06:40] === Showdown ===
+[10:06:40] Cards revealed: Player 0: K, Player 1: Q
+[10:06:40] Player 0 wins the pot of 4 with K.
+[10:06:40] Player 0 gained 2 chip(s) this round.
+[10:06:40] Player 1 lost 2 chip(s) this round.
+[10:06:40] Chip counts after Hand 31: Player 0: 98, Player 1: 102
+[10:06:40] === Starting Hand 32 ===
+[10:06:40] Starting Hand 32 with chip counts: Player 0: 98, Player 1: 102
+[10:06:40] All active players ante 1 unit. Pot is now 2.
+[10:06:40] Chance node: Dealt card K to Player 0.
+[10:06:40] Chance node: Dealt card Q to Player 1.
+[10:06:40] Starting First Betting Round.
+[10:06:40] Available actions for Player 0 :
+[10:06:40] 0: check - No bet on the table. You may check or bet.
+[10:06:40] 1: bet - You may bet 1 unit.
+[10:06:40] Player 0 bets. Pot is now 3.
+[10:06:41] Available actions for Player 1 :
+[10:06:41] 2: call - Call the bet of 1 unit(s).
+[10:06:41] 3: fold - Fold your hand.
+[10:06:41] 4: raise - Raise by betting an additional amount.
+[10:06:41] Player 1 calls. Pot is now 4.
+[10:06:42] === Showdown ===
+[10:06:42] Cards revealed: Player 0: K, Player 1: Q
+[10:06:42] Player 0 wins the pot of 4 with K.
+[10:06:42] Player 0 gained 2 chip(s) this round.
+[10:06:42] Player 1 lost 2 chip(s) this round.
+[10:06:42] Chip counts after Hand 32: Player 0: 100, Player 1: 100
+[10:06:42] === Starting Hand 33 ===
+[10:06:42] Starting Hand 33 with chip counts: Player 0: 100, Player 1: 100
+[10:06:42] All active players ante 1 unit. Pot is now 2.
+[10:06:42] Chance node: Dealt card K to Player 0.
+[10:06:42] Chance node: Dealt card Q to Player 1.
+[10:06:42] Starting First Betting Round.
+[10:06:42] Available actions for Player 0 :
+[10:06:42] 0: check - No bet on the table. You may check or bet.
+[10:06:42] 1: bet - You may bet 1 unit.
+[10:06:42] Player 0 bets. Pot is now 3.
+[10:06:43] Available actions for Player 1 :
+[10:06:43] 2: call - Call the bet of 1 unit(s).
+[10:06:43] 3: fold - Fold your hand.
+[10:06:43] 4: raise - Raise by betting an additional amount.
+[10:06:43] Player 1 calls. Pot is now 4.
+[10:06:43] === Showdown ===
+[10:06:43] Cards revealed: Player 0: K, Player 1: Q
+[10:06:43] Player 0 wins the pot of 4 with K.
+[10:06:43] Player 0 gained 2 chip(s) this round.
+[10:06:43] Player 1 lost 2 chip(s) this round.
+[10:06:43] Chip counts after Hand 33: Player 0: 102, Player 1: 98
+[10:06:43] === Starting Hand 34 ===
+[10:06:43] Starting Hand 34 with chip counts: Player 0: 102, Player 1: 98
+[10:06:43] All active players ante 1 unit. Pot is now 2.
+[10:06:43] Chance node: Dealt card J to Player 0.
+[10:06:43] Chance node: Dealt card K to Player 1.
+[10:06:44] Starting First Betting Round.
+[10:06:44] Available actions for Player 0 :
+[10:06:44] 0: check - No bet on the table. You may check or bet.
+[10:06:44] 1: bet - You may bet 1 unit.
+[10:06:44] Player 0 bets. Pot is now 3.
+[10:06:44] Available actions for Player 1 :
+[10:06:44] 2: call - Call the bet of 1 unit(s).
+[10:06:44] 3: fold - Fold your hand.
+[10:06:44] 4: raise - Raise by betting an additional amount.
+[10:06:44] Player 1 calls. Pot is now 4.
+[10:06:45] === Showdown ===
+[10:06:45] Cards revealed: Player 0: J, Player 1: K
+[10:06:45] Player 1 wins the pot of 4 with K.
+[10:06:45] Player 0 lost 2 chip(s) this round.
+[10:06:45] Player 1 gained 2 chip(s) this round.
+[10:06:45] Chip counts after Hand 34: Player 0: 100, Player 1: 100
+[10:06:45] === Starting Hand 35 ===
+[10:06:45] Starting Hand 35 with chip counts: Player 0: 100, Player 1: 100
+[10:06:45] All active players ante 1 unit. Pot is now 2.
+[10:06:45] Chance node: Dealt card Q to Player 0.
+[10:06:45] Chance node: Dealt card J to Player 1.
+[10:06:45] Starting First Betting Round.
+[10:06:45] Available actions for Player 0 :
+[10:06:45] 0: check - No bet on the table. You may check or bet.
+[10:06:45] 1: bet - You may bet 1 unit.
+[10:06:45] Player 0 bets. Pot is now 3.
+[10:06:46] Available actions for Player 1 :
+[10:06:46] 2: call - Call the bet of 1 unit(s).
+[10:06:46] 3: fold - Fold your hand.
+[10:06:46] 4: raise - Raise by betting an additional amount.
+[10:06:46] Player 1 calls. Pot is now 4.
+[10:06:46] === Showdown ===
+[10:06:46] Cards revealed: Player 0: Q, Player 1: J
+[10:06:46] Player 0 wins the pot of 4 with Q.
+[10:06:46] Player 0 gained 2 chip(s) this round.
+[10:06:46] Player 1 lost 2 chip(s) this round.
+[10:06:46] Chip counts after Hand 35: Player 0: 102, Player 1: 98
+[10:06:46] === Starting Hand 36 ===
+[10:06:46] Starting Hand 36 with chip counts: Player 0: 102, Player 1: 98
+[10:06:46] All active players ante 1 unit. Pot is now 2.
+[10:06:46] Chance node: Dealt card Q to Player 0.
+[10:06:46] Chance node: Dealt card J to Player 1.
+[10:06:47] Starting First Betting Round.
+[10:06:47] Available actions for Player 0 :
+[10:06:47] 0: check - No bet on the table. You may check or bet.
+[10:06:47] 1: bet - You may bet 1 unit.
+[10:06:47] Player 0 bets. Pot is now 3.
+[10:06:47] Available actions for Player 1 :
+[10:06:47] 2: call - Call the bet of 1 unit(s).
+[10:06:47] 3: fold - Fold your hand.
+[10:06:47] 4: raise - Raise by betting an additional amount.
+[10:06:47] Player 1 calls. Pot is now 4.
+[10:06:48] === Showdown ===
+[10:06:48] Cards revealed: Player 0: Q, Player 1: J
+[10:06:48] Player 0 wins the pot of 4 with Q.
+[10:06:48] Player 0 gained 2 chip(s) this round.
+[10:06:48] Player 1 lost 2 chip(s) this round.
+[10:06:48] Chip counts after Hand 36: Player 0: 104, Player 1: 96
+[10:06:48] === Starting Hand 37 ===
+[10:06:48] Starting Hand 37 with chip counts: Player 0: 104, Player 1: 96
+[10:06:48] All active players ante 1 unit. Pot is now 2.
+[10:06:48] Chance node: Dealt card K to Player 0.
+[10:06:48] Chance node: Dealt card Q to Player 1.
+[10:06:48] Starting First Betting Round.
+[10:06:48] Available actions for Player 0 :
+[10:06:48] 0: check - No bet on the table. You may check or bet.
+[10:06:48] 1: bet - You may bet 1 unit.
+[10:06:48] Player 0 bets. Pot is now 3.
+[10:06:49] Available actions for Player 1 :
+[10:06:49] 2: call - Call the bet of 1 unit(s).
+[10:06:49] 3: fold - Fold your hand.
+[10:06:49] 4: raise - Raise by betting an additional amount.
+[10:06:49] Player 1 calls. Pot is now 4.
+[10:06:49] === Showdown ===
+[10:06:49] Cards revealed: Player 0: K, Player 1: Q
+[10:06:49] Player 0 wins the pot of 4 with K.
+[10:06:49] Player 0 gained 2 chip(s) this round.
+[10:06:49] Player 1 lost 2 chip(s) this round.
+[10:06:49] Chip counts after Hand 37: Player 0: 106, Player 1: 94
+[10:06:49] === Starting Hand 38 ===
+[10:06:49] Starting Hand 38 with chip counts: Player 0: 106, Player 1: 94
+[10:06:49] All active players ante 1 unit. Pot is now 2.
+[10:06:49] Chance node: Dealt card J to Player 0.
+[10:06:49] Chance node: Dealt card K to Player 1.
+[10:06:50] Starting First Betting Round.
+[10:06:50] Available actions for Player 0 :
+[10:06:50] 0: check - No bet on the table. You may check or bet.
+[10:06:50] 1: bet - You may bet 1 unit.
+[10:06:50] Player 0 bets. Pot is now 3.
+[10:06:50] Available actions for Player 1 :
+[10:06:50] 2: call - Call the bet of 1 unit(s).
+[10:06:50] 3: fold - Fold your hand.
+[10:06:50] 4: raise - Raise by betting an additional amount.
+[10:06:50] Player 1 calls. Pot is now 4.
+[10:06:51] === Showdown ===
+[10:06:51] Cards revealed: Player 0: J, Player 1: K
+[10:06:51] Player 1 wins the pot of 4 with K.
+[10:06:51] Player 0 lost 2 chip(s) this round.
+[10:06:51] Player 1 gained 2 chip(s) this round.
+[10:06:51] Chip counts after Hand 38: Player 0: 104, Player 1: 96
+[10:06:51] === Starting Hand 39 ===
+[10:06:51] Starting Hand 39 with chip counts: Player 0: 104, Player 1: 96
+[10:06:51] All active players ante 1 unit. Pot is now 2.
+[10:06:51] Chance node: Dealt card Q to Player 0.
+[10:06:51] Chance node: Dealt card J to Player 1.
+[10:06:51] Starting First Betting Round.
+[10:06:51] Available actions for Player 0 :
+[10:06:51] 0: check - No bet on the table. You may check or bet.
+[10:06:51] 1: bet - You may bet 1 unit.
+[10:06:51] Player 0 bets. Pot is now 3.
+[10:06:52] Available actions for Player 1 :
+[10:06:52] 2: call - Call the bet of 1 unit(s).
+[10:06:52] 3: fold - Fold your hand.
+[10:06:52] 4: raise - Raise by betting an additional amount.
+[10:06:52] Player 1 calls. Pot is now 4.
+[10:06:52] === Showdown ===
+[10:06:52] Cards revealed: Player 0: Q, Player 1: J
+[10:06:52] Player 0 wins the pot of 4 with Q.
+[10:06:52] Player 0 gained 2 chip(s) this round.
+[10:06:52] Player 1 lost 2 chip(s) this round.
+[10:06:52] Chip counts after Hand 39: Player 0: 106, Player 1: 94
+[10:06:52] === Starting Hand 40 ===
+[10:06:52] Starting Hand 40 with chip counts: Player 0: 106, Player 1: 94
+[10:06:52] All active players ante 1 unit. Pot is now 2.
+[10:06:52] Chance node: Dealt card K to Player 0.
+[10:06:52] Chance node: Dealt card J to Player 1.
+[10:06:53] Starting First Betting Round.
+[10:06:53] Available actions for Player 0 :
+[10:06:53] 0: check - No bet on the table. You may check or bet.
+[10:06:53] 1: bet - You may bet 1 unit.
+[10:06:53] Player 0 bets. Pot is now 3.
+[10:06:53] Available actions for Player 1 :
+[10:06:53] 2: call - Call the bet of 1 unit(s).
+[10:06:53] 3: fold - Fold your hand.
+[10:06:53] 4: raise - Raise by betting an additional amount.
+[10:06:53] Player 1 calls. Pot is now 4.
+[10:06:54] === Showdown ===
+[10:06:54] Cards revealed: Player 0: K, Player 1: J
+[10:06:54] Player 0 wins the pot of 4 with K.
+[10:06:54] Player 0 gained 2 chip(s) this round.
+[10:06:54] Player 1 lost 2 chip(s) this round.
+[10:06:54] Chip counts after Hand 40: Player 0: 108, Player 1: 92
+[10:06:54] === Starting Hand 41 ===
+[10:06:54] Starting Hand 41 with chip counts: Player 0: 108, Player 1: 92
+[10:06:54] All active players ante 1 unit. Pot is now 2.
+[10:06:54] Chance node: Dealt card K to Player 0.
+[10:06:54] Chance node: Dealt card Q to Player 1.
+[10:06:54] Starting First Betting Round.
+[10:06:54] Available actions for Player 0 :
+[10:06:54] 0: check - No bet on the table. You may check or bet.
+[10:06:54] 1: bet - You may bet 1 unit.
+[10:06:54] Player 0 bets. Pot is now 3.
+[10:06:55] Available actions for Player 1 :
+[10:06:55] 2: call - Call the bet of 1 unit(s).
+[10:06:55] 3: fold - Fold your hand.
+[10:06:55] 4: raise - Raise by betting an additional amount.
+[10:06:55] Player 1 calls. Pot is now 4.
+[10:06:55] === Showdown ===
+[10:06:55] Cards revealed: Player 0: K, Player 1: Q
+[10:06:55] Player 0 wins the pot of 4 with K.
+[10:06:55] Player 0 gained 2 chip(s) this round.
+[10:06:55] Player 1 lost 2 chip(s) this round.
+[10:06:55] Chip counts after Hand 41: Player 0: 110, Player 1: 90
+[10:06:55] === Starting Hand 42 ===
+[10:06:55] Starting Hand 42 with chip counts: Player 0: 110, Player 1: 90
+[10:06:55] All active players ante 1 unit. Pot is now 2.
+[10:06:55] Chance node: Dealt card Q to Player 0.
+[10:06:55] Chance node: Dealt card K to Player 1.
+[10:06:56] Starting First Betting Round.
+[10:06:56] Available actions for Player 0 :
+[10:06:56] 0: check - No bet on the table. You may check or bet.
+[10:06:56] 1: bet - You may bet 1 unit.
+[10:06:56] Player 0 bets. Pot is now 3.
+[10:06:56] Available actions for Player 1 :
+[10:06:56] 2: call - Call the bet of 1 unit(s).
+[10:06:56] 3: fold - Fold your hand.
+[10:06:56] 4: raise - Raise by betting an additional amount.
+[10:06:56] Player 1 calls. Pot is now 4.
+[10:06:57] === Showdown ===
+[10:06:57] Cards revealed: Player 0: Q, Player 1: K
+[10:06:57] Player 1 wins the pot of 4 with K.
+[10:06:57] Player 0 lost 2 chip(s) this round.
+[10:06:57] Player 1 gained 2 chip(s) this round.
+[10:06:57] Chip counts after Hand 42: Player 0: 108, Player 1: 92
+[10:06:57] === Starting Hand 43 ===
+[10:06:57] Starting Hand 43 with chip counts: Player 0: 108, Player 1: 92
+[10:06:57] All active players ante 1 unit. Pot is now 2.
+[10:06:57] Chance node: Dealt card Q to Player 0.
+[10:06:57] Chance node: Dealt card K to Player 1.
+[10:06:57] Starting First Betting Round.
+[10:06:57] Available actions for Player 0 :
+[10:06:57] 0: check - No bet on the table. You may check or bet.
+[10:06:57] 1: bet - You may bet 1 unit.
+[10:06:57] Player 0 bets. Pot is now 3.
+[10:06:58] Available actions for Player 1 :
+[10:06:58] 2: call - Call the bet of 1 unit(s).
+[10:06:58] 3: fold - Fold your hand.
+[10:06:58] 4: raise - Raise by betting an additional amount.
+[10:06:58] Player 1 calls. Pot is now 4.
+[10:06:58] === Showdown ===
+[10:06:58] Cards revealed: Player 0: Q, Player 1: K
+[10:06:58] Player 1 wins the pot of 4 with K.
+[10:06:58] Player 0 lost 2 chip(s) this round.
+[10:06:58] Player 1 gained 2 chip(s) this round.
+[10:06:58] Chip counts after Hand 43: Player 0: 106, Player 1: 94
+[10:06:58] === Starting Hand 44 ===
+[10:06:58] Starting Hand 44 with chip counts: Player 0: 106, Player 1: 94
+[10:06:58] All active players ante 1 unit. Pot is now 2.
+[10:06:58] Chance node: Dealt card J to Player 0.
+[10:06:58] Chance node: Dealt card Q to Player 1.
+[10:06:59] Starting First Betting Round.
+[10:06:59] Available actions for Player 0 :
+[10:06:59] 0: check - No bet on the table. You may check or bet.
+[10:06:59] 1: bet - You may bet 1 unit.
+[10:06:59] Player 0 checks.
+[10:06:59] Available actions for Player 1 :
+[10:06:59] 0: check - No bet on the table. You may check or bet.
+[10:06:59] 1: bet - You may bet 1 unit.
+[10:06:59] Player 1 checks.
+[10:06:59] All players checked. Going to showdown.
+[10:06:59] === Showdown ===
+[10:06:59] Cards revealed: Player 0: J, Player 1: Q
+[10:06:59] Player 1 wins the pot of 2 with Q.
+[10:06:59] Player 0 lost 1 chip(s) this round.
+[10:06:59] Player 1 gained 1 chip(s) this round.
+[10:06:59] Chip counts after Hand 44: Player 0: 105, Player 1: 95
+[10:06:59] === Starting Hand 45 ===
+[10:06:59] Starting Hand 45 with chip counts: Player 0: 105, Player 1: 95
+[10:06:59] All active players ante 1 unit. Pot is now 2.
+[10:06:59] Chance node: Dealt card Q to Player 0.
+[10:06:59] Chance node: Dealt card J to Player 1.
+[10:07:00] Starting First Betting Round.
+[10:07:00] Available actions for Player 0 :
+[10:07:00] 0: check - No bet on the table. You may check or bet.
+[10:07:00] 1: bet - You may bet 1 unit.
+[10:07:00] Player 0 bets. Pot is now 3.
+[10:07:00] Available actions for Player 1 :
+[10:07:00] 2: call - Call the bet of 1 unit(s).
+[10:07:00] 3: fold - Fold your hand.
+[10:07:00] 4: raise - Raise by betting an additional amount.
+[10:07:00] Player 1 calls. Pot is now 4.
+[10:07:01] === Showdown ===
+[10:07:01] Cards revealed: Player 0: Q, Player 1: J
+[10:07:01] Player 0 wins the pot of 4 with Q.
+[10:07:01] Player 0 gained 2 chip(s) this round.
+[10:07:01] Player 1 lost 2 chip(s) this round.
+[10:07:01] Chip counts after Hand 45: Player 0: 107, Player 1: 93
+[10:07:01] === Starting Hand 46 ===
+[10:07:01] Starting Hand 46 with chip counts: Player 0: 107, Player 1: 93
+[10:07:01] All active players ante 1 unit. Pot is now 2.
+[10:07:01] Chance node: Dealt card Q to Player 0.
+[10:07:01] Chance node: Dealt card J to Player 1.
+[10:07:01] Starting First Betting Round.
+[10:07:01] Available actions for Player 0 :
+[10:07:01] 0: check - No bet on the table. You may check or bet.
+[10:07:01] 1: bet - You may bet 1 unit.
+[10:07:01] Player 0 bets. Pot is now 3.
+[10:07:02] Available actions for Player 1 :
+[10:07:02] 2: call - Call the bet of 1 unit(s).
+[10:07:02] 3: fold - Fold your hand.
+[10:07:02] 4: raise - Raise by betting an additional amount.
+[10:07:02] Player 1 calls. Pot is now 4.
+[10:07:02] === Showdown ===
+[10:07:02] Cards revealed: Player 0: Q, Player 1: J
+[10:07:02] Player 0 wins the pot of 4 with Q.
+[10:07:02] Player 0 gained 2 chip(s) this round.
+[10:07:02] Player 1 lost 2 chip(s) this round.
+[10:07:02] Chip counts after Hand 46: Player 0: 109, Player 1: 91
+[10:07:02] === Starting Hand 47 ===
+[10:07:02] Starting Hand 47 with chip counts: Player 0: 109, Player 1: 91
+[10:07:02] All active players ante 1 unit. Pot is now 2.
+[10:07:02] Chance node: Dealt card J to Player 0.
+[10:07:02] Chance node: Dealt card K to Player 1.
+[10:07:03] Starting First Betting Round.
+[10:07:03] Available actions for Player 0 :
+[10:07:03] 0: check - No bet on the table. You may check or bet.
+[10:07:03] 1: bet - You may bet 1 unit.
+[10:07:03] Player 0 checks.
+[10:07:03] Available actions for Player 1 :
+[10:07:03] 0: check - No bet on the table. You may check or bet.
+[10:07:03] 1: bet - You may bet 1 unit.
+[10:07:03] Player 1 checks.
+[10:07:03] All players checked. Going to showdown.
+[10:07:03] === Showdown ===
+[10:07:03] Cards revealed: Player 0: J, Player 1: K
+[10:07:03] Player 1 wins the pot of 2 with K.
+[10:07:03] Player 0 lost 1 chip(s) this round.
+[10:07:03] Player 1 gained 1 chip(s) this round.
+[10:07:03] Chip counts after Hand 47: Player 0: 108, Player 1: 92
+[10:07:03] === Starting Hand 48 ===
+[10:07:03] Starting Hand 48 with chip counts: Player 0: 108, Player 1: 92
+[10:07:03] All active players ante 1 unit. Pot is now 2.
+[10:07:03] Chance node: Dealt card K to Player 0.
+[10:07:03] Chance node: Dealt card J to Player 1.
+[10:07:03] 🏁 GAME SESSION ENDED 🏁
+[10:07:03] Final chip counts: Player 0: 107, Player 1: 91
+[10:07:03] Transitions written to /Users/parthkapur/UNi/Spring_25/710_FML/Project/poker/engine/../logs/game_data/rl_data.csv.
+[10:07:03] Training data exported to /Users/parthkapur/UNi/Spring_25/710_FML/Project/poker/engine/../logs/game_data/training_data.csv
