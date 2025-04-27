@@ -346,7 +346,7 @@ class KuhnPokerEngine:
                     self.pot += call_used
 
                     # Now add the raise
-                    min_extra = 1  # Always set minimum raise to 1 instead of last_raise_amount
+                    min_extra = 1  # Always set minimum raise to 1
                     max_extra = self.chips[current_player]
                     raise_used = min(max_extra, max(min_extra, raise_amount or min_extra))
                     if raise_used <= 0:
