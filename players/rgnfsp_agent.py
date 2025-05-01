@@ -27,7 +27,7 @@ ACTION_MAP_INT = {v: k for k, v in ACTION_MAP_STR.items()}
 ACTION_CODES_ENGINE = {0: "check", 1: "bet", 2: "call", 3: "fold", 4: "raise"}
 ACTION_CODES_TO_INT_ENGINE = {v: k for k, v in ACTION_CODES_ENGINE.items()}
 
-PI_NETWORK_PATH = "../logs/game_data/rgnfsp"
+PI_NETWORK_PATH = "logs/game_data/rgnfsp_3p_pi_net.pth"
 
 # ============================
 # Infoset Tensor Conversion
@@ -71,7 +71,7 @@ class RGNFSP3PPlayer:
     def __init__(
             self,
             pi_network_weights_path: str = PI_NETWORK_PATH,
-            hidden_size: int = 128,
+            hidden_size: int = 256,
             device: torch.device = torch.device("cpu")
             ):
         self.pi_network = KuhnNetwork3P(
