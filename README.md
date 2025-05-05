@@ -1,6 +1,8 @@
 # A Reinforcement Learning Framework for Poker
 
-This repository provides a flexible implementation of Kuhn Poker (extendable to other poker variations) with support for different player agent types, including human players, random agents, and federated learning agents. The project is designed as a plug-and-play system to easily implement and test various ML algorithms in a simplified poker environment.
+This repository provides a flexible implementation of Kuhn Poker (extendable to other poker variations) with support for different player agent types, including human players, random agents, and reinforcement learning (RL) agents. The project is designed as a **plug-and-play system** to easily implement and test various ML algorithms in a simplified poker environment.
+
+For more details on the engine’s internals, see [KuhnPokerEngine Documentation](engine/README.md).
 
 ## Game Rules
 
@@ -8,14 +10,14 @@ This repository provides a flexible implementation of Kuhn Poker (extendable to 
 Kuhn poker is a simple poker variant played with just 3 cards: Jack (J), Queen (Q), and King (K).
 
 1. **Setup**: 
-   - Each player antes 1 chip to the pot and receives 1 card
-   - Cards are ranked from lowest to highest: J < Q < K
+   - Each player antes 1 chip to the pot and receives 1 card.
+   - Cards are ranked from lowest to highest: J < Q < K.
 
 2. **Gameplay**:
-   - First betting round: Players can check or bet 1 chip
-   - If there's a bet, the other player can call or fold
-   - If both players check, cards are revealed (showdown)
-   - If a player bets and the other calls, there's another betting round
+   - First betting round: Players can check or bet 1 chip.
+   - If there's a bet, the other player can call or fold.
+   - If both players check, cards are revealed (showdown).
+   - If a player bets and the other calls, there's another betting round.
 
 3. **Winner**: The highest card wins the pot. If a player folds, the other player wins automatically.
 
@@ -23,9 +25,9 @@ Kuhn poker is a simple poker variant played with just 3 cards: Jack (J), Queen (
 Our 3-player variant uses a modified deck to create more strategic depth:
 
 1. **Setup**:
-   - Uses 4 cards: Jack (J), Queen (Q), King (K), and Ace (A)
-   - 3 cards are dealt to players, and 1 card remains hidden
-   - This hidden card creates uncertainty - even the player with the King doesn't know if the Ace is in play
+   - Uses 4 cards: Jack (J), Queen (Q), King (K), and Ace (A). Cards are ranked from lowest to highest: J < Q < K < A.
+   - 3 cards are dealt to players, and 1 card remains hidden.
+   - This hidden card creates uncertainty, even the player with the King doesn't know if the Ace is in play. If a player does hold the Ace, they may disguise it or slow-play to extract more chips.
 
 2. **Gameplay**:
    - Same basic mechanics as 2-player, but with 3 players taking turns
@@ -36,19 +38,27 @@ Our 3-player variant uses a modified deck to create more strategic depth:
 ## File Structure
 
 ```
-FRL_Poker/
-├── game_engine.py       # Core game mechanics
-├── utilities.py         # Logging and utility functions 
+poker/
+├── engine/
+│   ├── KuhnPokerEngine.py
+│   └── ...
+├── models/
+│   ├── frl-models/
+│   ├── frl_actor_critic.py
+│   └── ...
+├── scripts/
+│   ├── train.py
+│   └── ...
 ├── players/
-│   ├── base.py          # Abstract base Player class
-│   ├── human_agent.py   # Human player implementation
-│   ├── random_agent.py  # Random action agent 
-│   └── federated_agent.py # Basic federated learning agent
+│   ├── base.py
+│   ├── human_agent.py
+│   ├── random_agent.py
+│   └── ...
 ├── logs/
-│   ├── game_log.txt     # Game logs
-│   └── game_data/       # Data files for ML training
-│       ├── rl_data.csv  # Reinforcement learning data
-│       └── federated_player_*_data.csv # Player-specific data
+│   ├── game_log.txt
+│   └── game_data/
+├── data/
+└── requirements.txt
 ```
 
 ## Installation & Requirements
@@ -56,17 +66,17 @@ FRL_Poker/
 1. Clone the repository:
    ```
    git clone https://github.com/shridpant/poker
-   cd Poker
+   cd poker
    ```
 
 2. Install dependencies:
    ```
-   pip install pyspiel
+   pip install -r requirements.txt
    ```
 
 ## Running the Game
 
-There's an ```example.ipynb``` for you. I tried to make it super intuitive, but a call would probably be easier to get it all sorted out!
+There's an ```example.ipynb``` for you. We tried to make it super intuitive!
 
 ### 2-Player Game (Human vs Random)
 
@@ -99,7 +109,7 @@ from players.federated_agent import FederatedPlayer
 
 player0 = HumanPlayer()
 player1 = RandomPlayer()
-player2 = FederatedPlayer(player_id=1)
+player2 = RandomPlayer()
 
 engine = KuhnPokerEngine(
     player0=player0,
@@ -163,11 +173,21 @@ class MyRLAgent(Player):
 
 ## Data Collection for Machine Learning
 
-The system automatically collects game data suitable for machine learning:
+RL agents **collect gameplay data primarily through self-play**. When running RL training scripts, each agent logs transitions from its own perspective. These transitions still follow the same specification outlined below to ensure consistency across agents.
 
-1. **RL Data**: Transitions for reinforcement learning are stored in `logs/game_data/rl_data.csv` with state, action, reward, and next state information.
+For example, to train the **FRL agents** and collect the data, you can use the following command from the root of this repo:
+   ```bash
+   python3 scripts/train.py --rounds 100 --hands_per_round 10 --aggregation median --num_players 3 --reset_chips
+   ```
+   This will:
+   - Initialize a Kuhn Poker environment with 3 FRL agents.
+   - Run multiple rounds of self-play, each with a configurable number of hands.
+   - Perform local training on each agent’s collected data.
+   - Aggregate model parameters using your chosen aggregator.
 
-2. **Federated Data**: Each federated agent stores its own local data in `logs/game_data/federated_player_{id}_data.csv`.
+Additionally, the system (KuhnPokerEngine) also automatically collects game data suitable for machine learning:
+
+- **RL Data**: Sample transitions for RL are also stored in `logs/game_data/rl_data.csv` with state, action, reward, and next state information. This *csv* is updated after each gameplay.
 
 The state representation includes:
 - Round number
@@ -178,8 +198,6 @@ The state representation includes:
 - Available actions
 - Betting history
 - Chip counts
-
-This framework collects gameplay data in CSV format to support training reinforcement learning (RL) or federated reinforcement learning (FRL) agents. The data is stored in files such as `rl_data.csv` and `federated_player_X_data.csv`.
 
 ### RL Data Format (`rl_data.csv`)
 
@@ -209,3 +227,11 @@ session_id,round,decision_index,stage,current_player,state,legal_actions,chosen_
 - **Action Display Issue**: Sometimes, for the human player, the available actions are not immediately shown. This can be remedied by pressing the "ESC" key and then entering the actual action.
   
 - **Module Import Errors**: If you encounter import errors, make sure your working directory is set correctly.
+
+## References
+- **Paper Citations**:  
+  - [AlphaHoldem: End-to-end Reinforcement Learning for Poker](#)  
+
+- **Implementation Examples**:  
+  - [PyTorch Official Tutorials](https://pytorch.org/tutorials/)  
+  - [W&B Documentation](https://docs.wandb.ai/)
