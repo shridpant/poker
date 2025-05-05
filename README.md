@@ -5,7 +5,7 @@ This repository provides a flexible implementation of Kuhn Poker (extendable to 
 For more details on the engine’s internals, see [KuhnPokerEngine Documentation](engine/README.md).
 
 For comprehensive details on training the three RL agents, see the following:
-- [Federated Reinforcement Learning](players/federatedrl.md)
+- [Federated Reinforcement Learning](players/federatedrl-readme.md)
 - [CFR](players/cfr-readme.md)
 - [RG-NFSP]()
 
@@ -47,17 +47,15 @@ poker/
 ├── engine/
 │   ├── KuhnPokerEngine.py
 │   └── ...
-├── models/
-│   ├── frl-models/
-│   ├── frl_actor_critic.py
-│   └── ...
 ├── scripts/
 │   ├── train.py
 │   └── ...
 ├── players/
 │   ├── base.py
 │   ├── human_agent.py
-│   ├── random_agent.py
+│   ├── cfr_agent.py
+│   ├── frl_agent.py
+│   ├── rgnfsp_agent.py
 │   └── ...
 ├── logs/
 │   ├── game_log.txt
