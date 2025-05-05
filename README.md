@@ -5,7 +5,7 @@ This repository provides a flexible implementation of Kuhn Poker (extendable to 
 For more details on the engine’s internals, see [KuhnPokerEngine Documentation](engine/README.md).
 
 For comprehensive details on training the three RL agents, see the following:
-- [Federated Reinforcement Learning](players/federatedrl.md)
+- [Federated Reinforcement Learning](players/federatedrl-readme.md)
 - [CFR]()
 - [RG-NFSP]()
 
