@@ -86,7 +86,6 @@ class CFRNode:
             for a in range(self.num_actions):
                 avg_strategy[a] = self.strategy_sum[a] / normalizing_sum
         else:
-            # Default to uniform strategy if no visits
             for a in range(self.num_actions):
                 avg_strategy[a] = 1.0 / self.num_actions
                 
@@ -106,7 +105,7 @@ class EnhancedCFRTrainer:
         self.out_dir = os.path.normpath(base)
         os.makedirs(self.out_dir, exist_ok=True)
         
-        # Card mapping (J=0, Q=1, K=2, A=3 for 3-player)
+        # Card mapping
         self.card_values = {"J": 0, "Q": 1, "K": 2, "A": 3}
         self.action_mapping = {0: "check", 1: "bet", 2: "call", 3: "fold", 4: "raise"}
         self.reverse_action_mapping = {"check": 0, "bet": 1, "call": 2, "fold": 3, "raise": 4}
@@ -217,7 +216,6 @@ class EnhancedCFRTrainer:
             new_reach_probs = reach_probs.copy()
             new_reach_probs[current_player] *= strategy[action_idx]
             
-            # Recursive call with updated history
             action_utils[action_idx] = -self._cfr(cards, new_history, new_reach_probs, next_player)
             node_util += strategy[action_idx] * action_utils[action_idx]
         
@@ -266,8 +264,7 @@ class EnhancedCFRTrainer:
         if not history:
             return False
                 
-        # Path too long (simple heuristic for termination)
-        if len(history) >= 10:  # Increased limit to allow for more complex histories
+        if len(history) >= 10:  
             return True
                 
         # Fold always ends
@@ -287,7 +284,7 @@ class EnhancedCFRTrainer:
         # After a call, check if it was in response to a bet or raise
         if history and history[-1] == "2":
             for action in reversed(history[:-1]):
-                if action in ["1", "4"]:  # If responding to bet or raise
+                if action in ["1", "4"]: 
                     return True
                         
         return False
@@ -296,26 +293,21 @@ class EnhancedCFRTrainer:
         
     def _utility(self, history, cards, current_player):
         """Calculate the utility at a terminal state."""
-        # If someone folded, they lose their ante
         if "3" in history:
-            # Find who folded
             for i in range(len(history)):
                 if history[i] == "3":
                     folded_player = i % self.num_players
                     return 1 if folded_player != current_player else -1
         
-        # No fold - showdown
         card_values = [self._card_value(c) for c in cards]
         winners = []
         max_card = max(card_values)
         
-        # Find players with the highest card
         for p in range(self.num_players):
             if card_values[p] == max_card:
                 winners.append(p)
                 
-        # Calculate pot based on betting
-        pot_contribution = 1  # Start with ante
+        pot_contribution = 1 
         
         # Add bets/calls to pot 
         for i, action in enumerate(history):
@@ -338,7 +330,7 @@ class EnhancedCFRTrainer:
         """Return the numeric value of a card."""
         if isinstance(card, str):
             return self.card_values.get(card, -1)
-        return card  # Assume it's already a numeric value
+        return card 
 
 
 class AdvancedCFRAgent:
@@ -384,11 +376,10 @@ class AdvancedCFRAgent:
         self.optimizer = optim.Adam(self.raise_model.parameters(), lr=0.001)
         self.loss_fn = nn.MSELoss()
         
-        # Experience memory for training
         self.experiences = []
         self.min_experiences_to_train = 50
         self.batch_size = 32
-        self.exploration_rate = 0.2  # For raise amounts
+        self.exploration_rate = 0.2 
         
         # Card mapping
         self.card_values = {"J": 0, "Q": 1, "K": 2, "A": 3}
@@ -458,8 +449,8 @@ class AdvancedCFRAgent:
             # Get raise amount from neural network
             raise_amount = self._get_raise_amount(state_vector, chips)
         
-        # Store state information for all actions (not just raises)
-        if action_idx != 4:  # For non-raise actions
+        # Store state information for all actions 
+        if action_idx != 4:  
             state_vector = self._extract_state_features(card, available_actions, round_num, chips, public_state)
             self.current_round_states.append({
                 'state': state_vector.copy(),
@@ -475,8 +466,8 @@ class AdvancedCFRAgent:
         
         for action in priority_order:
             if action in available_actions:
-                if action == 4:  # Raise requires amount
-                    return (action, 1)  # Default minimum raise
+                if action == 4:  
+                    return (action, 1) 
                 return (action, None)
         
         # Fallback to first available action
@@ -581,7 +572,7 @@ class AdvancedCFRAgent:
             states = batch['state']
             predicted_amounts = self.raise_model(states)
             
-            # Calculate loss (adjusted by reward)
+            # Calculate loss
             # Positive rewards reinforce the bet amount, negative rewards push away
             target_amounts = batch['amount']
             rewards = batch['reward']
@@ -594,8 +585,6 @@ class AdvancedCFRAgent:
                     loss += self.loss_fn(predicted_amounts[i], target_amounts[i]) * rewards[i]
                 else:
                     # Negative reward - discourage these bet amounts
-                    # We do this by pushing predicted amount away from the target
-                    # if it was too small, make it bigger; if too big, make it smaller
                     if predicted_amounts[i] < target_amounts[i]:
                         ideal = target_amounts[i] + 0.2  # Push higher
                     else:
@@ -612,7 +601,7 @@ class AdvancedCFRAgent:
         # Print training statistics
         print(f"Trained raise model on {len(self.experiences)} experiences. Loss: {total_loss:.4f}")
         
-        # Reset experiences (keep the most recent ones)
+        # Reset experiences
         if len(self.experiences) > 1000:
             self.experiences = self.experiences[-500:]  # Keep last 500
             
@@ -697,7 +686,6 @@ if __name__ == "__main__":
         print(f"Training took {time.time() - start:.2f} seconds.")
     
     elif args.play:
-        # Import here to avoid circular imports
         try:
             from engine.KuhnPokerEngine import KuhnPokerEngine
             

@@ -5,3 +5,9 @@ plotly
 matplotlib
 wandb
 notebook>=6.5.2
+random
+json
+sys
+os
+time
+collections
