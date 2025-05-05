@@ -1,0 +1,7 @@
+pandas
+numpy
+torch
+plotly
+matplotlib
+wandb
+notebook>=6.5.2

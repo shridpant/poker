@@ -84,87 +84,6 @@ class CustomPlayerAgent:
         return action_idx, raise_amount  # (e.g., 0, None) for check
 ```
 
-### Reinforcement Learning Agents
-
-For specifically implementing RL-based agents, you can use state information and reward signals:
-
-#### State Representation
-Your agent can use these key elements from the environment (example):
-
-```python
-class RLAgent:
-    def get_action(self, card, available_actions, round_num, chips, public_state):
-        # Card value - one of J, Q, K, A (in 3-player game)
-        card_value = card
-        
-        # Convert to numeric for easier processing (1=J, 2=Q, 3=K, 4=A)
-        card_values = {"J": 1, "Q": 2, "K": 3, "A": 4}
-        numeric_card = card_values[card]
-        
-        # Extract features for your RL state space
-        features = [
-            numeric_card / 4.0,  # Normalized card rank
-            public_state['pot_size'] / 20.0,  # Normalized pot size
-            chips / 10.0,  # Normalized chips remaining
-            round_num / 2.0,  # Betting round (1 or 2)
-            len(available_actions) / 5.0,  # Number of available actions (normalized)
-            public_state['highest_bet'] / 10.0,  # Current highest bet
-            public_state['player_id'] / 3.0,  # Player position (normalized)
-            
-            # Betting history features
-            public_state['betting_history'].count('bet') / 5.0,
-            public_state['betting_history'].count('raise') / 5.0,
-            public_state['betting_history'].count('fold') / 5.0
-        ]
-        
-        # Use your trained model to predict best action
-        # action_idx = self.model.predict(features)
-        
-        # (example) For a basic RL agent, you might choose actions with epsilon-greedy:
-        if random.random() < self.epsilon:  # Exploration
-            action_idx = random.choice(list(available_actions.keys()))
-        else:  # Exploitation
-            action_idx = self.trained_model.predict(features)
-            
-        # For raising, determine a raise amount
-        raise_amount = 1
-        if action_idx == 4:  # raise action
-            raise_amount = max(1, min(chips, self.determine_raise_amount(features)))
-            
-        return action_idx, raise_amount
-        
-    def update_model(self, transition):
-        # Implement your learning algorithm (e.g., Q-learning, DQN)
-        # The engine automatically collects transitions with:
-        #   - state: Game state before action
-        #   - action: Chosen action
-        #   - reward: Chip difference at hand conclusion
-        #   - next_state: Next game state
-        #   - done: Whether the episode ended
-        pass
-```
-
-#### Reward Structure
-- Rewards in Kuhn Poker are based on chip differences after each hand
-- Positive reward: chips gained (winning the pot)
-- Negative reward: chips lost (folding or losing at showdown)
-- Value range: typically between -3 and +5 in simple games
-- The engine automatically calculates and assigns rewards to each transition
-
-#### Transition Collection
-The engine automatically records:
-- State information at decision time
-- The action chosen
-- Resulting reward
-- Whether the episode ended
-
-For custom RL collection, implement:
-```python
-def record_local_transition(self, transition):
-    # Store or process the transition data for your agent
-    pass
-```
-
 ## Running the Game
 
 To run a game with the engine, create a script (e.g., `main.py`/`example.ipynb`) like the following:
@@ -196,8 +115,6 @@ engine.run_game()
 
 Run from the root folder with:
 ```
-python main.py
-# or 
 jupyter notebook  # then open and run example.ipynb
 ```
 
@@ -411,22 +328,22 @@ Key Points:
 The engine handles below edge cases:
 
 1. **Insufficient Chips**:
-   - If a player doesn't have enough to call, they're forced to fold or go all-in
-   - If a player can't meet the minimum raise, they can only call or fold
-   - Players with zero chips can still check but not bet (standard poker rules)
+   - If a player doesn't have enough to call, they're forced to fold or go all-in.
+   - If a player can't meet the minimum raise, they can only call or fold.
+   - Players with zero chips can still check but not bet (standard poker rules).
 
 2. **Raise Amounts**:
-   - Minimum raise tracking ensures proper poker raise rules
-   - If the raise amount provided is invalid, it's adjusted to the valid range
+   - Minimum raise tracking ensures proper poker raise rules.
+   - If the raise amount provided is invalid, it's rejected.
 
 3. **Completion Conditions**:
-   - Special handling for when all players check
-   - Special handling for 2-player vs 3-player rules
-   - Detection when only one player remains (others folded)
+   - Special handling for when all players check.
+   - Special handling for 2-player vs 3-player rules.
+   - Detection when only one player remains (others folded).
 
 4. **Showdown Logic**:
-   - Handles default winner when others fold
-   - Properly compares cards for multiple active players
+   - Handles default winner when others fold.
+   - Properly compares cards for multiple active players.
 
 5. **Round Transitions**:
    - In 3-player games, second round starts with the next active player after the last to act
@@ -451,68 +368,3 @@ The engine exports this data in two formats:
    - Betting history statistics
    - One-hot encoded actions
    - Final rewards
-
-### RL Specific
-
-The engine automatically collects data for reinforcement learning:
-
-1. **RL Transitions**: Recorded at each decision point:
-   ```python
-   transition_data = {
-       "session_id": unique identifier,
-       "round": hand number,
-       "decision_index": action sequence number,
-       "stage": "first" or "second" betting round,
-       "current_player": player ID,
-       "state": {
-           # Detailed state information
-           "player0_card": card of player 0,
-           "player1_card": card of player 1,
-           "player2_card": card of player 2 (if applicable),
-           "pot": current pot size,
-           "chips": string of chip counts,
-           "betting_history": action history,
-           "highest_bet": current highest bet,
-           "last_bettor": player who bet/raised last
-       },
-       "legal_actions": available actions,
-       "chosen_action": action taken,
-       "reward": 0,  # Updated later at showdown
-       "done": False  # Updated later at showdown
-   }
-   ```
-
-2. **Reward Assignment**: During showdown:
-   ```python
-   # Group transitions by player and round
-   for each player's transitions:
-       # Calculate reward (chip difference)
-       reward = chips_after - chips_before
-       
-       # Update all transitions with reward
-       for transition in player_transitions[:-1]:
-           transition["reward"] = reward
-           transition["done"] = False
-           
-       # Mark last transition as terminal
-       player_transitions[-1]["reward"] = reward
-       player_transitions[-1]["done"] = True
-   ```
-
-3. **Federated Learning**: For players implementing federated learning:
-   ```python
-   # Record transition in player's local format
-   def record_local_transition(self, transition):
-       formatted = {
-           'local_state': str(state),
-           'local_action': action,
-           'local_reward': reward,
-           'local_done': done
-       }
-       self.local_transitions.append(formatted)
-   
-   # Export data at the end of the session
-   def flush_federated_transitions(player):
-       write_to_csv(player.local_transitions)
-       player.local_transitions.clear()
-   ```
