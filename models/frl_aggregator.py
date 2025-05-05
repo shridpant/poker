@@ -11,9 +11,9 @@ class FRLAggregator:
     - Median: Robust coordinate-wise median (Byzantine-resistant)
     - Trimmed Mean: Robust trimmed mean aggregation
     """
-    def __init__(self, robust=False, agg_method="fedavg"):
+    def __init__(self, robust=False, agg_method="median"):
         self.robust = robust
-        self.agg_method = agg_method if robust else "fedavg"
+        self.agg_method = agg_method if robust else "median"
         
     def aggregate_parameters(self, parameters_list, weights=None):
         """
@@ -51,9 +51,9 @@ class FRLAggregator:
         """Robust aggregation using coordinate-wise median"""
         aggregated_params = copy.deepcopy(parameters_list[0])
         for param_idx, _ in enumerate(aggregated_params):
-            # Stack parameters from all clients for this layer
+            # Stacking parameters from all clients for this layer
             stacked_params = torch.stack([client_params[param_idx] for client_params in parameters_list])
-            # Calculate median across clients (dimension 0)
+            # Calculating median across clients (dimension 0)
             median_update = torch.median(stacked_params, dim=0).values
             aggregated_params[param_idx].copy_(median_update)
         return aggregated_params
@@ -65,16 +65,16 @@ class FRLAggregator:
         n_trim = int(n_clients * trim_ratio)
         
         for param_idx, _ in enumerate(aggregated_params):
-            # Stack parameters from all clients for this layer
+            # Stacking parameters from all clients for this layer
             stacked_params = torch.stack([client_params[param_idx] for client_params in parameters_list])
-            # Sort values across clients
+            # Sorting values across clients
             sorted_params, _ = torch.sort(stacked_params, dim=0)
-            # Trim the smallest and largest values
+            # Trimming the smallest and largest values
             if n_trim > 0 and n_clients > 2*n_trim:
                 trimmed = sorted_params[n_trim:-n_trim]
             else:
                 trimmed = sorted_params
-            # Calculate mean of remaining values
+            # Calculating mean of remaining values
             mean_update = torch.mean(trimmed, dim=0)
             aggregated_params[param_idx].copy_(mean_update)
         return aggregated_params
@@ -87,5 +87,5 @@ class FRLAggregator:
             gradients_list: List of gradients from each agent
             weights: Optional weights for each agent's contribution
         """
-        # Use the same aggregation logic as for parameters
+        # Using the same aggregation logic as for parameters
         return self.aggregate_parameters(gradients_list, weights)

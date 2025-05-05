@@ -36,12 +36,6 @@ class FRLAgent(Player):
         self.betting_history = ""
         self.raise_exploration_rate = raise_exploration_rate
         
-        # Removed normalization: using raw scores so no scaling is applied.
-        # if variant == "kuhn_3p":
-        #     self.model.set_variant_scale(5.0) 
-        # elif variant == "kuhn_2p":
-        #     self.model.set_variant_scale(3.0)
-        
         # Reputation tracking
         self.reputation = {
             "bluff_count": 0,
@@ -59,18 +53,18 @@ class FRLAgent(Player):
         self.current_card = card
         state = self._preprocess_state(card, available_actions, round_num, chips_remaining, public_state)
         
-        # Get the device that the model is on
-        # # Check if MPS is available
-        # if torch.backends.mps.is_available():
-        #     device = torch.device("mps")
-        #     print(f"Using MPS device")
-        # else:
-        #     print(f"MPS requested but not available, falling back to CPU")
-        #     device = torch.device("cpu")
+        # Check if MPS is available
+        if torch.backends.mps.is_available():
+            device = torch.device("mps")
+            print(f"Using MPS device")
+        else:
+            print(f"MPS requested but not available, falling back to CPU")
+            device = torch.device("cpu")
         
-        # print(f"frl_agent.py: Using device: {device}")
-        # Move tensors to the same device as the model
-        # state_tensor = torch.tensor(state, dtype=torch.float32).to(device)
+        # Moving the model to the appropriate device
+        self.model.model = self.model.model.to(device)
+        
+        print(f"frl_agent.py: Using device: {device}")
         
         # Epsilon-greedy exploration
         if random.random() < self.epsilon:
@@ -111,28 +105,28 @@ class FRLAgent(Player):
             if action < len(actions_one_hot):
                 actions_one_hot[action] = 1
                 
-        # Use raw round number without normalization
+        # Using raw round number without normalization
         round_raw = round_num
-        
+        max_history_length = 20  # Track last 20 actions
         # Raw betting history counts without normalization
         history_features = [
-            self.betting_history.count('check'),
-            self.betting_history.count('bet'),
-            self.betting_history.count('call'),
-            self.betting_history.count('fold'),
+            min(self.betting_history.count('check')/max_history_length, 1.0),
+            min(self.betting_history.count('bet')/max_history_length, 1.0),
+            min(self.betting_history.count('call')/max_history_length, 1.0),
+            min(self.betting_history.count('fold')/max_history_length, 1.0),
         ]
         
-        # Process chips remaining - use raw values
+        # Processing chips remaining (raw values)
         if isinstance(chips_remaining, dict):
             chips_list = list(chips_remaining.values())
         else:
             # Default equal distribution if no chip info
             chips_list = [100, 100, 100]  # Use raw default value
             
-        # Combine all features
+        # Combining all features
         state_vector = card_one_hot + actions_one_hot + [round_raw] + history_features + chips_list
         
-        # Incorporate public state features (raw values)
+        # Incorporating public state features (raw values)
         if public_state:
             pot_size = public_state.get("pot_size", 0)
             highest_bet = public_state.get("highest_bet", 0)
@@ -151,7 +145,7 @@ class FRLAgent(Player):
             # Raw count of winning hands
             wins_count = sum(1 for r in self.hand_history if r > 0)
             
-            # Add to state vector
+            # Adding to state vector
             reputation_features = [
                 bluff_count,
                 fold_count,
@@ -162,7 +156,7 @@ class FRLAgent(Player):
                 len(self.hand_history)
             ]
             
-            # Add opponent fold raw counts
+            # Adding opponent fold raw counts
             if public_state and 'player_id' in public_state:
                 my_id = public_state['player_id']
                 opponent_fold_counts = []
@@ -172,7 +166,7 @@ class FRLAgent(Player):
                         opponent_fold_counts.append(fold_count_to_me)
                 reputation_features.extend(opponent_fold_counts)
             
-            # Add to state vector
+            # Adding to state vector
             state_vector.extend(reputation_features)
         
         return state_vector
@@ -190,15 +184,15 @@ class FRLAgent(Player):
         """
         self.reputation["hands_played"] += 1
         
-        # Track bluffing (betting/raising with low card and winning)
+        # Tracking bluffing (betting/raising with low card and winning)
         if (action in [1, 4]) and result > 0 and not high_card:
             self.reputation["bluff_count"] += 1
             
-        # Track folding
+        # Tracking folding
         if action == 3:
             self.reputation["fold_count"] += 1
             
-        # Track aggression
+        # Tracking aggression
         if action in [1, 4]:
             self.reputation["aggressive_count"] += 1
             
@@ -208,13 +202,13 @@ class FRLAgent(Player):
         else:
             self.reputation["passive_count"] += 1
             
-        # Track opponents folding to this agent
+        # Tracking opponents folding to this agent
         if opponents_folded:
             for opp_id in opponents_folded:
                 if opp_id != self.player_id:
                     self.reputation["opponent_folds"][opp_id] += 1
                     
-        # Store hand history (last 20 hands)
+        # Storing hand history (last 20 hands)
         self.hand_history.append(result)
         if len(self.hand_history) > 20:
             self.hand_history.pop(0)
@@ -240,11 +234,11 @@ class FRLAgent(Player):
             
         self.betting_history += action_str + ','
         
-        # Extract state from transition
+        # Extracting state from transition
         my_player_id = transition['current_player']
         my_card_key = f'player{my_player_id}_card'
         
-        # Extract chips info
+        # Extracting chips info
         chips_str = transition['state'].get('chips', '')
         chips_dict = {}
         if chips_str:
@@ -263,21 +257,24 @@ class FRLAgent(Player):
         reward = transition['reward']
         done = transition['done']
         
-        # Store in model memory for training
-        if hasattr(self, 'prev_state') and hasattr(self, 'prev_action'):
+        if hasattr(self, "prev_state") and hasattr(self, "prev_action"):
+            # regular ≥2‑step hand
             self.model.remember(self.prev_state, self.prev_action, reward, state, done)
-        
-        # Store current state and action for next transition
-        if not done:
-            self.prev_state = state
-            self.prev_action = action
         else:
-            # Reset for new episode
-            delattr(self, 'prev_state') if hasattr(self, 'prev_state') else None
-            delattr(self, 'prev_action') if hasattr(self, 'prev_action') else None
+            # hand ended on the very first decision (still storing something)
+            terminal_stub = [0.0] * len(state)          # minimal next‑state
+            self.model.remember(state, action, reward, terminal_stub, done)
+
+        # Book‑keeping for the next call
+        if not done:                                     # hand continues
+            self.prev_state  = state
+            self.prev_action = action
+        else:                                            # hand ended
+            self.prev_state  = None
+            self.prev_action = None
             self.betting_history = ""
         
-        # Store in local transitions for analysis
+        # Storing in local transitions for analysis
         self.local_transitions.append({
             'state': state,
             'action': action,
@@ -289,20 +286,34 @@ class FRLAgent(Player):
     def train_local(self, learning_rate=None):
         """
         Perform local training on the agent's model and return metrics (as a dict).
-        
-        Args:
-            learning_rate: Optional learning rate override for this training step
         """
-        # Update learning rate if provided
+        # Updating learning rate if provided
         if learning_rate is not None and hasattr(self.model, 'optimizer'):
             for param_group in self.model.optimizer.param_groups:
                 param_group['lr'] = learning_rate
         
-        result = self.model.train()  # returns (grads, metrics) or None
+        # Not training if memory is empty
+        if not self.model.memory:
+            print(f"[Agent {self.player_id}] No memory to train on. Memory size: 0")
+            return {}
+            
+        print(f"[Agent {self.player_id}] Training on memory of size {len(self.model.memory)}")
+        
+        # Computing gradients and apply them directly
+        result = self.model.compute_gradients()
         if result:
-            _, metrics = result
+            grads, metrics = result
+            self._cached_grads = grads
+            
+            # Actually applying gradients
+            self.model.apply_gradients(grads)
+            
             return metrics
         return {}
+    
+    def get_gradients(self):
+        """Return grads cached during the preceding train_local call."""
+        return getattr(self, "_cached_grads", [])
     
     def get_model_params(self):
         """Get the current model parameters"""
@@ -319,14 +330,3 @@ class FRLAgent(Player):
     def load_model(self, path):
         """Load the model from disk"""
         self.model.model.load_state_dict(torch.load(path))
-    
-    def get_gradients(self):
-        """
-        Compute gradients from the model without applying them.
-        Returns a list of gradient tensors if available, else an empty list.
-        """
-        result = self.model.compute_gradients()
-        if result is not None:
-            grads, metrics = result
-            return grads
-        return []
