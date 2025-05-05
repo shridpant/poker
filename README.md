@@ -4,6 +4,11 @@ This repository provides a flexible implementation of Kuhn Poker (extendable to 
 
 For more details on the engine’s internals, see [KuhnPokerEngine Documentation](engine/README.md).
 
+For comprehensive details on training the three RL agents, see the following:
+- [Federated Reinforcement Learning](players/federatedrl.md)
+- [CFR]()
+- [RG-NFSP]()
+
 ## Game Rules
 
 ### Standard Kuhn Poker (2 Players)
@@ -175,19 +180,9 @@ class MyRLAgent(Player):
 
 RL agents **collect gameplay data primarily through self-play**. When running RL training scripts, each agent logs transitions from its own perspective. These transitions still follow the same specification outlined below to ensure consistency across agents.
 
-For example, to train the **FRL agents** and collect the data, you can use the following command from the root of this repo:
-   ```bash
-   python3 scripts/train.py --rounds 100 --hands_per_round 10 --aggregation median --num_players 3 --reset_chips
-   ```
-   This will:
-   - Initialize a Kuhn Poker environment with 3 FRL agents.
-   - Run multiple rounds of self-play, each with a configurable number of hands.
-   - Perform local training on each agent’s collected data.
-   - Aggregate model parameters using your chosen aggregator.
-
 Additionally, the system (KuhnPokerEngine) also automatically collects game data suitable for machine learning:
 
-- **RL Data**: Sample transitions for RL are also stored in `logs/game_data/rl_data.csv` with state, action, reward, and next state information. This *csv* is updated after each gameplay.
+- **RL Data**: Sample transitions for RL are also stored in [logs/game_data/rl_data.csv](logs/game_data/rl_data.csv) with state, action, reward, and next state information. This *csv* is updated after each gameplay.
 
 The state representation includes:
 - Round number
@@ -230,7 +225,7 @@ session_id,round,decision_index,stage,current_player,state,legal_actions,chosen_
 
 ## References
 - **Paper Citations**:  
-  - [AlphaHoldem: End-to-end Reinforcement Learning for Poker](#)  
+  - [AlphaHoldem: End-to-end Reinforcement Learning for Poker](https://cdn.aaai.org/ojs/20394/20394-13-24407-1-2-20220628.pdf)  
 
 - **Implementation Examples**:  
   - [PyTorch Official Tutorials](https://pytorch.org/tutorials/)  
