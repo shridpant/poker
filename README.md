@@ -83,11 +83,11 @@ poker/
 
 There's an ```example.ipynb``` for you. We tried to make it super intuitive!
 
-### 2-Player Game (Human vs Random)
+### 2-Player Kuhn Poker Game 
 
 ```python
 from engine.game_engine import KuhnPokerEngine
-from players.human_agent import HumanPlayer
+from players.cfr_agent import CFRPlayerWrapper
 from players.random_agent import RandomPlayer
 
 player0 = HumanPlayer()
@@ -95,8 +95,8 @@ player1 = RandomPlayer()
 
 engine = KuhnPokerEngine(
     player0=player0,
-    player1=player1,
-    delay=0.0,  # Set delay to 0 when human players are involved
+    player1 = CFRPlayerWrapper(player_id=1, num_players=3),
+    delay=0.0,  
     num_players=2,
     auto_rounds=None  # None to ask for next round after each hand
 )
@@ -104,16 +104,16 @@ engine = KuhnPokerEngine(
 engine.run_game()
 ```
 
-### 3-Player Game (Human vs Random vs Federated)
+### 3-Player Game 
 
 ```python
 from engine.game_engine import KuhnPokerEngine
-from players.human_agent import HumanPlayer
+from players.cfr_agent import CFRPlayerWrapper
 from players.random_agent import RandomPlayer
 from players.federated_agent import FederatedPlayer
 
 player0 = HumanPlayer()
-player1 = RandomPlayer()
+player1 = CFRPlayerWrapper(player_id=1, num_players=3)
 player2 = RandomPlayer()
 
 engine = KuhnPokerEngine(
