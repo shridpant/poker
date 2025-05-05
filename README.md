@@ -6,7 +6,7 @@ For more details on the engine’s internals, see [KuhnPokerEngine Documentation
 
 For comprehensive details on training the three RL agents, see the following:
 - [Federated Reinforcement Learning](players/federatedrl.md)
-- [CFR]()
+- [CFR](players/cfr-readme.md)
 - [RG-NFSP]()
 
 ## Game Rules
