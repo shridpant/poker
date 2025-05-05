@@ -13,11 +13,17 @@ import random
 # ============================
 # Helpful global constants
 # ============================
-NUM_PLAYERS = 3
-CARDS = ['J', 'Q', 'K', 'A'] # 4 cards for 3 players
-NUM_CARDS = len(CARDS)
-CARD_MAP = {card: i for i, card in enumerate(CARDS)}
-CARD_RANK = {card: rank for rank, card in enumerate(CARDS)} # J=0, Q=1, K=2, A=3
+
+CARDS_2P = ['J', 'Q', 'K', 'A'] # 4 cards for 2 players
+NUM_CARDS_2P = len(CARDS_2P)
+CARD_MAP_2P = {card: i for i, card in enumerate(CARDS_2P)}
+CARD_RANK_2P = {card: rank for rank, card in enumerate(CARDS_2P)} # J=0, Q=1, K=2, A=3
+
+CARDS_3P = ['J', 'Q', 'K', 'A'] # 4 cards for 3 players
+NUM_CARDS_3P = len(CARDS_3P)
+CARD_MAP_3P = {card: i for i, card in enumerate(CARDS_3P)}
+CARD_RANK_3P = {card: rank for rank, card in enumerate(CARDS_3P)} # J=0, Q=1, K=2, A=3
+
 
 CHECK, BET, CALL, FOLD, RAISE = 0, 1, 2, 3, 4
 ACTIONS = [CHECK, BET, CALL, FOLD, RAISE]
@@ -27,23 +33,26 @@ ACTION_MAP_INT = {v: k for k, v in ACTION_MAP_STR.items()}
 ACTION_CODES_ENGINE = {0: "check", 1: "bet", 2: "call", 3: "fold", 4: "raise"}
 ACTION_CODES_TO_INT_ENGINE = {v: k for k, v in ACTION_CODES_ENGINE.items()}
 
-PI_NETWORK_PATH = "logs/game_data/rgnfsp_3p_pi_net.pth"
+PI_NETWORK_PATH_3P = "../models/rg_nfsp_3p_pi_net.pth"
+PI_NETWORK_PATH_2P = "../models/rg_nfsp_2p_pi_net.pth"
 
 # ============================
 # Infoset Tensor Conversion
 # ============================
 MAX_HISTORY_LEN_3P = 6
-INFOSER_FEATURE_SIZE_3P = NUM_CARDS + NUM_PLAYERS + (NUM_ACTIONS * MAX_HISTORY_LEN_3P) # Card + Pos + History
+MAX_HISTORY_LEN_2P = 4
+INFOSER_FEATURE_SIZE_2P = NUM_CARDS_2P + (NUM_ACTIONS * MAX_HISTORY_LEN_2P) # Card + Pos + History
+INFOSER_FEATURE_SIZE_3P = NUM_CARDS_3P + (NUM_ACTIONS * MAX_HISTORY_LEN_3P) # Card + Pos + History
 
 
 
 # =============================
 # Neural Network for 3P Kuhn Poker
 # =============================
-class KuhnNetwork3P(torch.nn.Module):
+class KuhnNetwork(torch.nn.Module):
     def __init__(
             self,
-            input_size=INFOSER_FEATURE_SIZE_3P,
+            input_size,
             output_size=NUM_ACTIONS,
             hidden_size=128
             ):
@@ -61,33 +70,44 @@ class KuhnNetwork3P(torch.nn.Module):
         return self.net(x)
 
 
+
+
 # ============================
-# RGNFSP Agent for 3P Kuhn Poker
+# RGNFSP Agent for Kuhn Poker
 # ============================
-class RGNFSP3PPlayer:
+class RGNFSPPlayer:
     """
     RG-NFSP agent for 3-player Kuhn Poker.
     """
     def __init__(
             self,
-            pi_network_weights_path: str = PI_NETWORK_PATH,
-            hidden_size: int = 256,
+            num_players: int,
+            hidden_size: int = 128,
             device: torch.device = torch.device("cpu")
             ):
-        self.pi_network = KuhnNetwork3P(
-            input_size=INFOSER_FEATURE_SIZE_3P,
+        assert num_players in [2, 3], "Number of players must be either 2 or 3."
+        input_size = INFOSER_FEATURE_SIZE_2P if num_players == 2 else INFOSER_FEATURE_SIZE_3P
+        self.pi_network = KuhnNetwork(
+            input_size=input_size,
             output_size=NUM_ACTIONS,
             hidden_size=hidden_size
         )
         self.hidden_size = hidden_size
         # Load weights
-        if pi_network_weights_path:
+        if num_players == 2:
             try:
-                self.pi_network.load_state_dict(torch.load(pi_network_weights_path, map_location=device))
-                print(f"Loaded Pi network weights from {pi_network_weights_path}")
+                self.pi_network.load_state_dict(torch.load(PI_NETWORK_PATH_2P, map_location=device))
+                self.pi_network_weights_path = PI_NETWORK_PATH_2P
+                print(f"Loaded Pi network weights from {PI_NETWORK_PATH_2P}")
             except FileNotFoundError:
-                print(f"Error: Pi network weights file not found at {pi_network_weights_path}")
-        self.pi_network_weights_path = pi_network_weights_path
+                print(f"Error: Pi network weights file not found at {PI_NETWORK_PATH_2P}")
+        else:
+            try:
+                self.pi_network.load_state_dict(torch.load(PI_NETWORK_PATH_3P, map_location=device))
+                self.pi_network_weights_path = PI_NETWORK_PATH_3P
+                print(f"Loaded Pi network weights from {PI_NETWORK_PATH_3P}")
+            except FileNotFoundError:
+                print(f"Error: Pi network weights file not found at {PI_NETWORK_PATH_3P}")
         self.device = device
         self.pi_network.to(device)
         self.pi_network.eval()
@@ -98,25 +118,22 @@ class RGNFSP3PPlayer:
             device: torch.device
             ) -> torch.Tensor:
         """
-        Converts infoset string ('CardPosHistory') to a one-hot tensor.
-        Example: 'J0kb' -> [1,0,0,0] + [1,0,0] + [1,0,0,0,0] + [0,1,0,0,0] + padding
+        Converts infoset string ('CardHistory') to a one-hot tensor.
+        Example: 'J0kb' -> [1,0,0,0]  + [1,0,0,0,0] + [0,1,0,0,0] + padding
 
         Args:
-            infoset_str: str, infoset string in the format 'CardPosHistory'.
+            infoset_str: str, infoset string in the format 'CardHistory'.
             device: torch.device, device to which the tensor should be moved.
         
         Returns:
             infoset_tensor: torch.Tensor, one-hot encoded tensor representing the infoset.
         """
         card = infoset_str[0]
-        position = int(infoset_str[1])
-        history = infoset_str[2:]
+        history = infoset_str[1:]
 
         card_idx = CARD_MAP.get(card, -1) # Handle potential errors
         if card_idx == -1: raise ValueError(f"Invalid card in infoset: {infoset_str}")
         card_one_hot = F.one_hot(torch.tensor(card_idx), num_classes=NUM_CARDS)
-
-        pos_one_hot = F.one_hot(torch.tensor(position), num_classes=NUM_PLAYERS)
 
         history_indices = [ACTION_MAP_INT.get(action_char, -1) for action_char in history]
         if any(idx == -1 for idx in history_indices): raise ValueError(f"Invalid action char in infoset: {infoset_str}")
@@ -137,7 +154,7 @@ class RGNFSP3PPlayer:
         final_history_tensor = torch.cat((flat_history.float(), history_padding))
 
         # Concatenate card, position, and history
-        infoset_tensor = torch.cat((card_one_hot.float(), pos_one_hot.float(), final_history_tensor))
+        infoset_tensor = torch.cat((card_one_hot.float(), final_history_tensor))
 
         return infoset_tensor.to(device).unsqueeze(0) # Add batch dimension
 
@@ -218,7 +235,7 @@ class RGNFSP3PPlayer:
         """
         # Get policy from the Pi network
         legal_actions = list(available_actions.keys())
-        infoset = f"{card}{public_state['current_player']}"
+        infoset = f"{card}"
         history = self._convert_engine_history_to_my_history(public_state['betting_history'])
         infoset += history
         action_policy = self._get_avg_policy(self.pi_network, infoset, legal_actions)
