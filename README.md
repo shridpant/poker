@@ -5,7 +5,7 @@ This repository provides a flexible implementation of Kuhn Poker (extendable to 
 For more details on the engine’s internals, see [KuhnPokerEngine Documentation](engine/README.md).
 
 For comprehensive details on training the three RL agents, see the following:
-- [Federated Reinforcement Learning](players/federatedrl-readme.md)
+- [FRL](players/federatedrl-readme.md)
 - [CFR](players/cfr-readme.md)
 - [RG-NFSP]()
 
@@ -86,17 +86,24 @@ There's an ```example.ipynb``` for you. We tried to make it super intuitive!
 ```python
 from engine.game_engine import KuhnPokerEngine
 from players.cfr_agent import CFRPlayerWrapper
-from players.random_agent import RandomPlayer
+from players.frl_agent import FRLAgent
 
-player0 = HumanPlayer()
-player1 = RandomPlayer()
+# Initialize players
+frl_agent = FRLAgent(player_id=0, state_dim=20, action_dim=5, variant="kuhn_3p")
+cfr_agent = CFRPlayerWrapper(player_id=1, num_players=3)
+
+# Load the FRL model
+model_path = os.path.join("models", "frl-models", "best_frl_global.pt")
+frl_agent.load_model(model_path)
+# For inference only (pure exploitation)
+frl_agent.epsilon = 0.01
 
 engine = KuhnPokerEngine(
-    player0=player0,
-    player1 = CFRPlayerWrapper(player_id=1, num_players=3),
+    player0=frl_agent,
+    player1 = cfr_agent,
     delay=0.0,  
     num_players=2,
-    auto_rounds=None  # None to ask for next round after each hand
+    auto_rounds=1  # None to ask for next round after each hand
 )
 
 engine.run_game()
@@ -107,20 +114,27 @@ engine.run_game()
 ```python
 from engine.game_engine import KuhnPokerEngine
 from players.cfr_agent import CFRPlayerWrapper
+from players.frl_agent import FRLAgent
 from players.random_agent import RandomPlayer
-from players.federated_agent import FederatedPlayer
 
-player0 = HumanPlayer()
-player1 = CFRPlayerWrapper(player_id=1, num_players=3)
-player2 = RandomPlayer()
+# Initialize players
+frl_agent = FRLAgent(player_id=0, state_dim=20, action_dim=5, variant="kuhn_3p")
+cfr_agent = CFRPlayerWrapper(player_id=1, num_players=3)
+player3 = RandomPlayer()
+
+# Load the FRL model
+model_path = os.path.join("models", "frl-models", "best_frl_global.pt")
+frl_agent.load_model(model_path)
+# For inference only (pure exploitation)
+frl_agent.epsilon = 0.01
 
 engine = KuhnPokerEngine(
-    player0=player0,
-    player1=player1,
-    player2=player2,
+    player0=frl_agent,
+    player1=cfr_agent,
+    player2=player3,
     delay=0.0,
     num_players=3,
-    auto_rounds=None
+    auto_rounds=1
 )
 
 engine.run_game()
