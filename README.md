@@ -1,8 +1,6 @@
-# A Reinforcement Learning Framework for Poker <img src="media/logo2.png" alt="logo2" style="height:2em; width:auto;" />
+# A Reinforcement Learning (RL) Framework for Poker <img src="media/logo2.png" alt="logo2" style="height:2em; width:auto;" />
 
 [Request Feature](https://github.com/shridpant/poker/issues) · [Report Bug](https://github.com/shridpant/poker/issues) · [Contributing](#contributing) · [License](#license)
-
-[Request Feature](https://github.com/shridpant/poker/issues) · [Report Bug](https://github.com/gaurav-2626/shridpant/poker/issues) · [Contributing](#contributing) · [License](#license)
 
 This repository provides a flexible implementation of Kuhn Poker (extendable to other poker variations) with support for different player agent types, including human players, random agents, and reinforcement learning (RL) agents. The project is designed as a **plug-and-play system** to easily implement and test various ML algorithms in a simplified poker environment.
 
@@ -10,8 +8,7 @@ For more details on the engine’s internals, see [KuhnPokerEngine Documentation
 
 For comprehensive details on training the three RL agents, see [FRL](players/federatedrl-readme.md), [CFR](players/cfr-readme.md), and [RG-NFSP](players/rgnfsp-readme.md).
 
-Following animation shows the three agents playing against each other for 3 rounds.
-
+In the animation below, you'll see three RL agents play against each other:
 ![AgentsPlaying](media/poker_wins_1k_final.gif)
 
 
