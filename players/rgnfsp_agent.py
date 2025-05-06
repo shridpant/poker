@@ -13,7 +13,7 @@ import random
 # =============================
 # Neural Network for 3P Kuhn Poker
 # =============================
-class KuhnNetwork3P(torch.nn.Module):
+class KuhnNetwork(torch.nn.Module):
     def __init__(
             self,
             input_size,
@@ -67,7 +67,7 @@ class RGNFSP3PPlayer:
         MAX_HISTORY_LEN_3P = 6
         INFOSER_FEATURE_SIZE_3P = self.num_cards + self.num_players + (self.num_actions * MAX_HISTORY_LEN_3P) # Card + Pos + History
 
-        self.pi_network = KuhnNetwork3P(
+        self.pi_network = KuhnNetwork(
             input_size=INFOSER_FEATURE_SIZE_3P,
             output_size=self.num_actions,
             hidden_size=hidden_size
