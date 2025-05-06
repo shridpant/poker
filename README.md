@@ -12,7 +12,7 @@ For comprehensive details on training the three RL agents, see [FRL](players/fed
 
 Following animation shows the three agents playing against each other for 3 rounds.
 
-![AgentsPlaying](media/poker_results_1k.gif)
+![AgentsPlaying](media/poker_wins_1k_final.gif)
 
 
 ## Table of Contents
