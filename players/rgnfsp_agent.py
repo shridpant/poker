@@ -234,9 +234,11 @@ class RGNFSP3PPlayer:
     """
     def __init__(
             self,
+            player_id: int,
             hidden_size: int = 256,
             device: torch.device = torch.device("cpu")
             ):
+        self.player_id = player_id
         self.num_players = 3
         self.cards = ['J', 'Q', 'K', 'A'] # 4 cards for 3 players
         self.num_cards = len(self.cards)
@@ -250,7 +252,7 @@ class RGNFSP3PPlayer:
         self.actions_codes_engine = {0: "check", 1: "bet", 2: "call", 3: "fold", 4: "raise"}
         self.actions_codes_to_int_engine = {v: k for k, v in self.actions_codes_engine.items()}
 
-        PI_NETWORK_PATH = "models/rg_nfsp_3p_pi_net.pth"
+        PI_NETWORK_PATH = "logs/game_data/rgnfsp_3p_pi_net.pth"
 
         # ============================
         # Infoset Tensor Conversion
@@ -401,7 +403,7 @@ class RGNFSP3PPlayer:
         """
         # Get policy from the Pi network
         legal_actions = list(available_actions.keys())
-        infoset = f"{card}{public_state['current_player']}"
+        infoset = f"{card}{self.player_id}"
         history = self._convert_engine_history_to_my_history(public_state['betting_history'])
         infoset += history
         action_policy = self._get_avg_policy(self.pi_network, infoset, legal_actions)

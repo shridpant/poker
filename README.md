@@ -2,6 +2,8 @@
 
 [Request Feature](https://github.com/shridpant/poker/issues) · [Report Bug](https://github.com/shridpant/poker/issues) · [Contributing](#contributing) · [License](#license)
 
+[Request Feature](https://github.com/shridpant/poker/issues) · [Report Bug](https://github.com/gaurav-2626/shridpant/poker/issues) · [Contributing](#contributing) · [License](#license)
+
 This repository provides a flexible implementation of Kuhn Poker (extendable to other poker variations) with support for different player agent types, including human players, random agents, and reinforcement learning (RL) agents. The project is designed as a **plug-and-play system** to easily implement and test various ML algorithms in a simplified poker environment.
 
 For more details on the engine’s internals, see [KuhnPokerEngine Documentation](engine/README.md).
@@ -137,7 +139,7 @@ from players.rgnfsp_agent import RGNFSP3PPlayer
 # Initialize players
 frl_agent = FRLAgent(player_id=0, state_dim=20, action_dim=5, variant="kuhn_3p")
 cfr_agent = CFRPlayerWrapper(player_id=1, num_players=3)
-rgnfsp_agent = RGNFSP3PPlayer()
+rgnfsp_agent = RGNFSP3PPlayer(player_id=2)
 
 # Load the FRL model
 model_path = os.path.join("models", "frl-models", "best_frl_global.pt")
