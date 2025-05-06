@@ -115,12 +115,12 @@ engine.run_game()
 from engine.game_engine import KuhnPokerEngine
 from players.cfr_agent import CFRPlayerWrapper
 from players.frl_agent import FRLAgent
-from players.random_agent import RandomPlayer
+from players.rgnfsp_agent import RGNFSP3PPlayer
 
 # Initialize players
 frl_agent = FRLAgent(player_id=0, state_dim=20, action_dim=5, variant="kuhn_3p")
 cfr_agent = CFRPlayerWrapper(player_id=1, num_players=3)
-player3 = RandomPlayer()
+rgnfsp_agent = RGNFSP3PPlayer()
 
 # Load the FRL model
 model_path = os.path.join("models", "frl-models", "best_frl_global.pt")
@@ -131,7 +131,7 @@ frl_agent.epsilon = 0.01
 engine = KuhnPokerEngine(
     player0=frl_agent,
     player1=cfr_agent,
-    player2=player3,
+    player2=rgnfsp_agent,
     delay=0.0,
     num_players=3,
     auto_rounds=1
