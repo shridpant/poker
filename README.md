@@ -10,6 +10,11 @@ For more details on the engine’s internals, see [KuhnPokerEngine Documentation
 
 For comprehensive details on training the three RL agents, see [FRL](players/federatedrl-readme.md), [CFR](players/cfr-readme.md), and [RG-NFSP](players/rgnfsp-readme.md).
 
+Following animation shows the three agents playing against each other for 3 rounds.
+
+![AgentsPlaying](media/poker_results_1k.gif)
+
+
 ## Table of Contents
 - [Game Rules](#game-rules)
   - [Standard Kuhn Poker (2 Players)](#standard-kuhn-poker-2-players)
