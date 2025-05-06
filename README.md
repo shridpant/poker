@@ -120,7 +120,7 @@ from players.rgnfsp_agent import RGNFSP3PPlayer
 # Initialize players
 frl_agent = FRLAgent(player_id=0, state_dim=20, action_dim=5, variant="kuhn_3p")
 cfr_agent = CFRPlayerWrapper(player_id=1, num_players=3)
-rgnfsp_agent = RGNFSP3PPlayer()
+rgnfsp_agent = RGNFSP3PPlayer(player_id=2)
 
 # Load the FRL model
 model_path = os.path.join("models", "frl-models", "best_frl_global.pt")
